@@ -9,5 +9,6 @@ def launch():
     game = Game("{NAME}", {WIDTH}, {HEIGHT}, scenes)
     game.run()
 
+
 if __name__ == "__main__":
     launch()
