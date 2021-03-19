@@ -12,7 +12,7 @@ import subprocess
 
 
 class AssetsExplorer(QWidget):
-    def __init__(cls, parent):
+    def __init__(self, parent):
         super().__init__(parent)
         self.parent = parent
         self.list_folder = QListWidget(self)
@@ -36,7 +36,7 @@ class AssetsExplorer(QWidget):
         
         self.setLayout(self.layout)
 
-    def context_menu_folder(cls):
+    def context_menu_folder(self):
         if self.current_folder == self.folders["scenes"]:
             menu = QMenu(self.content_folder)
             create_scene = QAction("Create Scene", self)
@@ -71,12 +71,12 @@ class AssetsExplorer(QWidget):
                 menu.addAction(remove_script)
             menu.exec_(QCursor.pos())
 
-    def select_folder(cls):
+    def select_folder(self):
         if len(self.list_folder.selectedItems()) >= 1:
             folder = self.list_folder.selectedItems()[0].folder
             self.open_folder(folder)
         
-    def open_content(cls):
+    def open_content(self):
         if len(self.content_folder.selectedItems()) >= 1:
             widget = self.content_folder.itemWidget(self.content_folder.selectedItems()[0])
             if os.path.isdir(widget.path):
@@ -88,13 +88,13 @@ class AssetsExplorer(QWidget):
             elif self.current_folder == self.folders["scripts"]:
                 self.open_script(widget.title.text())
     
-    def open_script(cls, name):
+    def open_script(self, name):
         editor = self.parent.project.settings.get("editor", None)
         if editor is not None:
             path = os.path.abspath(os.path.join(self.parent.project.folders["scripts"], name+".py"))
             subprocess.Popen([editor, path], cwd=editor.split("\\")[0].split("/")[0])
 
-    def open_folder(cls, folder):
+    def open_folder(self, folder):
         self.current_folder = folder
         self.content_folder.clear()
         for i in os.listdir(folder):
@@ -111,14 +111,14 @@ class AssetsExplorer(QWidget):
             self.content_folder.addItem(wi)
             self.content_folder.setItemWidget(wi, w)
 
-    def update_project(cls):
+    def update_project(self):
         self.list_folder.clear()
         for k, v in self.parent.project.folders.items():
             if k != "assets" and k != "main":
                 self.folders[k] = v
                 self.list_folder.addItem(AssetItem(k.capitalize(), v))
 
-    def create_asset(cls, asset):
+    def create_asset(self, asset):
         if asset == "scene":
             text = QInputDialog.getText(self, "PyEngine4 - Create Scene", "Scene Name:", QLineEdit.Normal)
             if text[1] and len(text[0]) > 0:
@@ -145,8 +145,8 @@ class AssetsExplorer(QWidget):
             self.open_script(name[0])
             self.open_folder(self.current_folder)
     
-    def remove_asset(cls, asset, name):
-        if asset=="texture":
+    def remove_asset(self, asset, name):
+        if asset == "texture":
             self.parent.project.textures.remove(self.parent.project.get_texture(name))
             self.parent.project.save()
             self.open_folder(self.current_folder)
