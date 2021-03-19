@@ -18,5 +18,8 @@ class SpriteComponent(Component):
             scale = transform.scale
             image = pygame.image.load(os.path.join("resources", self.sprite)).convert_alpha()
             image = pygame.transform.rotate(image, rotation)
-            image = pygame.transform.scale(image, [int(image.get_rect().width * scale[0]), int(image.get_rect().height * scale[1])])
+            image = pygame.transform.scale(
+                image,
+                [int(image.get_rect().width * scale[0]), int(image.get_rect().height * scale[1])]
+            )
             screen.blit(image, position)
