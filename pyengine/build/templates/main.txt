@@ -1,0 +1,13 @@
+from files import *
+from files.components import *
+
+
+def launch():
+    {SCENES}
+    scenes = {SCENES_NAMES}
+
+    game = Game("{NAME}", {WIDTH}, {HEIGHT}, scenes)
+    game.run()
+
+if __name__ == "__main__":
+    launch()

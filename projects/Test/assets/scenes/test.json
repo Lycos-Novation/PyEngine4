@@ -1,0 +1,38 @@
+{
+    "name": "test",
+    "childs": [
+        {
+            "name": "empty",
+            "childs": [],
+            "components": [
+                {
+                    "name": "TransformComponent",
+                    "position": [
+                        150,
+                        300
+                    ],
+                    "rotation": 0,
+                    "scale": [
+                        0.46,
+                        0.46
+                    ]
+                },
+                {
+                    "name": "SpriteComponent",
+                    "sprite": "test"
+                }
+            ]
+        }
+    ],
+    "components": [
+        {
+            "name": "ColorComponent",
+            "color": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    ]
+}

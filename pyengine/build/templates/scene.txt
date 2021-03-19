@@ -1,0 +1,4 @@
+{ENTITIES}
+    entities = {ENTITIES_NAMES}
+    {NAME} = Scene("{NAME}", {COLOR}, entities)
+    {SCENES}
