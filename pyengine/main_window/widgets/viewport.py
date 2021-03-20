@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QWidget
-from PyQt5.QtGui import QImage, QPainter
+from PyQt5.QtGui import QImage, QPainter, QPixmap
+from PyQt5.QtCore import QPoint
 
 import pygame
 import os
@@ -58,7 +59,12 @@ class Viewport(QWidget):
         self.update()
 
     def paintEvent(self, evt):
-        qp = QPainter()
-        qp.begin(self)
-        qp.drawImage(0, 0, self.image)
-        qp.end()
+        qp = QPainter(self)
+        qp.setRenderHints(QPainter.Antialiasing | QPainter.SmoothPixmapTransform, 1)
+        center = QPoint(self.width()/2, self.height()/2)
+        qp.translate(center)
+
+        qp.scale(self.width() / self.image.width(), self.height() / self.image.height())
+
+        qp.translate(-self.image.width()/2, -self.image.height()/2)
+        qp.drawPixmap(0, 0, self.image.width(), self.image.height(), QPixmap.fromImage(self.image))
