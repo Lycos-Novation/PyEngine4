@@ -27,7 +27,23 @@ class Game:
             for event in pygame.event.get():
                 if event.type == const.QUIT:
                     self.stop()
-            
+                elif event.type == const.KEYDOWN:
+                    self.engine.down_keys.append(event.key)
+                    self.scenes[self.current_scene].key_press(event)
+                elif event.type == const.KEYUP:
+                    self.engine.down_keys.remove(event.key)
+                    self.scenes[self.current_scene].key_release(event)
+                elif event.type == const.MOUSEBUTTONDOWN:
+                    self.engine.down_mousebuttons.append(event.button)
+                    self.scenes[self.current_scene].mouse_press(event)
+                elif event.type == const.MOUSEBUTTONUP:
+                    self.engine.down_mousebuttons.remove(event.button)
+                    self.scenes[self.current_scene].mouse_release(event)
+                elif event.type == const.MOUSEWHEEL:
+                    self.scenes[self.current_scene].mouse_wheel(event)
+                elif event.type == const.MOUSEMOTION:
+                    self.scenes[self.current_scene].mouse_motion(event)
+
             self.scenes[self.current_scene].update()
             self.scenes[self.current_scene].show(self.screen)
 
