@@ -1,11 +1,11 @@
 import json
 import os
 
-from pyengine.common.project_objects.entity import Entity
+from pyengine.common.project_objects.gameobject import GameObject
 from pyengine.common.components import ColorComponent
 
 
-class Scene(Entity):
+class Scene(GameObject):
     def __init__(self, name):
         super().__init__(name)
         self.components.append(ColorComponent())
@@ -30,7 +30,7 @@ class Scene(Entity):
         scene = Scene(values.get("name", "Unknown Scene"))
         scene.childs = []
         for i in values.get("childs", []):
-            scene.childs.append(Entity.from_dict(i))
+            scene.childs.append(GameObject.from_dict(i))
         scene.components = []
         for i in values.get("components", []):
             if i.get("name", "") == "ColorComponent":
