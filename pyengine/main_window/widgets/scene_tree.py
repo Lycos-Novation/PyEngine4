@@ -2,8 +2,8 @@ from PyQt5.QtWidgets import QTreeWidget, QMessageBox, QAction, QMenu, QInputDial
 from PyQt5.QtGui import QCursor
 from PyQt5.QtCore import Qt
 
-from pyengine.main_window.utils import EntityItem
-from pyengine.common.project_objects import Entity
+from pyengine.main_window.utils import GameObjectItem
+from pyengine.common.project_objects import GameObject
 
 
 class SceneTree(QTreeWidget):
@@ -19,8 +19,8 @@ class SceneTree(QTreeWidget):
 
     def context_menu(self):
         menu = QMenu(self)
-        create_empty = QAction("Create Empty", self)
-        create_empty.triggered.connect(lambda: self.create_entity("empty"))
+        create_empty = QAction("Create GameObject", self)
+        create_empty.triggered.connect(lambda: self.create_entity("gameobject"))
         menu.addAction(create_empty)
         if len(self.selectedItems()) >= 1:
             menu.addSeparator()
@@ -56,10 +56,10 @@ class SceneTree(QTreeWidget):
             obj = self.selectedItems()[0]
         else:
             obj = self.scene
-        if entity == "empty":
-            text = QInputDialog.getText(self, "PyEngine4 - Create Empty", "Empty Name:", QLineEdit.Normal)
+        if entity == "gameobject":
+            text = QInputDialog.getText(self, "PyEngine4 - Create GameObject", "GameObject Name:", QLineEdit.Normal)
             if text[1] and len(text[0]) > 0:
-                new = Entity(text[0])
+                new = GameObject(text[0])
                 obj.childs.append(new)
                 self.parent.viewport.update_screen()
                 self.parent.components.set_obj(new)
@@ -76,7 +76,7 @@ class SceneTree(QTreeWidget):
     def update_items(self):
         self.clear()
 
-        treeitem = EntityItem([self.scene.name], self.scene)
+        treeitem = GameObjectItem([self.scene.name], self.scene)
         self.setup_childs(treeitem, self.scene)
         self.addTopLevelItem(treeitem)
 
@@ -84,7 +84,7 @@ class SceneTree(QTreeWidget):
     
     def setup_childs(self, widget, obj):
         for o in obj.childs:
-            child = EntityItem([o.name], o)
+            child = GameObjectItem([o.name], o)
             widget.addChild(child)
             self.setup_childs(child, o)
     

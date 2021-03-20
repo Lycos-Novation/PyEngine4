@@ -1,7 +1,7 @@
 from pyengine.common.components import *
 
 
-class Entity:
+class GameObject:
     def __init__(self, name):
         self.name = name
         self.childs = []
@@ -25,11 +25,11 @@ class Entity:
     
     @classmethod
     def from_dict(cls, values):
-        obj = Entity(values.get("name", "Unknown Object"))
+        obj = GameObject(values.get("name", "Unknown Object"))
         obj.childs = values.get("childs", [])
         obj.childs = []
         for i in values.get("childs", []):
-            obj.childs.append(Entity.from_dict(i))
+            obj.childs.append(GameObject.from_dict(i))
         obj.components = []
         for i in values.get("components", []):
             if i.get("name", "") == "ColorComponent":
