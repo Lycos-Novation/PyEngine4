@@ -1,11 +1,11 @@
 import json
 import os
 
-from pyengine.common.project_objects.entity import Entity
+from pyengine.common.project_objects.gameobject import GameObject
 from pyengine.common.components import PathComponent
 
 
-class Texture(Entity):
+class Texture(GameObject):
     def __init__(self, name, path):
         super().__init__(name)
         self.components.append(PathComponent(path))
