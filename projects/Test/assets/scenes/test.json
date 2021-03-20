@@ -2,24 +2,27 @@
     "name": "test",
     "childs": [
         {
-            "name": "empty",
+            "name": "gameobject",
             "childs": [],
             "components": [
                 {
                     "name": "TransformComponent",
                     "position": [
-                        150,
-                        300
+                        0,
+                        0
                     ],
                     "rotation": 0,
                     "scale": [
-                        0.46,
-                        0.46
+                        1,
+                        1
                     ]
                 },
                 {
                     "name": "SpriteComponent",
                     "sprite": "test"
+                },
+                {
+                    "name": "ScriptComponent myScript"
                 }
             ]
         }

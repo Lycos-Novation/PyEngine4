@@ -1,23 +1,29 @@
 from files import *
 from files.components import *
+from files.scripts import *
 
 
 def launch():
-    empty = Entity("empty")
-    transformcomponent = TransformComponent([150, 300], 0, [0.46, 0.46])
-    spritecomponent = SpriteComponent("test.png")
+    engine = Engine()
+    gameobject = Entity("gameobject")
+    transformcomponent = TransformComponent(engine, [0, 0], 0, [1, 1])
+    spritecomponent = SpriteComponent(engine, "test.png")
+    myscript = Myscript(engine)
 
 
-    empty.add_component(transformcomponent)
-    empty.add_component(spritecomponent)
+    gameobject.add_component(transformcomponent)
+    gameobject.add_component(spritecomponent)
+    gameobject.add_component(myscript)
 
-    entities = [empty]
+    entities = [gameobject]
     test = Scene("test", [0, 0, 0, 0], entities)
     
     scenes = [test]
 
-    game = Game("Test", 1080, 720, scenes)
+    game = Game("Test", 1080, 720, scenes, engine)
+    engine.game = game
     game.run()
+
 
 if __name__ == "__main__":
     launch()
