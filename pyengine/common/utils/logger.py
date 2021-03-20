@@ -12,7 +12,7 @@ class Logger(logging.Logger):
 
         if file is not None:
 
-            self.file_handler = logging.handlers.RotatingFileHandler(file, maxBytes=1000000, backupCount=1)
+            self.file_handler = logging.FileHandler(file, "w", "utf-8")
             self.file_handler.setFormatter(self.formatter)
             self.addHandler(self.file_handler)
         else:
@@ -33,7 +33,5 @@ class Logger(logging.Logger):
             self.file_handler.setLevel(level)
 
 
-if os.path.exists("builds/build.log"):
-    os.remove("builds/build.log")
 build_logger = Logger("PyEngine4 - BUILD", True, "builds/build.log")
 core_logger = Logger("PyEngine4 - Core", True)
