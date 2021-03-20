@@ -5,8 +5,8 @@ import os
 
 
 class SpriteComponent(Component):
-    def __init__(self, sprite):
-        super().__init__()
+    def __init__(self, engine, sprite):
+        super().__init__(engine)
         self.name = "SpriteComponent"
         self.sprite = sprite
 

@@ -140,8 +140,12 @@ class AssetsExplorer(QWidget):
                 return
             self.parent.project.scripts.append(name[0])
             with open(os.path.join(self.parent.project.folders["scripts"], name[0]+".py"), "w") as f:
-                f.write(f"from files.script import Script\n\n\n"
-                        f"class {name[0].title()}(Script):\n    def __init__(cls):\n        super().__init__()")
+                f.write(
+                    f"from files.scripts.script import Script\n\n\n"
+                    f"class {name[0].title()}(Script):\n"
+                    f"    def __init__(self, engine):\n"
+                    f"        super().__init__(engine, \"{name[0]}\")\n"
+                )
             self.open_script(name[0])
             self.open_folder(self.current_folder)
     

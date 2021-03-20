@@ -4,10 +4,12 @@ from files.scripts import *
 
 
 def launch():
+    engine = Engine()
     {SCENES}
     scenes = {SCENES_NAMES}
 
-    game = Game("{NAME}", {WIDTH}, {HEIGHT}, scenes)
+    game = Game("{NAME}", {WIDTH}, {HEIGHT}, scenes, engine)
+    engine.game = game
     game.run()
 
 

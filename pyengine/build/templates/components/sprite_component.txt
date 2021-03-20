@@ -1,2 +1,2 @@
-    {NAME} = SpriteComponent("{SPRITE}")
+    {NAME} = SpriteComponent(engine, "{SPRITE}")
 {COMPONENTS}

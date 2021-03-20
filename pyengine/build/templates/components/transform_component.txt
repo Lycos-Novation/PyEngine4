@@ -1,2 +1,2 @@
-    {NAME} = TransformComponent({POSITION}, {ROTATION}, {SCALE})
+    {NAME} = TransformComponent(engine, {POSITION}, {ROTATION}, {SCALE})
 {COMPONENTS}

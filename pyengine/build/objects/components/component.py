@@ -1,6 +1,7 @@
 class Component:
-    def __init__(self):
+    def __init__(self, engine):
         self.entity = None
+        self.engine = engine
 
     def update(self):
         pass

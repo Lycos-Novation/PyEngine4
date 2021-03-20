@@ -5,7 +5,8 @@ pygame.init()
 
 
 class Game:
-    def __init__(self, name, width, height, scenes):
+    def __init__(self, name, width, height, scenes, engine):
+        self.engine = engine
         self.name = name
         self.width = width
         self.height = height
