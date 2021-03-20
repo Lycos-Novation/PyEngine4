@@ -1,8 +1,6 @@
 import logging
 import logging.handlers
 
-import os
-
 
 class Logger(logging.Logger):
     def __init__(self, name, stream=False, file=None):

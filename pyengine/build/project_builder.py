@@ -9,6 +9,7 @@ class ProjectBuilder:
     build_folders = {
         "objects": os.path.join("pyengine", "build", "objects"),
         "components": os.path.join("pyengine", "build", "objects", "components"),
+        "scripts": os.path.join("pyengine", "build", "objects", "scripts"),
         "templates": os.path.join("pyengine", "build", "templates")
     }
     project_folders = {}
@@ -19,6 +20,8 @@ class ProjectBuilder:
             return ComponentBuilder.generate_transform_component(text, comp)
         elif comp.name == "SpriteComponent":
             return ComponentBuilder.generate_sprite_component(text, comp)
+        elif comp.name.startswith("ScriptComponent"):
+            return ComponentBuilder.generate_script_component(text, comp, ProjectBuilder.project_folders["scripts"])
         else:
             return text
 
@@ -37,7 +40,10 @@ class ProjectBuilder:
         # GENERATE COMPONENTS
         for i in entity.components:
             template = ProjectBuilder.generate_component(template, i)
-            template += f"    {entity.name}.add_component({i.name.lower()})\n"
+            if i.name.startswith("ScriptComponent"):
+                template += f"    {entity.name}.add_component({i.name.split(' ')[-1].lower()})\n"
+            else:
+                template += f"    {entity.name}.add_component({i.name.lower()})\n"
         template = template.replace("{COMPONENTS}", "")
 
         # GENERATE CHILDS
@@ -99,6 +105,7 @@ class ProjectBuilder:
             "main": os.path.join("builds", project.name),
             "files": os.path.join("builds", project.name, "files"),
             "components": os.path.join("builds", project.name, "files", "components"),
+            "scripts": os.path.join("builds", project.name, "files", "scripts"),
             "resources": os.path.join("builds", project.name, "resources")
         }
         shutil.rmtree(os.path.join("builds", project.name), ignore_errors=True)
@@ -108,17 +115,23 @@ class ProjectBuilder:
 
         logger.info("COPY CORE FILES : STARTED")
         for i in os.listdir(ProjectBuilder.build_folders["objects"]):
-            if i != "components":
+            if i != "components" and i != "scripts":
                 logger.info("CORE FILE : " + i)
                 shutil.copyfile(
                     os.path.join(ProjectBuilder.build_folders["objects"], i),
                     os.path.join(ProjectBuilder.project_folders["files"], i)
                 )
         for i in os.listdir(ProjectBuilder.build_folders["components"]):
-            logger.info("CORE FILE : " + i)
+            logger.info("CORE COMPONENT FILE : " + i)
             shutil.copyfile(
                 os.path.join(ProjectBuilder.build_folders["components"], i),
                 os.path.join(ProjectBuilder.project_folders["components"], i)
+            )
+        for i in os.listdir(ProjectBuilder.build_folders["scripts"]):
+            logger.info("CORE SCRIPT FILE : " + i)
+            shutil.copyfile(
+                os.path.join(ProjectBuilder.build_folders["scripts"], i),
+                os.path.join(ProjectBuilder.project_folders["scripts"], i)
             )
         logger.info("COPY CORE FILES : SUCCESSFULLY ENDED")
 
@@ -132,6 +145,16 @@ class ProjectBuilder:
                 os.path.join(ProjectBuilder.project_folders["resources"], i.name+"."+ext)
             )
         logger.info("COPY GAME RESOURCES : SUCCESSFULLY ENDED")
+
+        logger.info("COPY GAME SCRIPTS : STARTED")
+        for i in os.listdir(project.folders["scripts"]):
+            logger.info("GAME SCRIPT : "+i)
+            shutil.copyfile(
+                os.path.join(project.folders["scripts"], i),
+                os.path.join(ProjectBuilder.project_folders["scripts"], i)
+            )
+
+        logger.info("COPY GAME SCRIPT : SUCCESSFULLY ENDED")
 
         logger.info("GENERATE GAME FILES : STARTED")
         logger.info("GENERATE : Main")

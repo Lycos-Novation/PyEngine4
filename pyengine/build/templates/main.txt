@@ -1,5 +1,6 @@
 from files import *
 from files.components import *
+from files.scripts import *
 
 
 def launch():

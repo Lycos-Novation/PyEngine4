@@ -6,11 +6,30 @@ class ComponentBuilder:
     sprites = {}
 
     @staticmethod
+    def generate_script_component(text, comp, script_dir):
+        name = comp.name.split(" ")[-1]
+        replaces = {
+            "{NAME}": str(name.lower()),
+            "{NAMETITLED}": str(name.title())
+        }
+        with open(os.path.join(script_dir, "__init__.py"), "a") as f:
+            f.write("from files.scripts."+name+" import "+name.title())
+        with open(os.path.join(ComponentBuilder.templates, "script_component.txt"), "r") as f:
+            template = f.read()
+
+        # GENERATE MAIN INFO
+        for k, v in replaces.items():
+            template = template.replace(k, v)
+
+        return text.replace("{COMPONENTS}", template)
+
+    @staticmethod
     def generate_sprite_component(text, comp):
         replaces = {
             "{NAME}": str(comp.name.lower()),
             "{SPRITE}": str(comp.sprite)+"."+ComponentBuilder.sprites[comp.sprite]
         }
+
         with open(os.path.join(ComponentBuilder.templates, "sprite_component.txt"), "r") as f:
             template = f.read()
 

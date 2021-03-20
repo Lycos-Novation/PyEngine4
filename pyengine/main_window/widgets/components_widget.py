@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QListWidgetItem, QMenu, QAction
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QListWidgetItem, QMenu, QAction, \
+    QAbstractItemView
 from PyQt5.QtGui import QFont, QCursor
 from PyQt5.QtCore import Qt
 
@@ -60,6 +61,9 @@ class ComponentsWidget(QWidget):
         create_sprite = QAction("Sprite", self)
         create_sprite.triggered.connect(lambda: self.create_component("SpriteComponent"))
         menu.addAction(create_sprite)
+        create_script = QAction("Script", self)
+        create_script.triggered.connect(lambda: self.create_component("ScriptComponent"))
+        menu.addAction(create_script)
         menu.exec_(QCursor.pos())
 
     def remove_component(self, comp):
@@ -76,6 +80,11 @@ class ComponentsWidget(QWidget):
             self.parent.viewport.update_screen()
         elif comp == "SpriteComponent":
             self.obj.components.append(components.SpriteComponent())
+            self.set_obj(self.obj)
+            self.parent.project.save()
+            self.parent.viewport.update_screen()
+        elif comp == "ScriptComponent":
+            self.obj.components.append(components.ScriptComponent())
             self.set_obj(self.obj)
             self.parent.project.save()
             self.parent.viewport.update_screen()
@@ -98,6 +107,8 @@ class ComponentsWidget(QWidget):
                 w = PathComponent(self, i)
             elif i.name == "SpriteComponent":
                 w = SpriteComponent(self, i)
+            elif i.name.startswith("ScriptComponent"):
+                w = ScriptComponent(self, i)
             else:
                 continue
             wi = QListWidgetItem()

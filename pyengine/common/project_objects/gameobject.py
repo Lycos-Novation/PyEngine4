@@ -38,4 +38,6 @@ class GameObject:
                 obj.components.append(TransformComponent.from_dict(i))
             elif i.get("name", "") == "SpriteComponent":
                 obj.components.append(SpriteComponent.from_dict(i))
+            elif i.get("name", "").startswith("ScriptComponent"):
+                obj.components.append(ScriptComponent.from_dict(i))
         return obj
