@@ -4,7 +4,7 @@ from PyQt5.QtCore import Qt
 
 from pyengine.main_window.components import *
 from pyengine.common import components
-from pyengine.common.project_objects import Entity
+from pyengine.common.project_objects import GameObject
 
 
 class ComponentsWidget(QWidget):
@@ -55,7 +55,7 @@ class ComponentsWidget(QWidget):
     def set_obj(self, obj):
         self.obj = obj
         self.title.setText(obj.name.replace("_", " ").title())
-        if obj.__class__ == Entity:
+        if obj.__class__ == GameObject:
             self.add_component.setEnabled(True)
         else:
             self.add_component.setEnabled(False)
