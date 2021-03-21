@@ -36,12 +36,13 @@ class Viewport(QWidget):
                 for child in parent.childs:
                     transform = child.get_component("TransformComponent")
                     sprite = child.get_component("SpriteComponent")
+                    text = child.get_component("TextComponent")
                     if transform is not None:
+                        position = transform.position
+                        rotation = transform.rotation
+                        scale = transform.scale
                         if sprite is not None and sprite.sprite is not None:
                             path = self.parent.project.get_texture(sprite.sprite).components[0].path
-                            position = transform.position
-                            rotation = transform.rotation
-                            scale = transform.scale
                             image = pygame.image.load(path).convert_alpha()
                             image = pygame.transform.rotate(image, rotation)
                             image = pygame.transform.scale(
@@ -49,6 +50,21 @@ class Viewport(QWidget):
                                 [int(image.get_rect().width * scale[0]), int(image.get_rect().height * scale[1])]
                             )
                             screen.blit(image, position)
+                        if text is not None:
+                            try:
+                                font = pygame.font.Font(text.font_name, text.font_size)
+                            except FileNotFoundError:
+                                font = pygame.font.SysFont(text.font_name, text.font_size)
+                            font.set_underline(text.font_underline)
+                            font.set_italic(text.font_italic)
+                            font.set_bold(text.font_bold)
+                            render = font.render(text.text, text.font_antialias, text.font_color)
+                            render = pygame.transform.rotate(render, rotation)
+                            render = pygame.transform.scale(
+                                render,
+                                [int(render.get_rect().width * scale[0]), int(render.get_rect().height * scale[1])]
+                            )
+                            screen.blit(render, position)
                     objs.append(child)
 
         w = screen.get_width()

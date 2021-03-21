@@ -43,6 +43,9 @@ class ComponentsWidget(QWidget):
         create_sprite = QAction("Sprite", self)
         create_sprite.triggered.connect(lambda: self.create_component("SpriteComponent"))
         menu.addAction(create_sprite)
+        create_text = QAction("Text", self)
+        create_text.triggered.connect(lambda: self.create_component("TextComponent"))
+        menu.addAction(create_text)
         create_script = QAction("Script", self)
         create_script.triggered.connect(lambda: self.create_component("ScriptComponent"))
         menu.addAction(create_script)
@@ -61,6 +64,9 @@ class ComponentsWidget(QWidget):
         create_sprite = QAction("Sprite", self)
         create_sprite.triggered.connect(lambda: self.create_component("SpriteComponent"))
         menu.addAction(create_sprite)
+        create_text = QAction("Text", self)
+        create_text.triggered.connect(lambda: self.create_component("TextComponent"))
+        menu.addAction(create_text)
         create_script = QAction("Script", self)
         create_script.triggered.connect(lambda: self.create_component("ScriptComponent"))
         menu.addAction(create_script)
@@ -75,19 +81,15 @@ class ComponentsWidget(QWidget):
     def create_component(self, comp):
         if comp == "TransformComponent":
             self.obj.components.append(components.TransformComponent())
-            self.set_obj(self.obj)
-            self.parent.project.save()
-            self.parent.viewport.update_screen()
         elif comp == "SpriteComponent":
             self.obj.components.append(components.SpriteComponent())
-            self.set_obj(self.obj)
-            self.parent.project.save()
-            self.parent.viewport.update_screen()
+        elif comp == "TextComponent":
+            self.obj.components.append(components.TextComponent())
         elif comp == "ScriptComponent":
             self.obj.components.append(components.ScriptComponent())
-            self.set_obj(self.obj)
-            self.parent.project.save()
-            self.parent.viewport.update_screen()
+        self.set_obj(self.obj)
+        self.parent.project.save()
+        self.parent.viewport.update_screen()
 
     def set_obj(self, obj):
         self.obj = obj
@@ -107,6 +109,8 @@ class ComponentsWidget(QWidget):
                 w = PathComponent(self, i)
             elif i.name == "SpriteComponent":
                 w = SpriteComponent(self, i)
+            elif i.name == "TextComponent":
+                w = TextComponent(self, i)
             elif i.name.startswith("ScriptComponent"):
                 w = ScriptComponent(self, i)
             else:

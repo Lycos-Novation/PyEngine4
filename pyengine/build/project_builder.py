@@ -20,6 +20,8 @@ class ProjectBuilder:
             return ComponentBuilder.generate_transform_component(text, comp)
         elif comp.name == "SpriteComponent":
             return ComponentBuilder.generate_sprite_component(text, comp)
+        elif comp.name == "TextComponent":
+            return ComponentBuilder.generate_text_component(text, comp)
         elif comp.name.startswith("ScriptComponent"):
             return ComponentBuilder.generate_script_component(text, comp, ProjectBuilder.project_folders["scripts"])
         else:

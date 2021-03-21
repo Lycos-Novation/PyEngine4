@@ -3,3 +3,4 @@ from pyengine.common.components.transform_component import TransformComponent
 from pyengine.common.components.path_component import PathComponent
 from pyengine.common.components.sprite_component import SpriteComponent
 from pyengine.common.components.script_component import ScriptComponent
+from pyengine.common.components.text_component import TextComponent
