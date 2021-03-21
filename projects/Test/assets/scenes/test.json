@@ -8,7 +8,7 @@
                 {
                     "name": "TransformComponent",
                     "position": [
-                        150,
+                        100,
                         200
                     ],
                     "rotation": 0,
@@ -23,6 +23,11 @@
                 },
                 {
                     "name": "ScriptComponent myScript"
+                },
+                {
+                    "name": "CollisionComponent",
+                    "solid": true,
+                    "callback": "myScript - collide"
                 }
             ]
         },
@@ -44,19 +49,24 @@
                 },
                 {
                     "name": "TextComponent",
-                    "text": "Hello Lycos !",
+                    "text": "Hello Lyos :DDD",
                     "font_name": "arial",
-                    "font_size": 20,
-                    "font_bold": true,
-                    "font_italic": true,
-                    "font_underline": true,
+                    "font_size": 50,
+                    "font_bold": false,
+                    "font_italic": false,
+                    "font_underline": false,
                     "font_color": [
-                        255,
+                        0,
                         0,
                         255,
                         255
                     ],
                     "font_antialias": true
+                },
+                {
+                    "name": "CollisionComponent",
+                    "solid": true,
+                    "callback": null
                 }
             ]
         }

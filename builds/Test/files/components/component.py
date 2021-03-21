@@ -3,6 +3,9 @@ class Component:
         self.entity = None
         self.engine = engine
 
+    def start(self):
+        pass
+
     def update(self):
         pass
 

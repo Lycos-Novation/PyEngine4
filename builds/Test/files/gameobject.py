@@ -13,6 +13,10 @@ class GameObject:
             if i.name == name:
                 return i
 
+    def start(self):
+        for i in self.components:
+            i.start()
+
     def key_press(self, evt):
         for i in self.components:
             i.key_press(evt)
