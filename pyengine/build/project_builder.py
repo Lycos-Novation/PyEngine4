@@ -16,6 +16,7 @@ class ProjectBuilder:
 
     @staticmethod
     def generate_component(text, comp):
+        logger.info("GENERATE COMPONENT : "+comp.name)
         if comp.name == "TransformComponent":
             return ComponentBuilder.generate_transform_component(text, comp)
         elif comp.name == "SpriteComponent":
@@ -28,11 +29,12 @@ class ProjectBuilder:
             return text
 
     @staticmethod
-    def generate_entity(text, entity):
+    def generate_gameobject(text, gameobject):
+        logger.info("GENERATE GAMEOBJECT : "+gameobject.name)
         replaces = {
-            "{NAME}": str(entity.name)
+            "{NAME}": str(gameobject.name)
         }
-        with open(os.path.join(ProjectBuilder.build_folders["templates"], "entity.txt"), "r") as f:
+        with open(os.path.join(ProjectBuilder.build_folders["templates"], "gameobject.txt"), "r") as f:
             template = f.read()
 
         # GENERATE MAIN INFO
@@ -40,24 +42,32 @@ class ProjectBuilder:
             template = template.replace(k, v)
 
         # GENERATE COMPONENTS
-        for i in entity.components:
+        for i in gameobject.components:
             template = ProjectBuilder.generate_component(template, i)
             if i.name.startswith("ScriptComponent"):
-                template += f"    {entity.name}.add_component({i.name.split(' ')[-1].lower()})\n"
+                template = template.replace(
+                    "{COMPONENTS}",
+                    f"    {gameobject.name}.add_component({i.name.split(' ')[-1].lower()})\n" + "{COMPONENTS}"
+                )
             else:
-                template += f"    {entity.name}.add_component({i.name.lower()})\n"
-        template = template.replace("{COMPONENTS}", "")
+                template = template.replace(
+                    "{COMPONENTS}",
+                    f"    {gameobject.name}.add_component({i.name.split(' ')[-1].lower()})\n" + "{COMPONENTS}"
+                )
+        template += "\n"
+        template = template.replace("{COMPONENTS}\n", "")
 
         # GENERATE CHILDS
-        for i in entity.childs:
-            template = ProjectBuilder.generate_entity(template, i)
-            template += f"    {entity.name}.childs.append({i.name})\n"
-        template = template.replace("{CHILDS}", "")
+        for i in gameobject.childs:
+            template = ProjectBuilder.generate_gameobject(template, i)
+            template += f"    {gameobject.name}.childs.append({i.name})\n"
+        template = template.replace("{CHILDS}\n", "")
 
         return text.replace("{ENTITIES}", template)
 
     @staticmethod
     def generate_scene(text, scene):
+        logger.info("GENERATE SCENE : "+scene.name)
         replaces = {
             "{NAME}": str(scene.name),
             "{COLOR}": str(scene.components[0].color),
@@ -72,8 +82,8 @@ class ProjectBuilder:
 
         # GENERATE ENTITIES
         for i in scene.childs:
-            template = ProjectBuilder.generate_entity(template, i)
-        template = template.replace("{ENTITIES}", "")
+            template = ProjectBuilder.generate_gameobject(template, i)
+        template = template.replace("{ENTITIES}\n", "")
 
         return text.replace("{SCENES}", template)
 
