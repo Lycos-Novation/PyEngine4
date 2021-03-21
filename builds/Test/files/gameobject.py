@@ -1,4 +1,4 @@
-class Entity:
+class GameObject:
     def __init__(self, name):
         self.name = name
         self.childs = []

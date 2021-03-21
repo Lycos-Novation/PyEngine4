@@ -8,13 +8,13 @@
                 {
                     "name": "TransformComponent",
                     "position": [
-                        0,
-                        0
+                        150,
+                        200
                     ],
                     "rotation": 0,
                     "scale": [
-                        1,
-                        1
+                        1.0,
+                        1.0
                     ]
                 },
                 {
@@ -23,6 +23,40 @@
                 },
                 {
                     "name": "ScriptComponent myScript"
+                }
+            ]
+        },
+        {
+            "name": "text",
+            "childs": [],
+            "components": [
+                {
+                    "name": "TransformComponent",
+                    "position": [
+                        300,
+                        200
+                    ],
+                    "rotation": 0,
+                    "scale": [
+                        1.0,
+                        1.0
+                    ]
+                },
+                {
+                    "name": "TextComponent",
+                    "text": "Hello Lycos !",
+                    "font_name": "arial",
+                    "font_size": 20,
+                    "font_bold": true,
+                    "font_italic": true,
+                    "font_underline": true,
+                    "font_color": [
+                        255,
+                        0,
+                        255,
+                        255
+                    ],
+                    "font_antialias": true
                 }
             ]
         }
