@@ -39,16 +39,15 @@ class ComponentsWidget(QWidget):
         menu = QMenu(self)
         create_transform = QAction("Transform", self)
         create_transform.triggered.connect(lambda: self.create_component("TransformComponent"))
-        menu.addAction(create_transform)
         create_sprite = QAction("Sprite", self)
         create_sprite.triggered.connect(lambda: self.create_component("SpriteComponent"))
-        menu.addAction(create_sprite)
         create_text = QAction("Text", self)
         create_text.triggered.connect(lambda: self.create_component("TextComponent"))
-        menu.addAction(create_text)
+        create_collision = QAction("Collision", self)
+        create_collision.triggered.connect(lambda: self.create_component("CollisionComponent"))
         create_script = QAction("Script", self)
         create_script.triggered.connect(lambda: self.create_component("ScriptComponent"))
-        menu.addAction(create_script)
+        menu.addActions([create_transform, create_sprite, create_text, create_collision, create_script])
         if len(self.list_components.selectedItems()) >= 1:
             widget = self.list_components.itemWidget(self.list_components.selectedItems()[0])
             remove = QAction("Delete Component", self)
@@ -60,16 +59,15 @@ class ComponentsWidget(QWidget):
         menu = QMenu(self)
         create_transform = QAction("Transform", self)
         create_transform.triggered.connect(lambda: self.create_component("TransformComponent"))
-        menu.addAction(create_transform)
         create_sprite = QAction("Sprite", self)
         create_sprite.triggered.connect(lambda: self.create_component("SpriteComponent"))
-        menu.addAction(create_sprite)
         create_text = QAction("Text", self)
         create_text.triggered.connect(lambda: self.create_component("TextComponent"))
-        menu.addAction(create_text)
+        create_collision = QAction("Collision", self)
+        create_collision.triggered.connect(lambda: self.create_component("CollisionComponent"))
         create_script = QAction("Script", self)
         create_script.triggered.connect(lambda: self.create_component("ScriptComponent"))
-        menu.addAction(create_script)
+        menu.addActions([create_transform, create_sprite, create_text, create_collision, create_script])
         menu.exec_(QCursor.pos())
 
     def remove_component(self, comp):
@@ -87,6 +85,8 @@ class ComponentsWidget(QWidget):
             self.obj.components.append(components.TextComponent())
         elif comp == "ScriptComponent":
             self.obj.components.append(components.ScriptComponent())
+        elif comp == "CollisionComponent":
+            self.obj.components.append(components.CollisionComponent())
         self.set_obj(self.obj)
         self.parent.project.save()
         self.parent.viewport.update_screen()
@@ -111,6 +111,8 @@ class ComponentsWidget(QWidget):
                 w = SpriteComponent(self, i)
             elif i.name == "TextComponent":
                 w = TextComponent(self, i)
+            elif i.name == "CollisionComponent":
+                w = CollisionComponent(self, i)
             elif i.name.startswith("ScriptComponent"):
                 w = ScriptComponent(self, i)
             else:

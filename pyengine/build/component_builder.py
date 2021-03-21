@@ -24,6 +24,25 @@ class ComponentBuilder:
         return text.replace("{COMPONENTS}", template)
 
     @staticmethod
+    def generate_collision_component(text, comp):
+        replaces = {
+            "{NAME}": str(comp.name.lower()),
+            "{SOLID}": str(comp.solid),
+            "{CALLBACK}": str(comp.callback)
+        }
+
+        with open(os.path.join(ComponentBuilder.templates, "collision_component.txt"), "r") as f:
+            template = f.read()
+
+        # GENERATE MAIN INFO
+        for k, v in replaces.items():
+            template = template.replace(k, v)
+
+        return text.replace("{COMPONENTS}", template)
+
+
+
+    @staticmethod
     def generate_text_component(text, comp):
         replaces = {
             "{NAME}": str(comp.name.lower()),
@@ -40,7 +59,7 @@ class ComponentBuilder:
         with open(os.path.join(ComponentBuilder.templates, "text_component.txt"), "r") as f:
             template = f.read()
 
-        #GENERATE MAIN INFO
+        # GENERATE MAIN INFO
         for k, v in replaces.items():
             template = template.replace(k, v)
 
