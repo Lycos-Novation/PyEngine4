@@ -17,7 +17,11 @@ class TextComponent(Component):
         self.font_color = font_color
         self.font_antialias = font_antialias
         self.transformed_font = None
+        self.render = None
         self.update_font()
+
+    def start(self):
+        self.update_render()
 
     def update_font(self):
         try:
@@ -32,16 +36,20 @@ class TextComponent(Component):
     def rendered_size(self, text):
         return self.transformed_font.size(text)
 
-    def show(self, screen):
+    def update_render(self):
         transform = self.entity.get_component("TransformComponent")
         if transform is not None:
-            position = transform.position
             rotation = transform.rotation
             scale = transform.scale
             render = self.transformed_font.render(self.text, self.font_antialias, self.font_color)
             render = pygame.transform.rotate(render, rotation)
-            render = pygame.transform.scale(
+            self.render = pygame.transform.scale(
                 render,
                 [int(render.get_rect().width * scale[0]), int(render.get_rect().height * scale[1])]
             )
-            screen.blit(render, position)
+
+    def show(self, screen):
+        transform = self.entity.get_component("TransformComponent")
+        if transform is not None:
+            position = transform.position
+            screen.blit(self.render, position)

@@ -24,6 +24,7 @@ class Game:
 
     def run(self):
         self.is_running = True
+        self.scenes[self.current_scene].start()
         while self.is_running:
             for event in pygame.event.get():
                 if event.type == const.QUIT:

@@ -4,6 +4,10 @@ class Scene:
         self.bg_color = color
         self.entities = entities
 
+    def start(self):
+        for i in self.entities:
+            i.start()
+
     def key_press(self, evt):
         for i in self.entities:
             i.key_press(evt)
