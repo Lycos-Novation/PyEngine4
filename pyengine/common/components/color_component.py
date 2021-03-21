@@ -1,7 +1,7 @@
 class ColorComponent:
     def __init__(self):
         self.name = "ColorComponent"
-        self.color = [0, 0, 0, 0]
+        self.color = [0, 0, 0, 255]
     
     def to_dict(self):
         return {
@@ -12,5 +12,5 @@ class ColorComponent:
     @classmethod
     def from_dict(cls, values):
         color = ColorComponent()
-        color.color = values.get("color", [0, 0, 0, 0])
+        color.color = values.get("color", [0, 0, 0, 255])
         return color
