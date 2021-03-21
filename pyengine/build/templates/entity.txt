@@ -1,4 +1,0 @@
-{NAME} = Entity("{NAME}")
-{COMPONENTS}
-{CHILDS}
-{ENTITIES}
