@@ -3,6 +3,7 @@ class GameObject:
         self.name = name
         self.childs = []
         self.components = []
+        self.id_ = -1
 
     def add_component(self, comp):
         self.components.append(comp)

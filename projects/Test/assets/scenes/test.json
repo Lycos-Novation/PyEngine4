@@ -27,7 +27,11 @@
                 {
                     "name": "CollisionComponent",
                     "solid": true,
-                    "callback": "myScript - collide"
+                    "callback": null
+                },
+                {
+                    "name": "BasicPhysicComponent",
+                    "gravity": 5
                 }
             ]
         },
@@ -38,8 +42,8 @@
                 {
                     "name": "TransformComponent",
                     "position": [
-                        300,
-                        200
+                        20,
+                        400
                     ],
                     "rotation": 0,
                     "scale": [

@@ -3,3 +3,4 @@ from files.components.sprite_component import SpriteComponent
 from files.components.transform_component import TransformComponent
 from files.components.text_component import TextComponent
 from files.components.collision_component import CollisionComponent
+from files.components.basicphysic_component import BasicPhysicComponent
