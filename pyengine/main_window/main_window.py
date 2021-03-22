@@ -52,7 +52,8 @@ class MainWindow(QWidget):
     def launch_project(self):
         if self.project is not None:
             self.showMinimized()
-            self.project.launch()
+            if self.project.launch():
+                QMessageBox.warning(self, "Launching Error", "Launching Game make an error.\nSee logs.")
             self.showMaximized()
 
     def build_project(self):

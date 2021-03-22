@@ -8,6 +8,9 @@ import importlib
 
 from pyengine.common.project_objects import Scene, Texture
 from pyengine.build import ProjectBuilder
+from pyengine.common.utils import core_logger
+
+from types import ModuleType
 
 
 class Project:
@@ -33,6 +36,8 @@ class Project:
         self.scenes = []
         self.textures = []
         self.scripts = []
+        self.crash = False
+        self.module = None
 
     def get_scene(self, name):
         for i in self.scenes:
@@ -47,13 +52,36 @@ class Project:
     def build(self):
         ProjectBuilder.build(self)
 
+    def __reload_module(self, module=None, mdict=None):
+        if module is None:
+            module = self.module
+        if mdict is None:
+            mdict = {}
+        if module not in mdict:
+            mdict[module] = []
+        for name in dir(module):
+            attr = getattr(module, name)
+            if type(attr) is ModuleType:
+                if attr not in mdict[module]:
+                    if attr.__name__ not in sys.builtin_module_names and attr.__name__ not in ["pygame"]:
+                        mdict[module].append(attr)
+                        self.__reload_module(attr, mdict)
+        importlib.reload(module)
+
     def __launch(self):
+        self.crash = False
         if os.path.exists(os.path.join("builds", self.name, self.name.title()+".py")):
             os.chdir(os.path.join("builds", self.name))
             sys.path.append(os.path.join("."))
-            module = importlib.__import__(".".join(["builds", self.name, self.name.title()]))
-            eval("module."+self.name+"."+self.name.title()+".launch()")
-            sys.modules.pop(".".join(["builds", self.name, self.name.title()]))
+            if self.module is None:
+                self.module = importlib.import_module(self.name.title(), "builds."+self.name)
+            else:
+                self.__reload_module()
+            try:
+                self.module.launch()
+            except Exception as e:
+                self.crash = True
+                core_logger.exception("Error in Game Launching")
             DISPLAY = (1, 1)
             DEPTH = 32
             FLAGS = 0
@@ -63,6 +91,7 @@ class Project:
     def launch(self):
         thread = threading.Thread(target=self.__launch)
         thread.run()
+        return self.crash
 
     def save(self):
         removes = [self.folders["prefabs"], self.folders["textures"], self.folders["scenes"]]
