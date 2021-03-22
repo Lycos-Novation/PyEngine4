@@ -22,9 +22,6 @@
                     "sprite": "test"
                 },
                 {
-                    "name": "ScriptComponent myScript"
-                },
-                {
                     "name": "CollisionComponent",
                     "solid": true,
                     "callback": null
@@ -32,6 +29,17 @@
                 {
                     "name": "BasicPhysicComponent",
                     "gravity": 5
+                },
+                {
+                    "name": "ControlComponent",
+                    "keys": {
+                        "UPJUMP": "K_UP",
+                        "DOWN": "K_DOWN",
+                        "LEFT": "K_LEFT",
+                        "RIGHT": "K_RIGHT"
+                    },
+                    "control_type": "CLASSICJUMP",
+                    "speed": 5
                 }
             ]
         },
