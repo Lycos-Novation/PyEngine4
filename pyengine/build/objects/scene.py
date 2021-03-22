@@ -10,9 +10,9 @@ class Scene:
         for i in game_objects:
             self.add_game_object(i)
 
-    def add_game_object(self, entity):
-        self.game_objects.append(entity)
-        entity.id_ = self.__game_object_count
+    def add_game_object(self, game_object):
+        self.game_objects.append(game_object)
+        game_object.id_ = self.__game_object_count
         self.__game_object_count += 1
 
     def get_game_object(self, id_):

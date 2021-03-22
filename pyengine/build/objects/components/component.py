@@ -1,6 +1,6 @@
 class Component:
     def __init__(self, engine):
-        self.entity = None
+        self.game_object = None
         self.engine = engine
 
     def start(self):
