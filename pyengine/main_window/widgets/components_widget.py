@@ -45,9 +45,11 @@ class ComponentsWidget(QWidget):
         create_text.triggered.connect(lambda: self.create_component("TextComponent"))
         create_collision = QAction("Collision", self)
         create_collision.triggered.connect(lambda: self.create_component("CollisionComponent"))
+        create_phys = QAction("Basic Physics", self)
+        create_phys.triggered.connect(lambda: self.create_component("BasicPhysicComponent"))
         create_script = QAction("Script", self)
         create_script.triggered.connect(lambda: self.create_component("ScriptComponent"))
-        menu.addActions([create_transform, create_sprite, create_text, create_collision, create_script])
+        menu.addActions([create_transform, create_sprite, create_text, create_collision, create_phys, create_script])
         if len(self.list_components.selectedItems()) >= 1:
             widget = self.list_components.itemWidget(self.list_components.selectedItems()[0])
             remove = QAction("Delete Component", self)
@@ -65,9 +67,11 @@ class ComponentsWidget(QWidget):
         create_text.triggered.connect(lambda: self.create_component("TextComponent"))
         create_collision = QAction("Collision", self)
         create_collision.triggered.connect(lambda: self.create_component("CollisionComponent"))
+        create_phys = QAction("Basic Physics", self)
+        create_phys.triggered.connect(lambda: self.create_component("BasicPhysicComponent"))
         create_script = QAction("Script", self)
         create_script.triggered.connect(lambda: self.create_component("ScriptComponent"))
-        menu.addActions([create_transform, create_sprite, create_text, create_collision, create_script])
+        menu.addActions([create_transform, create_sprite, create_text, create_collision, create_phys, create_script])
         menu.exec_(QCursor.pos())
 
     def remove_component(self, comp):
@@ -87,6 +91,8 @@ class ComponentsWidget(QWidget):
             self.obj.components.append(components.ScriptComponent())
         elif comp == "CollisionComponent":
             self.obj.components.append(components.CollisionComponent())
+        elif comp == "BasicPhysicComponent":
+            self.obj.components.append(components.BasicPhysicComponent())
         self.set_obj(self.obj)
         self.parent.project.save()
         self.parent.viewport.update_screen()
@@ -113,6 +119,8 @@ class ComponentsWidget(QWidget):
                 w = TextComponent(self, i)
             elif i.name == "CollisionComponent":
                 w = CollisionComponent(self, i)
+            elif i.name == "BasicPhysicComponent":
+                w = BasicPhysicComponent(self, i)
             elif i.name.startswith("ScriptComponent"):
                 w = ScriptComponent(self, i)
             else:

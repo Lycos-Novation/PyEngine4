@@ -24,6 +24,22 @@ class ComponentBuilder:
         return text.replace("{COMPONENTS}", template)
 
     @staticmethod
+    def generate_basicphysic_component(text, comp):
+        replaces = {
+            "{NAME}": str(comp.name.lower()),
+            "{GRAVITY}": str(comp.gravity)
+        }
+
+        with open(os.path.join(ComponentBuilder.templates, "basicphysic_component.txt"), "r") as f:
+            template = f.read()
+
+        # GENERATE MAIN INFO
+        for k, v in replaces.items():
+            template = template.replace(k, v)
+
+        return text.replace("{COMPONENTS}", template)
+
+    @staticmethod
     def generate_collision_component(text, comp):
         replaces = {
             "{NAME}": str(comp.name.lower()),
@@ -39,8 +55,6 @@ class ComponentBuilder:
             template = template.replace(k, v)
 
         return text.replace("{COMPONENTS}", template)
-
-
 
     @staticmethod
     def generate_text_component(text, comp):

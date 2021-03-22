@@ -25,6 +25,8 @@ class ProjectBuilder:
             return ComponentBuilder.generate_text_component(text, comp)
         elif comp.name == "CollisionComponent":
             return ComponentBuilder.generate_collision_component(text, comp)
+        elif comp.name == "BasicPhysicComponent":
+            return ComponentBuilder.generate_basicphysic_component(text, comp)
         elif comp.name.startswith("ScriptComponent"):
             return ComponentBuilder.generate_script_component(text, comp, ProjectBuilder.project_folders["scripts"])
         else:
