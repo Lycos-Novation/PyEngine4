@@ -37,7 +37,7 @@ class TextComponent(Component):
         return self.transformed_font.size(text)
 
     def update_render(self):
-        transform = self.entity.get_component("TransformComponent")
+        transform = self.game_object.get_component("TransformComponent")
         if transform is not None:
             rotation = transform.rotation
             scale = transform.scale
@@ -49,7 +49,7 @@ class TextComponent(Component):
             )
 
     def show(self, screen):
-        transform = self.entity.get_component("TransformComponent")
+        transform = self.game_object.get_component("TransformComponent")
         if transform is not None:
             position = transform.position
             screen.blit(self.render, position)

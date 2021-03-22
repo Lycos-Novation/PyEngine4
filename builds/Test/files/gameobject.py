@@ -7,7 +7,7 @@ class GameObject:
 
     def add_component(self, comp):
         self.components.append(comp)
-        comp.entity = self
+        comp.game_object = self
 
     def get_component(self, name):
         for i in self.components:

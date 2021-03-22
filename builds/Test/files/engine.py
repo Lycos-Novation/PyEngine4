@@ -8,8 +8,8 @@ class Engine:
         self.down_keys = []
         self.down_mousebuttons = []
 
-    def get_entity(self, id_):
-        return self.game.scenes[self.game.current_scene].get_entity(id_)
+    def get_game_object(self, id_):
+        return self.game.scenes[self.game.current_scene].get_game_object(id_)
 
     def get_current_scene(self):
         return self.game.scenes[self.game.current_scene]

@@ -11,12 +11,12 @@ class BasicPhysicComponent(Component):
         self.time = 5
 
     def update(self):
-        transform = self.entity.get_component("TransformComponent")
+        transform = self.game_object.get_component("TransformComponent")
         if transform is not None:
             pos = transform.position.copy()
             pos[1] += self.gravity
 
-            collision = self.entity.get_component("CollisionComponent")
+            collision = self.game_object.get_component("CollisionComponent")
             if collision is not None:
                 if collision.can_go(pos, "GRAVITY"):
                     self.grounded = False
