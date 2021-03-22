@@ -1,0 +1,2 @@
+    {NAME} = BasicPhysicComponent(engine, {GRAVITY})
+{COMPONENTS}

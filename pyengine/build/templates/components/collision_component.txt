@@ -1,0 +1,2 @@
+    {NAME} = CollisionComponent(engine, {SOLID}, "{CALLBACK}")
+{COMPONENTS}

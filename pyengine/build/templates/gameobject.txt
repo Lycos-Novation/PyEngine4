@@ -1,0 +1,4 @@
+{NAME} = GameObject("{NAME}")
+{COMPONENTS}
+{CHILDS}
+    {ENTITIES}
