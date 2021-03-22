@@ -24,6 +24,24 @@ class ComponentBuilder:
         return text.replace("{COMPONENTS}", template)
 
     @staticmethod
+    def generate_control_component(text, comp):
+        replaces = {
+            "{NAME}": str(comp.name.lower()),
+            "{KEYS}": str(comp.keys),
+            "{CONTROL_TYPE}": str(comp.control_type),
+            "{SPEED}": str(comp.speed)
+        }
+
+        with open(os.path.join(ComponentBuilder.templates, "control_component.txt"), "r") as f:
+            template = f.read()
+
+        # GENERATE MAIN INFO
+        for k, v in replaces.items():
+            template = template.replace(k, v)
+
+        return text.replace("{COMPONENTS}", template)
+
+    @staticmethod
     def generate_basicphysic_component(text, comp):
         replaces = {
             "{NAME}": str(comp.name.lower()),

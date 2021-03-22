@@ -1,0 +1,2 @@
+    {NAME} = ControlComponent(engine, {KEYS}, "{CONTROL_TYPE}", {SPEED})
+{COMPONENTS}

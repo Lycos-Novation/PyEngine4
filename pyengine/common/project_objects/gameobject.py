@@ -44,6 +44,8 @@ class GameObject:
                 obj.components.append(CollisionComponent.from_dict(i))
             elif i.get("name", "") == "BasicPhysicComponent":
                 obj.components.append(BasicPhysicComponent.from_dict(i))
+            elif i.get("name", "") == "ControlComponent":
+                obj.components.append(ControlComponent.from_dict(i))
             elif i.get("name", "").startswith("ScriptComponent"):
                 obj.components.append(ScriptComponent.from_dict(i))
         return obj
