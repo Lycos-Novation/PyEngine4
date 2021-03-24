@@ -20,16 +20,16 @@ class SceneTree(QTreeWidget):
     def context_menu(self):
         menu = QMenu(self)
         create_empty = QAction("Create GameObject", self)
-        create_empty.triggered.connect(lambda: self.create_entity("gameobject"))
+        create_empty.triggered.connect(lambda: self.create_gameobject("gameobject"))
         menu.addAction(create_empty)
         if len(self.selectedItems()) >= 1:
             menu.addSeparator()
-            remove_entity = QAction("Remove Entity", self)
-            remove_entity.triggered.connect(self.remove_entity)
+            remove_entity = QAction("Remove GameObject", self)
+            remove_entity.triggered.connect(self.remove_gameobject)
             menu.addAction(remove_entity)
         menu.exec_(QCursor.pos())
 
-    def remove_entity(self):
+    def remove_gameobject(self):
         if len(self.selectedItems()) >= 1:
             obj = self.selectedItems()[0].obj
             if obj != self.scene:
@@ -49,9 +49,9 @@ class SceneTree(QTreeWidget):
                 self.parent.project.save()
                 self.update_items()
             else:
-                QMessageBox.warning(self, "PyEngine4 - Remove Entity", "Can't remove Scene")
+                QMessageBox.warning(self, "PyEngine4 - Remove GameObject", "Can't remove Scene")
 
-    def create_entity(self, entity):
+    def create_gameobject(self, entity):
         if len(self.selectedItems()) > 1:
             obj = self.selectedItems()[0]
         else:
