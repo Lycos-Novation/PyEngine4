@@ -114,6 +114,24 @@ class ComponentBuilder:
         return text.replace("{COMPONENTS}", template)
 
     @staticmethod
+    def generate_spritesheet_component(text, comp):
+        replaces = {
+            "{NAME}": str(comp.name.lower()),
+            "{SPRITE}": str(comp.sprite)+"."+ComponentBuilder.sprites[comp.sprite],
+            "{SPRITE_NUMBER}": str(comp.sprite_number),
+            "{CURRENT_SPRITE}": str(comp.current_sprite)
+        }
+
+        with open(os.path.join(ComponentBuilder.templates, "spritesheet_component.txt"), "r") as f:
+            template = f.read()
+
+        # GENERATE MAIN INFO
+        for k, v in replaces.items():
+            template = template.replace(k, v)
+
+        return text.replace("{COMPONENTS}", template)
+
+    @staticmethod
     def generate_transform_component(text, comp):
         replaces = {
             "{NAME}": str(comp.name.lower()),

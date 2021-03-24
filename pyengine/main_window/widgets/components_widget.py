@@ -49,6 +49,8 @@ class ComponentsWidget(QWidget):
         create_phys.triggered.connect(lambda: self.create_component("BasicPhysicComponent"))
         create_control = QAction("Control", self)
         create_control.triggered.connect(lambda: self.create_component("ControlComponent"))
+        create_spritesheet = QAction("SpriteSheet", self)
+        create_spritesheet.triggered.connect(lambda: self.create_component("SpriteSheetComponent"))
         create_script = QAction("Script", self)
         create_script.triggered.connect(lambda: self.create_component("ScriptComponent"))
         menu.addActions([
@@ -58,6 +60,7 @@ class ComponentsWidget(QWidget):
             create_collision,
             create_phys,
             create_control,
+            create_spritesheet,
             create_script
         ])
         if len(self.list_components.selectedItems()) >= 1:
@@ -81,6 +84,8 @@ class ComponentsWidget(QWidget):
         create_phys.triggered.connect(lambda: self.create_component("BasicPhysicComponent"))
         create_control = QAction("Control", self)
         create_control.triggered.connect(lambda: self.create_component("ControlComponent"))
+        create_spritesheet = QAction("SpriteSheet", self)
+        create_spritesheet.triggered.connect(lambda: self.create_component("SpriteSheetComponent"))
         create_script = QAction("Script", self)
         create_script.triggered.connect(lambda: self.create_component("ScriptComponent"))
         menu.addActions([
@@ -90,6 +95,7 @@ class ComponentsWidget(QWidget):
             create_collision,
             create_phys,
             create_control,
+            create_spritesheet,
             create_script
         ])
         menu.exec_(QCursor.pos())
@@ -115,6 +121,8 @@ class ComponentsWidget(QWidget):
             self.obj.components.append(components.BasicPhysicComponent())
         elif comp == "ControlComponent":
             self.obj.components.append(components.ControlComponent())
+        elif comp == "SpriteSheetComponent":
+            self.obj.components.append(components.SpriteSheetComponent())
         self.set_obj(self.obj)
         self.parent.project.save()
         self.parent.viewport.update_screen()
@@ -145,6 +153,8 @@ class ComponentsWidget(QWidget):
                 w = BasicPhysicComponent(self, i)
             elif i.name == "ControlComponent":
                 w = ControlComponent(self, i)
+            elif i.name == "SpriteSheetComponent":
+                w = SpriteSheetComponent(self, i)
             elif i.name.startswith("ScriptComponent"):
                 w = ScriptComponent(self, i)
             else:

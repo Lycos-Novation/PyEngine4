@@ -29,6 +29,8 @@ class ProjectBuilder:
             return ComponentBuilder.generate_basicphysic_component(text, comp)
         elif comp.name == "ControlComponent":
             return ComponentBuilder.generate_control_component(text, comp)
+        elif comp.name == "SpriteSheetComponent":
+            return ComponentBuilder.generate_spritesheet_component(text, comp)
         elif comp.name.startswith("ScriptComponent"):
             return ComponentBuilder.generate_script_component(text, comp, ProjectBuilder.project_folders["scripts"])
         else:

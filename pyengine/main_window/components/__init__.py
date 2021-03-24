@@ -7,3 +7,4 @@ from pyengine.main_window.components.text_compnent import TextComponent
 from pyengine.main_window.components.collision_component import CollisionComponent
 from pyengine.main_window.components.basicphysic_component import BasicPhysicComponent
 from pyengine.main_window.components.control_component import ControlComponent
+from pyengine.main_window.components.spritesheet_component import SpriteSheetComponent

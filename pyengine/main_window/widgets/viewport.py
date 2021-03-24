@@ -36,20 +36,26 @@ class Viewport(QWidget):
                 for child in parent.childs:
                     transform = child.get_component("TransformComponent")
                     sprite = child.get_component("SpriteComponent")
+                    spritesheet = child.get_component("SpriteSheetComponent")
                     text = child.get_component("TextComponent")
                     if transform is not None:
                         position = transform.position
                         rotation = transform.rotation
                         scale = transform.scale
+                        render = None
                         if sprite is not None and sprite.sprite is not None:
                             path = self.parent.project.get_texture(sprite.sprite).components[0].path
+                            render = pygame.image.load(path).convert_alpha()
+                        if spritesheet is not None and spritesheet.sprite is not None:
+                            path = self.parent.project.get_texture(spritesheet.sprite).components[0].path
                             image = pygame.image.load(path).convert_alpha()
-                            image = pygame.transform.rotate(image, rotation)
-                            image = pygame.transform.scale(
-                                image,
-                                [int(image.get_rect().width * scale[0]), int(image.get_rect().height * scale[1])]
+                            x_diff = image.get_rect().width // spritesheet.sprite_number[0]
+                            y_diff = image.get_rect().height // spritesheet.sprite_number[1]
+                            indexes = (
+                                spritesheet.current_sprite % spritesheet.sprite_number[0],
+                                spritesheet.current_sprite // spritesheet.sprite_number[0]
                             )
-                            screen.blit(image, position)
+                            render = image.subsurface(pygame.Rect(indexes[0]*x_diff, indexes[1]*y_diff, x_diff, y_diff))
                         if text is not None:
                             try:
                                 font = pygame.font.Font(text.font_name, text.font_size)
@@ -59,6 +65,7 @@ class Viewport(QWidget):
                             font.set_italic(text.font_italic)
                             font.set_bold(text.font_bold)
                             render = font.render(text.text, text.font_antialias, text.font_color)
+                        if render is not None:
                             render = pygame.transform.rotate(render, rotation)
                             render = pygame.transform.scale(
                                 render,

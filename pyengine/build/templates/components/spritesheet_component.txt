@@ -1,0 +1,2 @@
+    {NAME} = SpriteSheetComponent(engine, "{SPRITE}", {SPRITE_NUMBER}, {CURRENT_SPRITE})
+{COMPONENTS}
