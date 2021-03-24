@@ -38,7 +38,7 @@
                         "LEFT": "K_LEFT",
                         "RIGHT": "K_RIGHT"
                     },
-                    "control_type": "CLASSICJUMP",
+                    "control_type": "FOURDIRECTION",
                     "speed": 5
                 }
             ]
@@ -79,6 +79,36 @@
                     "name": "CollisionComponent",
                     "solid": true,
                     "callback": null
+                }
+            ]
+        },
+        {
+            "name": "sprite_sheet",
+            "childs": [],
+            "components": [
+                {
+                    "name": "TransformComponent",
+                    "position": [
+                        400,
+                        150
+                    ],
+                    "rotation": 0,
+                    "scale": [
+                        1.0,
+                        1.0
+                    ]
+                },
+                {
+                    "name": "SpriteSheetComponent",
+                    "sprite": "sheet",
+                    "sprite_number": [
+                        3,
+                        2
+                    ],
+                    "current_sprite": 0
+                },
+                {
+                    "name": "ScriptComponent myScript"
                 }
             ]
         }

@@ -5,3 +5,4 @@ from files.components.text_component import TextComponent
 from files.components.collision_component import CollisionComponent
 from files.components.basicphysic_component import BasicPhysicComponent
 from files.components.control_component import ControlComponent
+from files.components.spritesheet_component import SpriteSheetComponent
