@@ -8,3 +8,4 @@ from pyengine.main_window.components.collision_component import CollisionCompone
 from pyengine.main_window.components.basicphysic_component import BasicPhysicComponent
 from pyengine.main_window.components.control_component import ControlComponent
 from pyengine.main_window.components.spritesheet_component import SpriteSheetComponent
+from pyengine.main_window.components.auto_component import AutoComponent

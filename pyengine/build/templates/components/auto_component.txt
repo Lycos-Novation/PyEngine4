@@ -1,0 +1,2 @@
+    {NAME} = AutoComponent(engine, {MOVE}, {ROTATION}, {ACTIVE})
+{COMPONENTS}

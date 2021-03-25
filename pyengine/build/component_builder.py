@@ -132,6 +132,23 @@ class ComponentBuilder:
         return text.replace("{COMPONENTS}", template)
 
     @staticmethod
+    def generate_auto_component(text, comp):
+        replaces = {
+            "{NAME}": str(comp.name.lower()),
+            "{MOVE}": str(comp.move),
+            "{ROTATION}": str(comp.rotation),
+            "{ACTIVE}": str(comp.active)
+        }
+        with open(os.path.join(ComponentBuilder.templates, "auto_component.txt"), "r") as f:
+            template = f.read()
+
+        # GENERATE MAIN INFO
+        for k, v in replaces.items():
+            template = template.replace(k, v)
+
+        return text.replace("{COMPONENTS}", template)
+
+    @staticmethod
     def generate_transform_component(text, comp):
         replaces = {
             "{NAME}": str(comp.name.lower()),

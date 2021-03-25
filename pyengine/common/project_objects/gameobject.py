@@ -48,6 +48,8 @@ class GameObject:
                 obj.components.append(ControlComponent.from_dict(i))
             elif i.get("name", "") == "SpriteSheetComponent":
                 obj.components.append(SpriteSheetComponent.from_dict(i))
+            elif i.get("name", "") == "AutoComponent":
+                obj.components.append(AutoComponent.from_dict(i))
             elif i.get("name", "").startswith("ScriptComponent"):
                 obj.components.append(ScriptComponent.from_dict(i))
         return obj
