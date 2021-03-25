@@ -52,5 +52,5 @@ class Game:
             self.scenes[self.current_scene].update()
             self.scenes[self.current_scene].show(self.screen)
 
-            self.clock.tick(60)
+            self.clock.tick()
             pygame.display.update()
