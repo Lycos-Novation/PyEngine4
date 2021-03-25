@@ -24,12 +24,16 @@ def launch():
     collisioncomponent = CollisionComponent(engine, True, "None")
     text.add_component(collisioncomponent)
     sprite_sheet = GameObject("sprite_sheet")
-    transformcomponent = TransformComponent(engine, [400, 150], 0, [1.0, 1.0])
+    transformcomponent = TransformComponent(engine, [1000, 150], 0, [1.0, 1.0])
     sprite_sheet.add_component(transformcomponent)
     spritesheetcomponent = SpriteSheetComponent(engine, "sheet.png", [3, 2], 0)
     sprite_sheet.add_component(spritesheetcomponent)
     myscript = Myscript(engine)
     sprite_sheet.add_component(myscript)
+    autocomponent = AutoComponent(engine, [-5, 0], 0, True)
+    sprite_sheet.add_component(autocomponent)
+    collisioncomponent = CollisionComponent(engine, True, "None")
+    sprite_sheet.add_component(collisioncomponent)
     
 
 

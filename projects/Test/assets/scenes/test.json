@@ -89,7 +89,7 @@
                 {
                     "name": "TransformComponent",
                     "position": [
-                        400,
+                        1000,
                         150
                     ],
                     "rotation": 0,
@@ -109,6 +109,15 @@
                 },
                 {
                     "name": "ScriptComponent myScript"
+                },
+                {
+                    "name": "AutoComponent",
+                    "move": [
+                        -5,
+                        0
+                    ],
+                    "rotation": 0,
+                    "active": true
                 }
             ]
         }
