@@ -13,6 +13,7 @@ class BasicPhysicComponent(QWidget):
         self.gravity = QLabel("Gravity", self)
         self.gravity_spin = QSpinBox(self)
 
+        self.gravity_spin.setRange(0, 2147483647)
         self.gravity_spin.setValue(self.component.gravity)
         self.gravity_spin.valueChanged.connect(self.change_value)
 
