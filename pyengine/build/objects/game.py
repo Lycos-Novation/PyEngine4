@@ -22,6 +22,9 @@ class Game:
     def stop(self):
         self.is_running = False
 
+    def get_fps(self):
+        return self.clock.get_fps()
+
     def run(self):
         self.is_running = True
         self.scenes[self.current_scene].start()
