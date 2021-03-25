@@ -33,6 +33,7 @@ class ControlComponent(QWidget):
         self.control_type_combobox.addItems(self.types)
         self.control_type_combobox.setCurrentIndex(self.types.index(self.component.control_type))
         self.control_type_combobox.currentIndexChanged.connect(self.change_value)
+        self.speed_spin.setRange(1, 2147483647)
         self.speed_spin.setValue(self.component.speed)
         self.speed_spin.valueChanged.connect(self.change_value)
 
