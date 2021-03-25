@@ -8,7 +8,7 @@ class ControlComponent:
             "DOWN": "K_DOWN"
         }
         self.control_type = "FOURDIRECTION"
-        self.speed = 5
+        self.speed = 200
 
     def to_dict(self):
         return {
@@ -22,6 +22,6 @@ class ControlComponent:
     def from_dict(cls, values):
         comp = ControlComponent()
         comp.keys = values.get("keys", {"UPJUMP": "K_UP", "LEFT": "K_LEFT", "RIGHT": "K_RIGHT", "DOWN": "K_DOWN"})
-        comp.control_type = values.get("control_component", "FOURDIRECTION")
-        comp.speed = values.get("speed", 5)
+        comp.control_type = values.get("control_type", "FOURDIRECTION")
+        comp.speed = values.get("speed", 200)
         return comp
