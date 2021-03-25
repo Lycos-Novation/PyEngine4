@@ -64,6 +64,7 @@ class ComponentsWidget(QWidget):
             create_script
         ])
         if len(self.list_components.selectedItems()) >= 1:
+            menu.addSeparator()
             widget = self.list_components.itemWidget(self.list_components.selectedItems()[0])
             remove = QAction("Delete Component", self)
             remove.triggered.connect(lambda: self.remove_component(widget.component.name))
