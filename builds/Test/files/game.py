@@ -22,6 +22,9 @@ class Game:
     def stop(self):
         self.is_running = False
 
+    def get_fps(self):
+        return self.clock.get_fps()
+
     def run(self):
         self.is_running = True
         self.scenes[self.current_scene].start()
@@ -46,8 +49,8 @@ class Game:
                 elif event.type == const.MOUSEMOTION:
                     self.scenes[self.current_scene].mouse_motion(event)
 
-            self.scenes[self.current_scene].update()
+            self.scenes[self.current_scene].update(self.clock.get_time() / 1000)
             self.scenes[self.current_scene].show(self.screen)
 
-            self.clock.tick(60)
+            self.clock.tick()
             pygame.display.update()

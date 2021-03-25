@@ -28,7 +28,7 @@
                 },
                 {
                     "name": "BasicPhysicComponent",
-                    "gravity": 5
+                    "gravity": 125
                 },
                 {
                     "name": "ControlComponent",
@@ -38,8 +38,8 @@
                         "LEFT": "K_LEFT",
                         "RIGHT": "K_RIGHT"
                     },
-                    "control_type": "FOURDIRECTION",
-                    "speed": 5
+                    "control_type": "CLASSICJUMP",
+                    "speed": 200
                 }
             ]
         },
@@ -113,7 +113,7 @@
                 {
                     "name": "AutoComponent",
                     "move": [
-                        -5,
+                        -200,
                         0
                     ],
                     "rotation": 0,

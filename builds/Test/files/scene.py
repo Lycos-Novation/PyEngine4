@@ -48,9 +48,9 @@ class Scene:
         for i in self.game_objects:
             i.mouse_wheel(evt)
     
-    def update(self):
+    def update(self, deltatime):
         for i in self.game_objects:
-            i.update()
+            i.update(deltatime)
 
     def show(self, screen):
         screen.fill(self.bg_color)

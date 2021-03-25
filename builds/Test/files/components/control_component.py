@@ -9,18 +9,18 @@ class ControlComponent(Component):
         self.control_type = type_
         self.speed = speed
 
-    def update(self):
+    def update(self, deltatime):
         for i in self.engine.down_keys:
-            self.move_by_key(i)
+            self.move_by_key(i, deltatime)
 
-    def move_by_key(self, key):
+    def move_by_key(self, key, deltatime):
         transform = self.game_object.get_component("TransformComponent")
         if transform is not None:
             position = transform.position.copy()
             cause = "UNKNOWN"
             if key == eval("self.engine.pg_constants."+self.keys["UPJUMP"]):
                 if self.control_type in ("FOURDIRECTION", "DOWNUP"):
-                    position[1] -= self.speed
+                    position[1] -= self.speed*deltatime
                     cause = "UPCONTROL"
                 elif self.control_type == "CLASSICJUMP":
                     phys = self.game_object.get_component("BasicPhysicComponent")
@@ -28,15 +28,15 @@ class ControlComponent(Component):
                         phys.gravity = -phys.max_gravity
             elif key == eval("self.engine.pg_constants."+self.keys["DOWN"]):
                 if self.control_type in ("FOURDIRECTION", "DOWNUP"):
-                    position[1] += self.speed
+                    position[1] += self.speed*deltatime
                     cause = "DOWNCONTROL"
             elif key == eval("self.engine.pg_constants."+self.keys["RIGHT"]):
                 if self.control_type in ("FOURDIRECTION", "LEFTRIGHT", "CLASSICJUMP"):
-                    position[0] += self.speed
+                    position[0] += self.speed*deltatime
                     cause = "RIGHTCONTROL"
             elif key == eval("self.engine.pg_constants."+self.keys["LEFT"]):
                 if self.control_type in ("FOURDIRECTION", "LEFTRIGHT", "CLASSICJUMP"):
-                    position[0] -= self.speed
+                    position[0] -= self.speed*deltatime
                     cause = "LEFTCONTROL"
 
             if position != transform.position:

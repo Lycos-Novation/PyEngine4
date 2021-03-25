@@ -9,14 +9,14 @@ class AutoComponent(Component):
         self.rotation = rotation
         self.active = active
 
-    def update(self):
+    def update(self, deltatime):
         if self.active:
             transform = self.game_object.get_component("TransformComponent")
             if transform is not None:
                 if self.move[0] != 0 or self.move[1] != 0:
                     go = transform.position.copy()
-                    go[0] += self.move[0]
-                    go[1] += self.move[1]
+                    go[0] += self.move[0] * deltatime
+                    go[1] += self.move[1] * deltatime
                     collision = self.game_object.get_component("CollisionComponent")
                     if collision is not None:
                         if collision.can_go(go, "AUTOCOMPONENT"):
@@ -24,4 +24,4 @@ class AutoComponent(Component):
                     else:
                         transform.position = go
                 if self.rotation != 0:
-                    transform.rotation += self.rotation
+                    transform.rotation += self.rotation * deltatime

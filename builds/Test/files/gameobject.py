@@ -42,9 +42,9 @@ class GameObject:
         for i in self.components:
             i.mouse_wheel(evt)
 
-    def update(self):
+    def update(self, deltatime):
         for i in self.components:
-            i.update()
+            i.update(deltatime)
 
     def show(self, screen):
         for i in self.components:

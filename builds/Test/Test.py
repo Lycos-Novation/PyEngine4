@@ -12,9 +12,9 @@ def launch():
     gameobject.add_component(spritecomponent)
     collisioncomponent = CollisionComponent(engine, True, "None")
     gameobject.add_component(collisioncomponent)
-    basicphysiccomponent = BasicPhysicComponent(engine, 5)
+    basicphysiccomponent = BasicPhysicComponent(engine, 125)
     gameobject.add_component(basicphysiccomponent)
-    controlcomponent = ControlComponent(engine, {'UPJUMP': 'K_UP', 'DOWN': 'K_DOWN', 'LEFT': 'K_LEFT', 'RIGHT': 'K_RIGHT'}, "FOURDIRECTION", 5)
+    controlcomponent = ControlComponent(engine, {'UPJUMP': 'K_UP', 'DOWN': 'K_DOWN', 'LEFT': 'K_LEFT', 'RIGHT': 'K_RIGHT'}, "CLASSICJUMP", 200)
     gameobject.add_component(controlcomponent)
     text = GameObject("text")
     transformcomponent = TransformComponent(engine, [20, 400], 0, [1.0, 1.0])
@@ -30,10 +30,8 @@ def launch():
     sprite_sheet.add_component(spritesheetcomponent)
     myscript = Myscript(engine)
     sprite_sheet.add_component(myscript)
-    autocomponent = AutoComponent(engine, [-5, 0], 0, True)
+    autocomponent = AutoComponent(engine, [-200, 0], 0, True)
     sprite_sheet.add_component(autocomponent)
-    collisioncomponent = CollisionComponent(engine, True, "None")
-    sprite_sheet.add_component(collisioncomponent)
     
 
 
