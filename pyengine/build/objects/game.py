@@ -49,7 +49,7 @@ class Game:
                 elif event.type == const.MOUSEMOTION:
                     self.scenes[self.current_scene].mouse_motion(event)
 
-            self.scenes[self.current_scene].update()
+            self.scenes[self.current_scene].update(self.clock.get_time() / 1000)
             self.scenes[self.current_scene].show(self.screen)
 
             self.clock.tick()

@@ -6,7 +6,7 @@ class Component:
     def start(self):
         pass
 
-    def update(self):
+    def update(self, deltatime):
         pass
 
     def show(self, screen):

@@ -8,13 +8,13 @@ class BasicPhysicComponent(Component):
         self.gravity = gravity
         self.max_gravity = gravity
         self.grounded = False
-        self.time = 5
+        self.time = 0.005
 
-    def update(self):
+    def update(self, deltatime):
         transform = self.game_object.get_component("TransformComponent")
         if transform is not None:
             pos = transform.position.copy()
-            pos[1] += self.gravity
+            pos[1] += self.gravity * deltatime
 
             collision = self.game_object.get_component("CollisionComponent")
             if collision is not None:
@@ -29,5 +29,5 @@ class BasicPhysicComponent(Component):
 
             if self.time <= 0 and self.gravity < self.max_gravity and not self.grounded:
                 self.gravity += 1
-                self.time = 5
-            self.time -= 1
+                self.time = 0.005
+            self.time -= deltatime
