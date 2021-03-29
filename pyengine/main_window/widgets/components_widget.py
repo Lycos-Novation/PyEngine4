@@ -38,35 +38,13 @@ class ComponentsWidget(QWidget):
     def components_context_menu(self):
         if self.obj.__class__ == GameObject:
             menu = QMenu(self)
-            create_transform = QAction("Transform", self)
-            create_transform.triggered.connect(lambda: self.create_component("TransformComponent"))
-            create_sprite = QAction("Sprite", self)
-            create_sprite.triggered.connect(lambda: self.create_component("SpriteComponent"))
-            create_text = QAction("Text", self)
-            create_text.triggered.connect(lambda: self.create_component("TextComponent"))
-            create_collision = QAction("Collision", self)
-            create_collision.triggered.connect(lambda: self.create_component("CollisionComponent"))
-            create_phys = QAction("Basic Physics", self)
-            create_phys.triggered.connect(lambda: self.create_component("BasicPhysicComponent"))
-            create_control = QAction("Control", self)
-            create_control.triggered.connect(lambda: self.create_component("ControlComponent"))
-            create_spritesheet = QAction("SpriteSheet", self)
-            create_spritesheet.triggered.connect(lambda: self.create_component("SpriteSheetComponent"))
-            create_auto = QAction("Auto", self)
-            create_auto.triggered.connect(lambda: self.create_component("AutoComponent"))
-            create_script = QAction("Script", self)
-            create_script.triggered.connect(lambda: self.create_component("ScriptComponent"))
-            menu.addActions([
-                create_transform,
-                create_sprite,
-                create_text,
-                create_collision,
-                create_phys,
-                create_control,
-                create_spritesheet,
-                create_auto,
-                create_script
-            ])
+            for i in (
+                "Transform", "Sprite", "Text", "Collision", "BasicPhysic", "Control", "SpriteSheet", "Auto",
+                "Script"
+            ):
+                action = QAction(i, self)
+                action.triggered.connect(lambda _, comp=i: self.create_component(comp + "Component"))
+                menu.addAction(action)
             if len(self.list_components.selectedItems()) >= 1:
                 widget = self.list_components.itemWidget(self.list_components.selectedItems()[0])
                 if widget.component.name not in ("ColorComponent", "PathComponent"):
@@ -78,35 +56,12 @@ class ComponentsWidget(QWidget):
 
     def add(self):
         menu = QMenu(self)
-        create_transform = QAction("Transform", self)
-        create_transform.triggered.connect(lambda: self.create_component("TransformComponent"))
-        create_sprite = QAction("Sprite", self)
-        create_sprite.triggered.connect(lambda: self.create_component("SpriteComponent"))
-        create_text = QAction("Text", self)
-        create_text.triggered.connect(lambda: self.create_component("TextComponent"))
-        create_collision = QAction("Collision", self)
-        create_collision.triggered.connect(lambda: self.create_component("CollisionComponent"))
-        create_phys = QAction("Basic Physics", self)
-        create_phys.triggered.connect(lambda: self.create_component("BasicPhysicComponent"))
-        create_control = QAction("Control", self)
-        create_control.triggered.connect(lambda: self.create_component("ControlComponent"))
-        create_spritesheet = QAction("SpriteSheet", self)
-        create_spritesheet.triggered.connect(lambda: self.create_component("SpriteSheetComponent"))
-        create_auto = QAction("Auto", self)
-        create_auto.triggered.connect(lambda: self.create_component("AutoComponent"))
-        create_script = QAction("Script", self)
-        create_script.triggered.connect(lambda: self.create_component("ScriptComponent"))
-        menu.addActions([
-            create_transform,
-            create_sprite,
-            create_text,
-            create_collision,
-            create_phys,
-            create_control,
-            create_spritesheet,
-            create_auto,
-            create_script
-        ])
+        for i in (
+            "Transform", "Sprite", "Text", "Collision", "BasicPhysic", "Control", "SpriteSheet", "Auto", "Script"
+        ):
+            action = QAction(i, self)
+            action.triggered.connect(lambda _, comp=i: self.create_component(comp + "Component"))
+            menu.addAction(action)
         menu.exec_(QCursor.pos())
 
     def remove_component(self, comp):
