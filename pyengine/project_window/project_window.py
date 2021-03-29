@@ -91,7 +91,9 @@ class ProjectWindow(QWidget):
 
         self.project_manager.create_project(self.project_name.text(), self.project_author.text(), self.project_icon)
         self.project_list.update_list(self.project_manager.projects)
-        self.project_manager.projects[0].save()
+        for i in self.project_manager.projects:
+            if common.__version__ == i.settings.get("engine_version", ""):
+                i.save()
     
     def remove_project(self):
         if len(self.project_list.selectedItems()) >= 1:
