@@ -12,8 +12,6 @@ class Myscript(Script):
         self.number_sprite = spritesheet.sprite_number[0] * spritesheet.sprite_number[1]
     
     def update(self, deltatime):
-        print(self.engine.game.get_fps())
-
         if self.time <= 0:
             spritesheet = self.game_object.get_component("SpriteSheetComponent")
             spritesheet.current_sprite += 1

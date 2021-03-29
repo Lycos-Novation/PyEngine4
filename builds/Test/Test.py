@@ -30,7 +30,7 @@ def launch():
     sprite_sheet.add_component(spritesheetcomponent)
     myscript = Myscript(engine)
     sprite_sheet.add_component(myscript)
-    autocomponent = AutoComponent(engine, [-200, 0], 0, True)
+    autocomponent = AutoComponent(engine, [-250, 0], 0, True)
     sprite_sheet.add_component(autocomponent)
     
 

@@ -15,7 +15,7 @@ class CollisionComponent(Component):
         if rect1.colliderect(rect2):
             if self.callback is not None:
                 names = self.callback.split(" - ")
-                eval('self.entity.get_component("' + names[0] + '").' + names[1] + "(entity, cause)")
+                eval('self.entity.get_component("' + names[0] + '").' + names[1] + "(game_object, cause)")
             if e_collision.solid and self.solid:
                 return True
         return False
@@ -25,12 +25,18 @@ class CollisionComponent(Component):
             if game_object != self.game_object:
                 e_transform = game_object.get_component("TransformComponent")
                 e_sprite = game_object.get_component("SpriteComponent")
+                e_spritesheet = game_object.get_component("SpriteSheetComponent")
                 e_text = game_object.get_component("TextComponent")
                 e_collision = game_object.get_component("CollisionComponent")
                 if e_collision is not None and e_transform is not None:
                     e_pos = e_transform.position
                     if e_sprite is not None:
                         e_rect = e_sprite.render.get_rect(x=e_pos[0], y=e_pos[1])
+                        if self.__rect_collide(rect, e_rect, game_object, cause, e_collision):
+                            return True
+
+                    if e_spritesheet is not None:
+                        e_rect = e_spritesheet.render.get_rect(x=e_pos[0], y=e_pos[1])
                         if self.__rect_collide(rect, e_rect, game_object, cause, e_collision):
                             return True
 
@@ -43,10 +49,15 @@ class CollisionComponent(Component):
     def can_go(self, position, cause="UNKNOWN"):
         transform = self.game_object.get_component("TransformComponent")
         sprite = self.game_object.get_component("SpriteComponent")
+        spritesheet = self.game_object.get_component("SpriteSheetComponent")
         text = self.game_object.get_component("TextComponent")
         if transform is not None:
             if sprite is not None:
                 rect = sprite.render.get_rect(x=position[0], y=position[1])
+                if self.__internal_collide(rect, cause):
+                    return False
+            if spritesheet is not None:
+                rect = spritesheet.render.get_rect(x=position[0], y=position[1])
                 if self.__internal_collide(rect, cause):
                     return False
             if text is not None:
