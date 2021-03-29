@@ -101,9 +101,10 @@ class Project:
             os.remove(os.path.join(self.folders["main"], "project.json"))
         if os.path.exists(os.path.join(self.folders["main"], "settings.json")):
             os.remove(os.path.join(self.folders["main"], "settings.json"))
-        for i in os.listdir(self.folders["scripts"]):
-            if i.replace(".py", "") not in self.scripts:
-                os.remove(os.path.join(self.folders["scripts"], i))
+        if os.path.exists(self.folders["scripts"]):
+            for i in os.listdir(self.folders["scripts"]):
+                if i.replace(".py", "") not in self.scripts:
+                    os.remove(os.path.join(self.folders["scripts"], i))
 
         for i in self.folders.values():
             os.makedirs(i, exist_ok=True)
