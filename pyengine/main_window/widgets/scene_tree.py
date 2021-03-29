@@ -51,12 +51,12 @@ class SceneTree(QTreeWidget):
             else:
                 QMessageBox.warning(self, "PyEngine4 - Remove GameObject", "Can't remove Scene")
 
-    def create_gameobject(self, entity):
-        if len(self.selectedItems()) > 1:
-            obj = self.selectedItems()[0]
+    def create_gameobject(self, game_object):
+        if len(self.selectedItems()) >= 1:
+            obj = self.selectedItems()[0].obj
         else:
             obj = self.scene
-        if entity == "gameobject":
+        if game_object == "gameobject":
             text = QInputDialog.getText(self, "PyEngine4 - Create GameObject", "GameObject Name:", QLineEdit.Normal)
             if text[1] and len(text[0]) > 0:
                 new = GameObject(text[0])
