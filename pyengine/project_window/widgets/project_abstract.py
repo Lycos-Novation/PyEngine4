@@ -5,6 +5,7 @@ from PyQt5.QtCore import Qt
 import os
 from pyengine.common.utils.logger import core_logger
 
+
 class ProjectAbstract(QWidget):
     def __init__(self, parent, project):
         super().__init__(parent)
@@ -17,13 +18,11 @@ class ProjectAbstract(QWidget):
         self.icon.setAlignment(Qt.AlignHCenter)
 
         pix = QPixmap()
-        if pix.load(os.path.join("pyengine", "resources", "icon.png") if project.icon == "default" else project.icon):
+        icon = os.path.join("pyengine", "resources", "icon.png") if project.icon == "default" else project.icon
+        if pix.load(icon):
             self.icon.setPixmap(pix.scaled(128, 128, Qt.KeepAspectRatio))
         else:
-            core_logger.error(
-                "Cannot load " +
-                os.path.join("pyengine", "resources", "icon.png") if project.icon == "default" else project.icon
-            )
+            core_logger.error("Cannot load " + icon)
         
         self.layout = QGridLayout()
 
