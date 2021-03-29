@@ -3,7 +3,7 @@ from PyQt5.QtGui import QPixmap, QFont
 from PyQt5.QtCore import Qt
 
 import os
-
+from pyengine.common.utils.logger import core_logger
 
 class ProjectAbstract(QWidget):
     def __init__(self, parent, project):
@@ -20,8 +20,8 @@ class ProjectAbstract(QWidget):
         if pix.load(os.path.join("pyengine", "resources", "icon.png") if project.icon == "default" else project.icon):
             self.icon.setPixmap(pix.scaled(128, 128, Qt.KeepAspectRatio))
         else:
-            print(
-                "ERROR : Cannot load",
+            core_logger.error(
+                "Cannot load " +
                 os.path.join("pyengine", "resources", "icon.png") if project.icon == "default" else project.icon
             )
         
