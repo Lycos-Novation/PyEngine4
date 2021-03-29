@@ -1,5 +1,9 @@
-class ScriptComponent:
-    def __init__(self):
+from pyengine.common.components.component import Component
+
+
+class ScriptComponent(Component):
+    def __init__(self, game_object):
+        super().__init__(game_object)
         self.name = "ScriptComponent "
 
     def to_dict(self):
@@ -8,7 +12,7 @@ class ScriptComponent:
         }
 
     @classmethod
-    def from_dict(cls, values):
-        comp = ScriptComponent()
+    def from_dict(cls, game_object, values):
+        comp = ScriptComponent(game_object)
         comp.name = values.get("name", "")
         return comp

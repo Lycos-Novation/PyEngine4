@@ -72,23 +72,23 @@ class ComponentsWidget(QWidget):
 
     def create_component(self, comp):
         if comp == "TransformComponent":
-            self.obj.components.append(components.TransformComponent())
+            self.obj.components.append(components.TransformComponent(self.obj))
         elif comp == "SpriteComponent":
-            self.obj.components.append(components.SpriteComponent())
+            self.obj.components.append(components.SpriteComponent(self.obj))
         elif comp == "TextComponent":
-            self.obj.components.append(components.TextComponent())
+            self.obj.components.append(components.TextComponent(self.obj))
         elif comp == "ScriptComponent":
-            self.obj.components.append(components.ScriptComponent())
+            self.obj.components.append(components.ScriptComponent(self.obj))
         elif comp == "CollisionComponent":
-            self.obj.components.append(components.CollisionComponent())
+            self.obj.components.append(components.CollisionComponent(self.obj))
         elif comp == "BasicPhysicComponent":
-            self.obj.components.append(components.BasicPhysicComponent())
+            self.obj.components.append(components.BasicPhysicComponent(self.obj))
         elif comp == "ControlComponent":
-            self.obj.components.append(components.ControlComponent())
+            self.obj.components.append(components.ControlComponent(self.obj))
         elif comp == "SpriteSheetComponent":
-            self.obj.components.append(components.SpriteSheetComponent())
+            self.obj.components.append(components.SpriteSheetComponent(self.obj))
         elif comp == "AutoComponent":
-            self.obj.components.append(components.AutoComponent())
+            self.obj.components.append(components.AutoComponent(self.obj))
         self.set_obj(self.obj)
         self.parent.project.save()
         self.parent.viewport.update_screen()

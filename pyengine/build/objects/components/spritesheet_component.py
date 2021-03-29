@@ -19,8 +19,8 @@ class SpriteSheetComponent(Component):
     def update_render(self):
         transform = self.game_object.get_component("TransformComponent")
         if transform is not None:
-            rotation = transform.rotation
-            scale = transform.scale
+            rotation = transform.global_rotation()
+            scale = transform.global_scale()
             image = pygame.image.load(os.path.join("resources", self.sprite)).convert_alpha()
             x_diff = image.get_rect().width // self.sprite_number[0]
             y_diff = image.get_rect().height // self.sprite_number[1]
@@ -38,5 +38,5 @@ class SpriteSheetComponent(Component):
     def show(self, screen):
         transform = self.game_object.get_component("TransformComponent")
         if transform is not None:
-            position = transform.position
+            position = transform.global_position()
             screen.blit(self.render, position)

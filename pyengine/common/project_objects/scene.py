@@ -8,7 +8,7 @@ from pyengine.common.components import ColorComponent
 class Scene(GameObject):
     def __init__(self, name):
         super().__init__(name)
-        self.components.append(ColorComponent())
+        self.components.append(ColorComponent(self))
     
     def save(self, directory):
         values = {
@@ -34,5 +34,5 @@ class Scene(GameObject):
         scene.components = []
         for i in values.get("components", []):
             if i.get("name", "") == "ColorComponent":
-                scene.components.append(ColorComponent.from_dict(i))
+                scene.components.append(ColorComponent.from_dict(scene, i))
         return scene

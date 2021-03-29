@@ -84,7 +84,30 @@
         },
         {
             "name": "sprite_sheet",
-            "childs": [],
+            "childs": [
+                {
+                    "name": "child",
+                    "childs": [],
+                    "components": [
+                        {
+                            "name": "TransformComponent",
+                            "position": [
+                                50,
+                                10
+                            ],
+                            "rotation": 0,
+                            "scale": [
+                                1.0,
+                                1.0
+                            ]
+                        },
+                        {
+                            "name": "SpriteComponent",
+                            "sprite": "test"
+                        }
+                    ]
+                }
+            ],
             "components": [
                 {
                     "name": "TransformComponent",

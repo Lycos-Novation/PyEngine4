@@ -39,9 +39,9 @@ class Viewport(QWidget):
                         sprite = child.get_component("SpriteComponent")
                         spritesheet = child.get_component("SpriteSheetComponent")
                         text = child.get_component("TextComponent")
-                        position = transform.position
-                        rotation = transform.rotation
-                        scale = transform.scale
+                        position = transform.global_position()
+                        rotation = transform.global_rotation()
+                        scale = transform.global_scale()
                         if sprite is not None and sprite.sprite is not None:
                             path = self.parent.project.get_texture(sprite.sprite).components[0].path
                             render = pygame.image.load(path).convert_alpha()

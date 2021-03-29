@@ -32,7 +32,14 @@ def launch():
     sprite_sheet.add_component(myscript)
     autocomponent = AutoComponent(engine, [-250, 0], 0, True)
     sprite_sheet.add_component(autocomponent)
+    child = GameObject("child")
+    transformcomponent = TransformComponent(engine, [50, 10], 0, [1.0, 1.0])
+    child.add_component(transformcomponent)
+    spritecomponent = SpriteComponent(engine, "test.png")
+    child.add_component(spritecomponent)
     
+    sprite_sheet.add_child(child)
+
 
 
     entities = [gameobject, text, sprite_sheet]

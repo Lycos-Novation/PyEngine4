@@ -1,5 +1,9 @@
-class CollisionComponent:
-    def __init__(self):
+from pyengine.common.components.component import Component
+
+
+class CollisionComponent(Component):
+    def __init__(self, game_object):
+        super().__init__(game_object)
         self.name = "CollisionComponent"
         self.solid = True
         self.callback = None
@@ -12,8 +16,8 @@ class CollisionComponent:
         }
 
     @classmethod
-    def from_dict(cls, values):
-        comp = CollisionComponent()
+    def from_dict(cls, game_object, values):
+        comp = CollisionComponent(game_object)
         comp.solid = values.get("solid", True)
         comp.callback = values.get("callback", None)
         return comp

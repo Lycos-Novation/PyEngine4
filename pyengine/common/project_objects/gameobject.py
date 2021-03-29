@@ -6,6 +6,7 @@ class GameObject:
         self.name = name
         self.childs = []
         self.components = []
+        self.parent = None
 
     def get_component(self, name):
         for i in self.components:
@@ -30,26 +31,27 @@ class GameObject:
         obj.childs = []
         for i in values.get("childs", []):
             obj.childs.append(GameObject.from_dict(i))
+            obj.childs[-1].parent = obj
         obj.components = []
         for i in values.get("components", []):
             if i.get("name", "") == "ColorComponent":
-                obj.components.append(ColorComponent.from_dict(i))
+                obj.components.append(ColorComponent.from_dict(obj, i))
             elif i.get("name", "") == "TransformComponent":
-                obj.components.append(TransformComponent.from_dict(i))
+                obj.components.append(TransformComponent.from_dict(obj, i))
             elif i.get("name", "") == "SpriteComponent":
-                obj.components.append(SpriteComponent.from_dict(i))
+                obj.components.append(SpriteComponent.from_dict(obj, i))
             elif i.get("name", "") == "TextComponent":
-                obj.components.append(TextComponent.from_dict(i))
+                obj.components.append(TextComponent.from_dict(obj, i))
             elif i.get("name", "") == "CollisionComponent":
-                obj.components.append(CollisionComponent.from_dict(i))
+                obj.components.append(CollisionComponent.from_dict(obj, i))
             elif i.get("name", "") == "BasicPhysicComponent":
-                obj.components.append(BasicPhysicComponent.from_dict(i))
+                obj.components.append(BasicPhysicComponent.from_dict(obj, i))
             elif i.get("name", "") == "ControlComponent":
-                obj.components.append(ControlComponent.from_dict(i))
+                obj.components.append(ControlComponent.from_dict(obj, i))
             elif i.get("name", "") == "SpriteSheetComponent":
-                obj.components.append(SpriteSheetComponent.from_dict(i))
+                obj.components.append(SpriteSheetComponent.from_dict(obj, i))
             elif i.get("name", "") == "AutoComponent":
-                obj.components.append(AutoComponent.from_dict(i))
+                obj.components.append(AutoComponent.from_dict(obj, i))
             elif i.get("name", "").startswith("ScriptComponent"):
-                obj.components.append(ScriptComponent.from_dict(i))
+                obj.components.append(ScriptComponent.from_dict(obj, i))
         return obj

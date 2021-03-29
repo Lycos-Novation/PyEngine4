@@ -8,7 +8,7 @@ from pyengine.common.components import PathComponent
 class Texture(GameObject):
     def __init__(self, name, path):
         super().__init__(name)
-        self.components.append(PathComponent(path))
+        self.components.append(PathComponent(self, path))
     
     def save(self, directory):
         values = {

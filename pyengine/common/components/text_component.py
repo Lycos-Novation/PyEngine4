@@ -1,5 +1,9 @@
-class TextComponent:
-    def __init__(self):
+from pyengine.common.components.component import Component
+
+
+class TextComponent(Component):
+    def __init__(self, game_object):
+        super().__init__(game_object)
         self.name = "TextComponent"
         self.text = ""
         self.font_name = "arial"
@@ -24,8 +28,8 @@ class TextComponent:
         }
 
     @classmethod
-    def from_dict(cls, values):
-        comp = TextComponent()
+    def from_dict(cls, game_object, values):
+        comp = TextComponent(game_object)
         comp.text = values.get("text", "")
         comp.font_name = values.get("font_name", "arial")
         comp.font_size = values.get("font_size", 16)

@@ -1,5 +1,9 @@
-class ControlComponent:
-    def __init__(self):
+from pyengine.common.components.component import Component
+
+
+class ControlComponent(Component):
+    def __init__(self, game_object):
+        super().__init__(game_object)
         self.name = "ControlComponent"
         self.keys = {
             "UPJUMP": "K_UP",
@@ -19,8 +23,8 @@ class ControlComponent:
         }
 
     @classmethod
-    def from_dict(cls, values):
-        comp = ControlComponent()
+    def from_dict(cls, game_object, values):
+        comp = ControlComponent(game_object)
         comp.keys = values.get("keys", {"UPJUMP": "K_UP", "LEFT": "K_LEFT", "RIGHT": "K_RIGHT", "DOWN": "K_DOWN"})
         comp.control_type = values.get("control_type", "FOURDIRECTION")
         comp.speed = values.get("speed", 200)

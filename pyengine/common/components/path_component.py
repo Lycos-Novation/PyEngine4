@@ -1,5 +1,9 @@
-class PathComponent:
-    def __init__(self, path):
+from pyengine.common.components.component import Component
+
+
+class PathComponent(Component):
+    def __init__(self, game_object, path):
+        super().__init__(game_object)
         self.name = "PathComponent"
         self.path = path
     
@@ -10,6 +14,6 @@ class PathComponent:
         }
     
     @classmethod
-    def from_dict(cls, values):
-        comp = PathComponent(values.get("path", ""))
+    def from_dict(cls, game_object, values):
+        comp = PathComponent(game_object, values.get("path", ""))
         return comp

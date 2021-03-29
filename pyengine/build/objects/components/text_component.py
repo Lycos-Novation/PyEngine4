@@ -39,8 +39,8 @@ class TextComponent(Component):
     def update_render(self):
         transform = self.game_object.get_component("TransformComponent")
         if transform is not None:
-            rotation = transform.rotation
-            scale = transform.scale
+            rotation = transform.global_rotation()
+            scale = transform.global_scale()
             render = self.transformed_font.render(self.text, self.font_antialias, self.font_color)
             render = pygame.transform.rotate(render, rotation)
             self.render = pygame.transform.scale(
@@ -51,5 +51,5 @@ class TextComponent(Component):
     def show(self, screen):
         transform = self.game_object.get_component("TransformComponent")
         if transform is not None:
-            position = transform.position
+            position = transform.global_position()
             screen.blit(self.render, position)

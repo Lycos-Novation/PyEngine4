@@ -1,5 +1,9 @@
-class SpriteComponent:
-    def __init__(self):
+from pyengine.common.components.component import Component
+
+
+class SpriteComponent(Component):
+    def __init__(self, game_object):
+        super().__init__(game_object)
         self.name = "SpriteComponent"
         self.sprite = None
     
@@ -10,7 +14,7 @@ class SpriteComponent:
         }
     
     @classmethod
-    def from_dict(cls, values):
-        comp = SpriteComponent()
+    def from_dict(cls, game_object, values):
+        comp = SpriteComponent(game_object)
         comp.sprite = values.get("sprite", None)
         return comp

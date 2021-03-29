@@ -70,7 +70,7 @@ class ProjectBuilder:
         # GENERATE CHILDS
         for i in gameobject.childs:
             template = ProjectBuilder.generate_gameobject(template, i)
-            template += f"    {gameobject.name}.childs.append({i.name})\n"
+            template += f"    {gameobject.name}.add_child({i.name})\n"
         template = template.replace("{CHILDS}\n", "")
 
         return text.replace("{ENTITIES}", template)
