@@ -1,5 +1,5 @@
 {
-    "engine_version": "indev",
+    "engine_version": "1.0.0-Colombe",
     "width": 1080,
     "height": 720,
     "mainScene": "test",
