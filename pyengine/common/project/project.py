@@ -9,6 +9,7 @@ import importlib
 from pyengine.common.project_objects import Scene, Texture
 from pyengine.build import ProjectBuilder
 from pyengine.common.utils import core_logger
+from pyengine import common
 
 from types import ModuleType
 
@@ -27,7 +28,7 @@ class Project:
             "scenes": os.path.join("projects", self.name, "assets", "scenes")
         }
         self.settings = {
-            "engine_version": "indev",
+            "engine_version": common.__version__,
             "width": 1080,
             "height": 720,
             "mainScene": None,
