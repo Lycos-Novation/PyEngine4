@@ -28,7 +28,7 @@
                 },
                 {
                     "name": "BasicPhysicComponent",
-                    "gravity": 125
+                    "gravity": 150
                 },
                 {
                     "name": "ControlComponent",

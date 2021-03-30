@@ -12,7 +12,7 @@ def launch():
     gameobject.add_component(spritecomponent)
     collisioncomponent = CollisionComponent(engine, True, "None")
     gameobject.add_component(collisioncomponent)
-    basicphysiccomponent = BasicPhysicComponent(engine, 125)
+    basicphysiccomponent = BasicPhysicComponent(engine, 150)
     gameobject.add_component(basicphysiccomponent)
     controlcomponent = ControlComponent(engine, {'UPJUMP': 'K_UP', 'DOWN': 'K_DOWN', 'LEFT': 'K_LEFT', 'RIGHT': 'K_RIGHT'}, "CLASSICJUMP", 200)
     gameobject.add_component(controlcomponent)
