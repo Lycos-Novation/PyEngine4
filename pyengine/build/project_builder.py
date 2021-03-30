@@ -34,7 +34,7 @@ class ProjectBuilder:
         elif comp.name == "AutoComponent":
             return ComponentBuilder.generate_auto_component(text, comp)
         elif comp.name.startswith("ScriptComponent"):
-            return ComponentBuilder.generate_script_component(text, comp, ProjectBuilder.project_folders["scripts"])
+            return ComponentBuilder.generate_script_component(text, comp)
         else:
             return text
 
@@ -175,6 +175,8 @@ class ProjectBuilder:
                 os.path.join(project.folders["scripts"], i),
                 os.path.join(ProjectBuilder.project_folders["scripts"], i)
             )
+            with open(os.path.join(ProjectBuilder.project_folders["scripts"], "__init__.py"), "a") as f:
+                f.write("from files.scripts." + i.replace(".py", "") + " import " + i.replace(".py", "").title() + "\n")
 
         logger.info("COPY GAME SCRIPT : SUCCESSFULLY ENDED")
 
