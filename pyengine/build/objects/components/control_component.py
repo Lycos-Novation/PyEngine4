@@ -19,7 +19,7 @@ class ControlComponent(Component):
             position = transform.position.copy()
             cause = "UNKNOWN"
             if key == eval("self.engine.pg_constants."+self.keys["UPJUMP"]):
-                if self.control_type in ("FOURDIRECTION", "DOWNUP"):
+                if self.control_type in ("FOURDIRECTION", "UPDOWN"):
                     position[1] -= self.speed*deltatime
                     cause = "UPCONTROL"
                 elif self.control_type == "CLASSICJUMP":
@@ -27,7 +27,7 @@ class ControlComponent(Component):
                     if phys.grounded:
                         phys.gravity = -phys.max_gravity
             elif key == eval("self.engine.pg_constants."+self.keys["DOWN"]):
-                if self.control_type in ("FOURDIRECTION", "DOWNUP"):
+                if self.control_type in ("FOURDIRECTION", "UPDOWN"):
                     position[1] += self.speed*deltatime
                     cause = "DOWNCONTROL"
             elif key == eval("self.engine.pg_constants."+self.keys["RIGHT"]):
