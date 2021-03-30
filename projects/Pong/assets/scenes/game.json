@@ -1,0 +1,171 @@
+{
+    "name": "game",
+    "childs": [
+        {
+            "name": "left_paddle",
+            "childs": [],
+            "components": [
+                {
+                    "name": "TransformComponent",
+                    "position": [
+                        50,
+                        310
+                    ],
+                    "rotation": 0,
+                    "scale": [
+                        1.0,
+                        1.0
+                    ]
+                },
+                {
+                    "name": "SpriteComponent",
+                    "sprite": "paddle"
+                },
+                {
+                    "name": "CollisionComponent",
+                    "solid": true,
+                    "callback": null
+                },
+                {
+                    "name": "ControlComponent",
+                    "keys": {
+                        "UPJUMP": "K_a",
+                        "DOWN": "K_q",
+                        "LEFT": "K_LEFT",
+                        "RIGHT": "K_RIGHT"
+                    },
+                    "control_type": "UPDOWN",
+                    "speed": 200
+                },
+                {
+                    "name": "ScriptComponent paddle_script"
+                }
+            ]
+        },
+        {
+            "name": "right_paddle",
+            "childs": [],
+            "components": [
+                {
+                    "name": "TransformComponent",
+                    "position": [
+                        1020,
+                        310
+                    ],
+                    "rotation": 0,
+                    "scale": [
+                        1.0,
+                        1.0
+                    ]
+                },
+                {
+                    "name": "SpriteComponent",
+                    "sprite": "paddle"
+                },
+                {
+                    "name": "CollisionComponent",
+                    "solid": true,
+                    "callback": null
+                },
+                {
+                    "name": "ControlComponent",
+                    "keys": {
+                        "UPJUMP": "K_UP",
+                        "DOWN": "K_DOWN",
+                        "LEFT": "K_LEFT",
+                        "RIGHT": "K_RIGHT"
+                    },
+                    "control_type": "UPDOWN",
+                    "speed": 200
+                },
+                {
+                    "name": "ScriptComponent paddle_script"
+                }
+            ]
+        },
+        {
+            "name": "score",
+            "childs": [],
+            "components": [
+                {
+                    "name": "TransformComponent",
+                    "position": [
+                        10,
+                        10
+                    ],
+                    "rotation": 0,
+                    "scale": [
+                        1.0,
+                        1.0
+                    ]
+                },
+                {
+                    "name": "TextComponent",
+                    "text": "P1 : 0 - P2 : 0",
+                    "font_name": "arial",
+                    "font_size": 20,
+                    "font_bold": true,
+                    "font_italic": false,
+                    "font_underline": false,
+                    "font_color": [
+                        255,
+                        255,
+                        255,
+                        255
+                    ],
+                    "font_antialias": true
+                }
+            ]
+        },
+        {
+            "name": "ball",
+            "childs": [],
+            "components": [
+                {
+                    "name": "TransformComponent",
+                    "position": [
+                        530,
+                        350
+                    ],
+                    "rotation": 0,
+                    "scale": [
+                        1.0,
+                        1.0
+                    ]
+                },
+                {
+                    "name": "SpriteComponent",
+                    "sprite": "ball"
+                },
+                {
+                    "name": "CollisionComponent",
+                    "solid": true,
+                    "callback": "ball_script - collide"
+                },
+                {
+                    "name": "AutoComponent",
+                    "move": [
+                        200,
+                        157
+                    ],
+                    "rotation": 0,
+                    "active": true
+                },
+                {
+                    "name": "ScriptComponent ball_script"
+                }
+            ]
+        }
+    ],
+    "components": [
+        {
+            "name": "ColorComponent",
+            "color": [
+                0,
+                0,
+                0,
+                255
+            ]
+        }
+    ]
+}
