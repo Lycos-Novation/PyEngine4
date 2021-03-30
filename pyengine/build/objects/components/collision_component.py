@@ -15,7 +15,7 @@ class CollisionComponent(Component):
         if rect1.colliderect(rect2):
             if self.callback is not None:
                 names = self.callback.split(" - ")
-                eval('self.entity.get_component("' + names[0] + '").' + names[1] + "(game_object, cause)")
+                eval('self.game_object.get_component("' + names[0] + '").' + names[1] + "(game_object, cause)")
             if e_collision.solid and self.solid:
                 return True
         return False
