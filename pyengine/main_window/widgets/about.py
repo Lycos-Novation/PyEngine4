@@ -14,7 +14,7 @@ class About(QWidget):
         self.setWindowTitle("PyEngine4 - About")
         self.resize(400, 400)
         title = QLabel("About PyEngine 4", self)
-        pe4version = QLabel("PyEngine4 Version : "+common.__version__, self)
+        pe4version = QLabel("PyEngine4 Version : "+common.__version__+" ("+common.__num_version__+")", self)
         pgversion = QLabel("PyGame Version : "+pygame.version.ver)
         sdlversion = QLabel("SDL Version : "+".".join(map(str, pygame.version.SDL)))
         thanks = QLabel("Thanks to LycosNovation.")

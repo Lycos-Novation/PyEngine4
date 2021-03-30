@@ -1,1 +1,2 @@
-__version__ = "1.0.0-Colombe"
+__version__ = "Colombe"
+__num_version__ = "1.0.0"
