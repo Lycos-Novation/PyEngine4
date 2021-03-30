@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QListWidgetItem, QMenu, QAction, \
-    QAbstractItemView
+    QAbstractItemView, QMessageBox
 from PyQt5.QtGui import QFont, QCursor
 from PyQt5.QtCore import Qt
 
@@ -71,6 +71,9 @@ class ComponentsWidget(QWidget):
         self.parent.viewport.update_screen()
 
     def create_component(self, comp):
+        if self.obj.get_component(comp) is not None:
+            QMessageBox.warning(self, "PyEngine4 - Adding Component", "The object already have this kind of component.")
+            return
         if comp == "TransformComponent":
             self.obj.components.append(components.TransformComponent(self.obj))
         elif comp == "SpriteComponent":
