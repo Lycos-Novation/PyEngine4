@@ -3,6 +3,8 @@ from PyQt5.QtCore import Qt
 
 from pyengine.main_window.widgets import *
 
+import webbrowser
+
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -14,20 +16,10 @@ class MainWindow(QWidget):
         self.assets_explorer = AssetsExplorer(self)
         self.components = ComponentsWidget(self)
         self.settings = Settings(self)
+        self.about = About(self)
 
         self.menu_bar = QMenuBar(self)
-        project_menu = self.menu_bar.addMenu("Project")
-        project_build = QAction('Build', self)
-        project_build.triggered.connect(self.build_project)
-        project_launch = QAction("Launch", self)
-        project_launch.triggered.connect(self.launch_project)
-        project_build_launch = QAction("Build and Launch", self)
-        project_build_launch.triggered.connect(self.build_launch_project)
-        project_menu.addActions([project_build, project_launch, project_build_launch])
-        project_menu.addSeparator()
-        project_settings = QAction("Settings", self)
-        project_settings.triggered.connect(self.open_settings)
-        project_menu.addAction(project_settings)
+        self.setup_menu_bar()
 
         self.layout = QGridLayout()
         self.layout.addWidget(self.menu_bar, 0, 0, 1, 3)
@@ -44,6 +36,27 @@ class MainWindow(QWidget):
         self.layout.setSpacing(0)
 
         self.setLayout(self.layout)
+
+    def setup_menu_bar(self):
+        project_menu = self.menu_bar.addMenu("Project")
+        project_build = QAction('Build', self)
+        project_build.triggered.connect(self.build_project)
+        project_launch = QAction("Launch", self)
+        project_launch.triggered.connect(self.launch_project)
+        project_build_launch = QAction("Build and Launch", self)
+        project_build_launch.triggered.connect(self.build_launch_project)
+        project_menu.addActions([project_build, project_launch, project_build_launch])
+        project_menu.addSeparator()
+        project_settings = QAction("Project Settings", self)
+        project_settings.triggered.connect(self.open_settings)
+        project_menu.addAction(project_settings)
+
+        help_menu = self.menu_bar.addMenu("Help")
+        help_doc = QAction('Docs', self)
+        help_doc.triggered.connect(lambda: webbrowser.open("https://pyengine4-docs.readthedocs.io/en/latest/"))
+        help_about = QAction('About', self)
+        help_about.triggered.connect(self.open_about)
+        help_menu.addActions([help_doc, help_about])
     
     def build_launch_project(self):
         self.build_project()
@@ -65,6 +78,10 @@ class MainWindow(QWidget):
             self.settings.set_project(self.project)
             self.settings.setWindowModality(Qt.ApplicationModal)
             self.settings.show()
+
+    def open_about(self):
+        self.about.setWindowModality(Qt.ApplicationModal)
+        self.about.show()
 
     def set_project(self, project):
         self.project = project
