@@ -17,7 +17,7 @@ class Settings(QWidget):
         self.height_spin = QSpinBox(self)
         main_scene = QLabel("Main Scene", self)
         self.main_scene_edit = QLineEdit("", self)
-        editor = QLabel("Editor", self)
+        editor = QLabel("Script Editor", self)
         self.editor_select = QPushButton("Select Editor", self)
         self.current_editor = ""
         self.valid = QPushButton("Validate", self)
