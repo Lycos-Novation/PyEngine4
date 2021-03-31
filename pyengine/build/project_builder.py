@@ -13,10 +13,14 @@ class ProjectBuilder:
         "templates": os.path.join("pyengine", "build", "templates")
     }
     project_folders = {}
+    components = {}
 
     @staticmethod
     def generate_component(text, comp):
         logger.info("GENERATE COMPONENT : "+comp.name)
+        if not comp.name.startswith("Script"):
+            ProjectBuilder.components[comp.name] = comp.name.lower().replace("component", "_component")
+
         if comp.name == "TransformComponent":
             return ComponentBuilder.generate_transform_component(text, comp)
         elif comp.name == "SpriteComponent":
@@ -115,10 +119,17 @@ class ProjectBuilder:
         # GENERATE SCENES
         for i in project.scenes:
             template = ProjectBuilder.generate_scene(template, i)
-        template = template.replace("{SCENES}", "")
+        finish = []
+        for i in template.replace("{SCENES}\n", "").split("\n"):
+            if i.startswith("def launch") or i.startswith("if __name__"):
+                finish.append("\n\n"+i)
+            elif "GameObject" in i:
+                finish.append("\n"+i)
+            elif i != "":
+                finish.append(i)
 
         with open(path, "w") as f:
-            f.write(template)
+            f.write("\n".join(finish)+"\n")
 
     @staticmethod
     def build(project):
@@ -130,32 +141,11 @@ class ProjectBuilder:
             "scripts": os.path.join("builds", project.name, "files", "scripts"),
             "resources": os.path.join("builds", project.name, "resources")
         }
+        ProjectBuilder.components = {"Component": "component"}
         shutil.rmtree(os.path.join("builds", project.name), ignore_errors=True)
         for i in ProjectBuilder.project_folders.values():
             logger.info("CREATE DIR : " + i)
             os.makedirs(i, exist_ok=True)
-
-        logger.info("COPY CORE FILES : STARTED")
-        for i in os.listdir(ProjectBuilder.build_folders["objects"]):
-            if i != "components" and i != "scripts":
-                logger.info("CORE FILE : " + i)
-                shutil.copyfile(
-                    os.path.join(ProjectBuilder.build_folders["objects"], i),
-                    os.path.join(ProjectBuilder.project_folders["files"], i)
-                )
-        for i in os.listdir(ProjectBuilder.build_folders["components"]):
-            logger.info("CORE COMPONENT FILE : " + i)
-            shutil.copyfile(
-                os.path.join(ProjectBuilder.build_folders["components"], i),
-                os.path.join(ProjectBuilder.project_folders["components"], i)
-            )
-        for i in os.listdir(ProjectBuilder.build_folders["scripts"]):
-            logger.info("CORE SCRIPT FILE : " + i)
-            shutil.copyfile(
-                os.path.join(ProjectBuilder.build_folders["scripts"], i),
-                os.path.join(ProjectBuilder.project_folders["scripts"], i)
-            )
-        logger.info("COPY CORE FILES : SUCCESSFULLY ENDED")
 
         logger.info("COPY GAME RESOURCES : STARTED")
         for i in project.textures:
@@ -169,6 +159,9 @@ class ProjectBuilder:
         logger.info("COPY GAME RESOURCES : SUCCESSFULLY ENDED")
 
         logger.info("COPY GAME SCRIPTS : STARTED")
+        with open(os.path.join(ProjectBuilder.project_folders["scripts"], "__init__.py"), "w") as f:
+            f.write("from files.scripts.script import Script\n")
+
         for i in os.listdir(project.folders["scripts"]):
             logger.info("GAME SCRIPT : "+i)
             shutil.copyfile(
@@ -187,5 +180,34 @@ class ProjectBuilder:
             project
         )
         logger.info("GENERATE GAME FILES : SUCCESSFULLY ENDED")
+
+        logger.info("COPY CORE FILES : STARTED")
+        for i in os.listdir(ProjectBuilder.build_folders["objects"]):
+            if i != "components" and i != "scripts":
+                logger.info("CORE FILE : " + i)
+                shutil.copyfile(
+                    os.path.join(ProjectBuilder.build_folders["objects"], i),
+                    os.path.join(ProjectBuilder.project_folders["files"], i)
+                )
+
+        with open(os.path.join(ProjectBuilder.project_folders["components"], "__init__.py"), "w") as f:
+            f.write("from files.components.component import Component\n")
+
+        for k, v in ProjectBuilder.components.items():
+            logger.info("CORE COMPONENT FILE : " + k)
+            shutil.copyfile(
+                os.path.join(ProjectBuilder.build_folders["components"], v+".py"),
+                os.path.join(ProjectBuilder.project_folders["components"], v+".py")
+            )
+            with open(os.path.join(ProjectBuilder.project_folders["components"], "__init__.py"), "a") as f:
+                f.write("from files.components." + v + " import " + k + "\n")
+
+        for i in os.listdir(ProjectBuilder.build_folders["scripts"]):
+            logger.info("CORE SCRIPT FILE : " + i)
+            shutil.copyfile(
+                os.path.join(ProjectBuilder.build_folders["scripts"], i),
+                os.path.join(ProjectBuilder.project_folders["scripts"], i)
+            )
+        logger.info("COPY CORE FILES : SUCCESSFULLY ENDED")
 
         logger.info("BUILD : SUCCESSFULLY ENDED")
