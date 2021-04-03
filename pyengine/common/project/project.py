@@ -60,14 +60,16 @@ class Project:
             mdict = {}
         if module not in mdict:
             mdict[module] = []
+        importlib.reload(module)
         for name in dir(module):
             attr = getattr(module, name)
             if type(attr) is ModuleType:
                 if attr not in mdict[module]:
-                    if attr.__name__ not in sys.builtin_module_names and attr.__name__ not in ["pygame"]:
+                    if attr.__name__ not in sys.builtin_module_names and attr.__name__ not in ["pygame", "pygame.color",
+                                                                                               "pygame.locals"]:
                         mdict[module].append(attr)
                         self.__reload_module(attr, mdict)
-        importlib.reload(module)
+        importlib.reload(module)  # NEEDED FOR SOME MODULES
 
     def __launch(self):
         self.crash = False
