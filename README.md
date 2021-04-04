@@ -27,6 +27,7 @@ Documentation : <https://pyengine4-docs.readthedocs.io/>
 - Sprite, Spritesheet and Text rendering
 - Collision detection with Callback
 - Ultra-basic physics (only Gravity) without engine
+- Build and Launch System
 
 ## Uncoming Features
 
@@ -45,6 +46,6 @@ Documentation : <https://pyengine4-docs.readthedocs.io/>
 
 ## Changelog
 
-### V 1.0.0 : Colombe Update - XX/XX/XX (INDEV)
+### V 1.0.0 : Colombe Update - 04/04/21 (LATEST)
 
 - First version
