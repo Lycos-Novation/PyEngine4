@@ -46,6 +46,10 @@ Documentation : <https://pyengine4-docs.readthedocs.io/>
 
 ## Changelog
 
+### V 1.1.0 : Kisure Update - XX/XX/XX (INDEV)
+
+- X
+
 ### V 1.0.0 : Colombe Update - 04/04/21 (LATEST)
 
 - First version

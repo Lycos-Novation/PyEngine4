@@ -1,2 +1,2 @@
-__version__ = "Colombe"
-__num_version__ = "1.0.0"
+__version__ = "Kisure"
+__num_version__ = "1.1.0"
