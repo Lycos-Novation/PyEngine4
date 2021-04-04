@@ -57,12 +57,13 @@ class ProjectWindow(QWidget):
         if len(self.project_list.selectedItems()) >= 1:
             project = self.project_list.itemWidget(self.project_list.selectedItems()[0]).project
             if common.__version__ != project.settings.get("engine_version", ""):
-                QMessageBox.critical(
+                if QMessageBox.question(
                     self,
                     "PyEngine4 - Launch Project",
-                    "This project use a different version of PyEngine4."
-                )
-                return
+                    "This project use a different version of PyEngine4.\nDo you want to load it anyway ?"
+                ) == QMessageBox.StandardButton.No:
+                    return
+            project.save()
             self.main.set_project(project)
             self.main.showMaximized()
             self.close()

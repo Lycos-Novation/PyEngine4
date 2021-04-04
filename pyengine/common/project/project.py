@@ -97,6 +97,8 @@ class Project:
         return self.crash
 
     def save(self):
+        self.settings["engine_version"] = common.__version__
+
         removes = [self.folders["prefabs"], self.folders["textures"], self.folders["scenes"]]
         for i in removes:
             shutil.rmtree(i, ignore_errors=True)
