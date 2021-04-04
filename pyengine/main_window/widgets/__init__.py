@@ -5,3 +5,4 @@ from pyengine.main_window.widgets.viewport import Viewport
 from pyengine.main_window.widgets.asset_widget import AssetWidget
 from pyengine.main_window.widgets.settings import Settings
 from pyengine.main_window.widgets.about import About
+from pyengine.main_window.widgets.pysettings import PySettings

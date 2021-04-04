@@ -1,6 +1,6 @@
 import os
 
-from pyengine.common.project.project import Project
+from pyengine.common.project import Project
 
 
 class ProjectManager:

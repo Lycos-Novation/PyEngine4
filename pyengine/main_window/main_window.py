@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QMenuBar, QAction, QMessageBox
 from PyQt5.QtCore import Qt
 
 from pyengine.main_window.widgets import *
+from pyengine.common import EngineSettings
 
 import webbrowser
 
@@ -11,11 +12,13 @@ class MainWindow(QWidget):
         super().__init__()
         self.project = None
 
+        self.engine_settings = EngineSettings()
         self.viewport = Viewport(self)
         self.scene_tree = SceneTree(self)
         self.assets_explorer = AssetsExplorer(self)
         self.components = ComponentsWidget(self)
         self.settings = Settings(self)
+        self.pysettings = PySettings(self)
         self.about = About(self)
 
         self.menu_bar = QMenuBar(self)
@@ -51,7 +54,11 @@ class MainWindow(QWidget):
         project_settings.triggered.connect(self.open_settings)
         project_menu.addAction(project_settings)
 
-        help_menu = self.menu_bar.addMenu("Help")
+        help_menu = self.menu_bar.addMenu("Engine")
+        engine_settings = QAction("Engine Settings", self)
+        engine_settings.triggered.connect(self.open_pysettings)
+        help_menu.addAction(engine_settings)
+        help_menu.addSeparator()
         help_doc = QAction('Docs', self)
         help_doc.triggered.connect(lambda: webbrowser.open("https://pyengine4-docs.readthedocs.io/en/latest/"))
         help_about = QAction('About', self)
@@ -82,6 +89,10 @@ class MainWindow(QWidget):
     def open_about(self):
         self.about.setWindowModality(Qt.ApplicationModal)
         self.about.show()
+
+    def open_pysettings(self):
+        self.pysettings.setWindowModality(Qt.ApplicationModal)
+        self.pysettings.show()
 
     def set_project(self, project):
         self.project = project

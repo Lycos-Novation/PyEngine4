@@ -89,7 +89,7 @@ class AssetsExplorer(QWidget):
                 self.open_script(widget.title.text())
     
     def open_script(self, name):
-        editor = self.parent.project.settings.get("editor", None)
+        editor = self.parent.engine_settings.values.get("editor", None)
         if editor is not None:
             path = os.path.abspath(os.path.join(self.parent.project.folders["scripts"], name+".py"))
             subprocess.Popen([editor, path], cwd=editor.split("\\")[0].split("/")[0])

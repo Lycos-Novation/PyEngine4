@@ -31,8 +31,7 @@ class Project:
             "engine_version": common.__version__,
             "width": 1080,
             "height": 720,
-            "mainScene": None,
-            "editor": None
+            "mainScene": None
         }
         self.scenes = []
         self.textures = []
@@ -75,7 +74,7 @@ class Project:
         self.crash = False
         if os.path.exists(os.path.join("builds", self.name, self.name.title()+".py")):
             os.chdir(os.path.join("builds", self.name))
-            sys.path.append(os.path.join("."))
+            sys.path.append(os.path.join("project"))
             if self.module is None:
                 self.module = importlib.import_module(self.name.title(), "builds."+self.name)
             else:
@@ -89,7 +88,7 @@ class Project:
             DEPTH = 32
             FLAGS = 0
             pygame.display.set_mode(DISPLAY, FLAGS, DEPTH)
-            os.chdir("../..")
+            os.chdir("..")
 
     def launch(self):
         thread = threading.Thread(target=self.__launch)
