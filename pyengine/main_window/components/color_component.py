@@ -15,8 +15,7 @@ class ColorComponent(QWidget):
         self.color_spins = [QSpinBox(self), QSpinBox(self), QSpinBox(self), QSpinBox(self)]
 
         for k, v in enumerate(component.color.rgba()):
-            self.color_spins[k].setMinimum(0)
-            self.color_spins[k].setMaximum(255)
+            self.color_spins[k].setRange(0, 255)
             self.color_spins[k].setValue(v)
             self.color_spins[k].valueChanged.connect(self.change_value)
         

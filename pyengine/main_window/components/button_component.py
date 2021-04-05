@@ -53,13 +53,11 @@ class ButtonComponent(QWidget):
         self.callback_script_edit.textChanged.connect(self.change_value)
         self.callback_func_edit.textChanged.connect(self.change_value)
         for k, v in enumerate(component.bg.rgba()):
-            self.bg_spins[k].setMinimum(0)
-            self.bg_spins[k].setMaximum(255)
+            self.bg_spins[k].setRange(0, 255)
             self.bg_spins[k].setValue(v)
             self.bg_spins[k].valueChanged.connect(self.change_value)
         for k, v in enumerate(component.font_color.rgba()):
-            self.font_color_spins[k].setMinimum(0)
-            self.font_color_spins[k].setMaximum(255)
+            self.font_color_spins[k].setRange(0, 255)
             self.font_color_spins[k].setValue(v)
             self.font_color_spins[k].valueChanged.connect(self.change_value)
         for k, v in enumerate(self.component.size.coords()):
