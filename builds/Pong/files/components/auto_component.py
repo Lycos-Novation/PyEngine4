@@ -13,10 +13,10 @@ class AutoComponent(Component):
         if self.active:
             transform = self.game_object.get_component("TransformComponent")
             if transform is not None:
-                if self.move[0] != 0 or self.move[1] != 0:
-                    go = transform.position.copy()
-                    go[0] += self.move[0] * deltatime
-                    go[1] += self.move[1] * deltatime
+                if self.move.x != 0 or self.move.y != 0:
+                    go = transform.position
+                    go.x += self.move.x * deltatime
+                    go.y += self.move.y * deltatime
                     collision = self.game_object.get_component("CollisionComponent")
                     if collision is not None:
                         if collision.can_go(go, "AUTOCOMPONENT"):

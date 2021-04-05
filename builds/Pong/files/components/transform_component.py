@@ -10,12 +10,12 @@ class TransformComponent(Component):
         self.position = position
 
     def global_position(self):
-        position = self.position.copy()
+        position = self.position
         if self.game_object.parent is not None:
             if self.game_object.parent.get_component("TransformComponent") is not None:
                 pposition = self.game_object.parent.get_component("TransformComponent").global_position()
-                position[0] += pposition[0]
-                position[1] += pposition[1]
+                position.x += pposition.x
+                position.y += pposition.y
         return position
 
     def global_rotation(self):
@@ -26,12 +26,12 @@ class TransformComponent(Component):
         return rotation
 
     def global_scale(self):
-        scale = self.scale.copy()
+        scale = self.scale
         if self.game_object.parent is not None:
             if self.game_object.parent.get_component("TransformComponent") is not None:
                 pscale = self.game_object.parent.get_component("TransformComponent").global_scale()
-                scale[0] += pscale[0]
-                scale[1] += pscale[1]
+                scale.x += pscale.x
+                scale.y += pscale.y
         return scale
 
     def __update_render(self):

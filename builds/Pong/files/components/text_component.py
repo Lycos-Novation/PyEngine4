@@ -41,15 +41,15 @@ class TextComponent(Component):
         if transform is not None:
             rotation = transform.global_rotation()
             scale = transform.global_scale()
-            render = self.transformed_font.render(self.text, self.font_antialias, self.font_color)
+            render = self.transformed_font.render(self.text, self.font_antialias, self.font_color.rgba())
             render = pygame.transform.rotate(render, rotation)
             self.render = pygame.transform.scale(
                 render,
-                [int(render.get_rect().width * scale[0]), int(render.get_rect().height * scale[1])]
+                [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
             )
 
     def show(self, screen):
         transform = self.game_object.get_component("TransformComponent")
         if transform is not None:
             position = transform.global_position()
-            screen.blit(self.render, position)
+            screen.blit(self.render, position.coords())

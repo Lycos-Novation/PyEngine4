@@ -31,17 +31,17 @@ class CollisionComponent(Component):
                 if e_collision is not None and e_transform is not None:
                     e_pos = e_transform.position
                     if e_sprite is not None:
-                        e_rect = e_sprite.render.get_rect(x=e_pos[0], y=e_pos[1])
+                        e_rect = e_sprite.render.get_rect(x=e_pos.x, y=e_pos.y)
                         if self.__rect_collide(rect, e_rect, game_object, cause, e_collision):
                             return True
 
                     if e_spritesheet is not None:
-                        e_rect = e_spritesheet.render.get_rect(x=e_pos[0], y=e_pos[1])
+                        e_rect = e_spritesheet.render.get_rect(x=e_pos.x, y=e_pos.y)
                         if self.__rect_collide(rect, e_rect, game_object, cause, e_collision):
                             return True
 
                     if e_text is not None:
-                        e_rect = e_text.render.get_rect(x=e_pos[0], y=e_pos[1])
+                        e_rect = e_text.render.get_rect(x=e_pos.x, y=e_pos.y)
                         if self.__rect_collide(rect, e_rect, game_object, cause, e_collision):
                             return True
         return False
@@ -53,15 +53,15 @@ class CollisionComponent(Component):
         text = self.game_object.get_component("TextComponent")
         if transform is not None:
             if sprite is not None:
-                rect = sprite.render.get_rect(x=position[0], y=position[1])
+                rect = sprite.render.get_rect(x=position.x, y=position.y)
                 if self.__internal_collide(rect, cause):
                     return False
             if spritesheet is not None:
-                rect = spritesheet.render.get_rect(x=position[0], y=position[1])
+                rect = spritesheet.render.get_rect(x=position.x, y=position.y)
                 if self.__internal_collide(rect, cause):
                     return False
             if text is not None:
-                rect = text.render.get_rect(x=position[0], y=position[1])
+                rect = text.render.get_rect(x=position.x, y=position.y)
                 if self.__internal_collide(rect, cause):
                     return False
         return True

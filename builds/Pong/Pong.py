@@ -1,13 +1,14 @@
 from files import *
 from files.components import *
 from files.scripts import *
+from files.utils import *
 
 
 def launch():
     engine = Engine()
 
     left_paddle = GameObject("left_paddle")
-    transformcomponent = TransformComponent(engine, [50, 310], 0, [1.0, 1.0])
+    transformcomponent = TransformComponent(engine, Vec2(50, 310), 0, Vec2(1.0, 1.0))
     left_paddle.add_component(transformcomponent)
     spritecomponent = SpriteComponent(engine, "paddle.png")
     left_paddle.add_component(spritecomponent)
@@ -19,7 +20,7 @@ def launch():
     left_paddle.add_component(paddle_script)
 
     right_paddle = GameObject("right_paddle")
-    transformcomponent = TransformComponent(engine, [1020, 310], 0, [1.0, 1.0])
+    transformcomponent = TransformComponent(engine, Vec2(1020, 310), 0, Vec2(1.0, 1.0))
     right_paddle.add_component(transformcomponent)
     spritecomponent = SpriteComponent(engine, "paddle.png")
     right_paddle.add_component(spritecomponent)
@@ -31,25 +32,25 @@ def launch():
     right_paddle.add_component(paddle_script)
 
     score = GameObject("score")
-    transformcomponent = TransformComponent(engine, [10, 10], 0, [1.0, 1.0])
+    transformcomponent = TransformComponent(engine, Vec2(10, 10), 0, Vec2(1.0, 1.0))
     score.add_component(transformcomponent)
-    textcomponent = TextComponent(engine, "P1 : 0 - P2 : 0", "arial", 20, True, False, False, [255, 255, 255, 255], True)
+    textcomponent = TextComponent(engine, "P1 : 0 - P2 : 0", "arial", 20, True, False, False, Color.from_rgba(255, 255, 255, 255), True)
     score.add_component(textcomponent)
 
     ball = GameObject("ball")
-    transformcomponent = TransformComponent(engine, [530, 350], 0, [1.0, 1.0])
+    transformcomponent = TransformComponent(engine, Vec2(530, 350), 0, Vec2(1.0, 1.0))
     ball.add_component(transformcomponent)
     spritecomponent = SpriteComponent(engine, "ball.png")
     ball.add_component(spritecomponent)
     collisioncomponent = CollisionComponent(engine, True, "ball_script - collide")
     ball.add_component(collisioncomponent)
-    autocomponent = AutoComponent(engine, [200, 157], 0, True)
+    autocomponent = AutoComponent(engine, Vec2(200, 157), 0, True)
     ball.add_component(autocomponent)
     ball_script = Ball_Script(engine)
     ball.add_component(ball_script)
     
     entities = [left_paddle, right_paddle, score, ball]
-    game = Scene("game", [0, 0, 0, 255], entities)
+    game = Scene("game", Color.from_rgba(0, 0, 0, 255), entities)
     
     scenes = [game]
     game = Game("Pong", 1080, 720, scenes, engine)
