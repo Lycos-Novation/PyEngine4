@@ -14,7 +14,7 @@ class BasicPhysicComponent(Component):
         transform = self.game_object.get_component("TransformComponent")
         if transform is not None:
             pos = transform.position.copy()
-            pos[1] += self.gravity * deltatime
+            pos.y += self.gravity * deltatime
 
             collision = self.game_object.get_component("CollisionComponent")
             if collision is not None:

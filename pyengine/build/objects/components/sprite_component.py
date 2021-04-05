@@ -23,11 +23,11 @@ class SpriteComponent(Component):
             image = pygame.transform.rotate(image, rotation)
             self.render = pygame.transform.scale(
                 image,
-                [int(image.get_rect().width * scale[0]), int(image.get_rect().height * scale[1])]
+                [int(image.get_rect().width * scale.x), int(image.get_rect().height * scale.y)]
             )
 
     def show(self, screen):
         transform = self.game_object.get_component("TransformComponent")
         if transform is not None:
             position = transform.global_position()
-            screen.blit(self.render, position)
+            screen.blit(self.render, position.coords())

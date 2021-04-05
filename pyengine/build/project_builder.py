@@ -10,7 +10,8 @@ class ProjectBuilder:
         "objects": os.path.join("pyengine", "build", "objects"),
         "components": os.path.join("pyengine", "build", "objects", "components"),
         "scripts": os.path.join("pyengine", "build", "objects", "scripts"),
-        "templates": os.path.join("pyengine", "build", "templates")
+        "templates": os.path.join("pyengine", "build", "templates"),
+        "utils": os.path.join("pyengine", "common", "utils")
     }
     project_folders = {}
     components = {}
@@ -139,6 +140,7 @@ class ProjectBuilder:
             "files": os.path.join("builds", project.name, "files"),
             "components": os.path.join("builds", project.name, "files", "components"),
             "scripts": os.path.join("builds", project.name, "files", "scripts"),
+            "utils": os.path.join("builds", project.name, "files", "utils"),
             "resources": os.path.join("builds", project.name, "resources")
         }
         ProjectBuilder.components = {"Component": "component"}
@@ -183,7 +185,7 @@ class ProjectBuilder:
 
         logger.info("COPY CORE FILES : STARTED")
         for i in os.listdir(ProjectBuilder.build_folders["objects"]):
-            if i != "components" and i != "scripts":
+            if i != "components" and i != "scripts" and i != "utils":
                 logger.info("CORE FILE : " + i)
                 shutil.copyfile(
                     os.path.join(ProjectBuilder.build_folders["objects"], i),
@@ -208,6 +210,18 @@ class ProjectBuilder:
                 os.path.join(ProjectBuilder.build_folders["scripts"], i),
                 os.path.join(ProjectBuilder.project_folders["scripts"], i)
             )
+
+        shutil.copyfile(
+            os.path.join("pyengine", "build", "objects", "utils", "__init__.py"),
+            os.path.join(ProjectBuilder.project_folders["utils"], "__init__.py")
+        )
+        for i in ("color.py", "vec2.py", "math.py"):
+            logger.info("CORE UTILS FILE : "+i)
+            shutil.copyfile(
+                os.path.join(ProjectBuilder.build_folders["utils"], i),
+                os.path.join(ProjectBuilder.project_folders["utils"], i)
+            )
+
         logger.info("COPY CORE FILES : SUCCESSFULLY ENDED")
 
         logger.info("BUILD : SUCCESSFULLY ENDED")

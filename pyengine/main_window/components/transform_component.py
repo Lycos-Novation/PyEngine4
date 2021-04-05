@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QWidget, QLabel, QSpinBox, QGridLayout, QDoubleSpinBox
 from PyQt5.QtCore import Qt
 
+from pyengine.common.utils import Vec2
+
 
 class TransformComponent(QWidget):
     def __init__(self, parent, component):
@@ -17,12 +19,12 @@ class TransformComponent(QWidget):
         self.scale_name = QLabel("Scale", self)
         self.scale_spins = [QDoubleSpinBox(self), QDoubleSpinBox(self)]
 
-        for k, v in enumerate(self.component.position):
+        for k, v in enumerate(self.component.position.coords()):
             self.pos_spins[k].setRange(-2147483648, 2147483647)
             self.pos_spins[k].setValue(v)
         self.rot_spin.setRange(-2147483648, 2147483647)
         self.rot_spin.setValue(self.component.rotation)
-        for k, v in enumerate(self.component.scale):
+        for k, v in enumerate(self.component.scale.coords()):
             self.scale_spins[k].setRange(-2147483648, 2147483647)
             self.scale_spins[k].setValue(v)
             self.scale_spins[k].setSingleStep(0.01)
@@ -45,8 +47,8 @@ class TransformComponent(QWidget):
         self.setLayout(self.layout)
     
     def change_value(self):
-        self.component.position = [i.value() for i in self.pos_spins]
+        self.component.position = Vec2(*(i.value() for i in self.pos_spins))
         self.component.rotation = self.rot_spin.value()
-        self.component.scale = [i.value() for i in self.scale_spins]
+        self.component.scale = Vec2(*(i.value() for i in self.scale_spins))
         self.parent.parent.project.save()
         self.parent.parent.viewport.update_screen()

@@ -53,7 +53,7 @@ class Scene:
             i.update(deltatime)
 
     def show(self, screen):
-        screen.fill(self.bg_color)
+        screen.fill(self.bg_color.rgba())
 
         for i in self.game_objects:
             i.show(screen)

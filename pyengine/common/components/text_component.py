@@ -1,4 +1,5 @@
 from pyengine.common.components.component import Component
+from pyengine.common.utils import Color
 
 
 class TextComponent(Component):
@@ -11,7 +12,7 @@ class TextComponent(Component):
         self.font_bold = False
         self.font_italic = False
         self.font_underline = False
-        self.font_color = [0, 0, 0, 255]
+        self.font_color = Color.from_rgb(0, 0, 0)
         self.font_antialias = False
 
     def to_dict(self):
@@ -23,7 +24,7 @@ class TextComponent(Component):
             "font_bold": self.font_bold,
             "font_italic": self.font_italic,
             "font_underline": self.font_underline,
-            "font_color": self.font_color,
+            "font_color": self.font_color.rgba(),
             "font_antialias": self.font_antialias
         }
 
@@ -36,6 +37,6 @@ class TextComponent(Component):
         comp.font_bold = values.get("font_bold", False)
         comp.font_italic = values.get("font_italic", False)
         comp.font_underline = values.get("font_underline", False)
-        comp.font_color = values.get("font_color", [0, 0, 0, 255])
+        comp.font_color = Color.from_rgba(*values.get("font_color", (0, 0, 0, 0)))
         comp.font_antialias = values.get("font_antialias", False)
         return comp

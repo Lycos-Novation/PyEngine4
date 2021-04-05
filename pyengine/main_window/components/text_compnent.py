@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QWidget, QLabel, QSpinBox, QGridLayout, QLineEdit, QCheckBox
 from PyQt5.QtCore import Qt
 
+from pyengine.common.utils import Color
+
 
 class TextComponent(QWidget):
     def __init__(self, parent, component):
@@ -39,7 +41,7 @@ class TextComponent(QWidget):
         self.font_underline_check.clicked.connect(self.change_value)
         self.font_antialias_check.setChecked(self.component.font_antialias)
         self.font_antialias_check.clicked.connect(self.change_value)
-        for k, v in enumerate(component.font_color):
+        for k, v in enumerate(component.font_color.rgba()):
             self.font_color_spins[k].setMinimum(0)
             self.font_color_spins[k].setMaximum(255)
             self.font_color_spins[k].setValue(v)
@@ -70,7 +72,7 @@ class TextComponent(QWidget):
         self.component.text = self.text_edit.text()
         self.component.font_name = self.font_name_edit.text()
         self.component.font_size = self.font_size_spin.value()
-        self.component.font_color = [i.value() for i in self.font_color_spins]
+        self.component.font_color = Color.from_rgba(*(i.value() for i in self.font_color_spins))
         self.component.font_bold = self.font_bold_check.isChecked()
         self.component.font_italic = self.font_italic_check.isChecked()
         self.component.font_underline = self.font_underline_check.isChecked()

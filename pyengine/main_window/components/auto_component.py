@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QWidget, QLabel, QSpinBox, QGridLayout, QCheckBox
 from PyQt5.QtCore import Qt
 
+from pyengine.common.utils import Vec2
+
 
 class AutoComponent(QWidget):
     def __init__(self, parent, component):
@@ -17,9 +19,10 @@ class AutoComponent(QWidget):
         self.active = QLabel("Active", self)
         self.active_check = QCheckBox(self)
 
-        for k, v in enumerate(self.component.move):
-            self.move_spins[k].setRange(-2147483648, 2147483647)
-            self.move_spins[k].setValue(v)
+        for i in self.move_spins:
+            i.setRange(-2147483648, 2147483647)
+        self.move_spins[0].setValue(self.component.move.x)
+        self.move_spins[1].setValue(self.component.move.y)
         self.rot_spin.setRange(-2147483648, 2147483647)
         self.rot_spin.setValue(self.component.rotation)
         self.active_check.setChecked(component.active)
@@ -42,7 +45,7 @@ class AutoComponent(QWidget):
         self.setLayout(self.layout)
 
     def change_value(self):
-        self.component.move = [i.value() for i in self.move_spins]
+        self.component.move = Vec2(self.move_spins[0].value(), self.move_spins[1].value())
         self.component.rotation = self.rot_spin.value()
         self.component.active = self.active_check.isChecked()
         self.parent.parent.project.save()

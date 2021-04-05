@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QWidget, QLabel, QSpinBox, QGridLayout
 from PyQt5.QtCore import Qt
 
+from pyengine.common.utils import Color
+
 
 class ColorComponent(QWidget):
     def __init__(self, parent, component):
@@ -12,7 +14,7 @@ class ColorComponent(QWidget):
         self.name.setAlignment(Qt.AlignHCenter)
         self.color_spins = [QSpinBox(self), QSpinBox(self), QSpinBox(self), QSpinBox(self)]
 
-        for k, v in enumerate(component.color):
+        for k, v in enumerate(component.color.rgba()):
             self.color_spins[k].setMinimum(0)
             self.color_spins[k].setMaximum(255)
             self.color_spins[k].setValue(v)
@@ -25,6 +27,6 @@ class ColorComponent(QWidget):
         self.setLayout(self.layout)
     
     def change_value(self):
-        self.component.color = [i.value() for i in self.color_spins]
+        self.component.color = Color.from_rgba(*(i.value() for i in self.color_spins))
         self.parent.parent.project.save()
         self.parent.parent.viewport.update_screen()
