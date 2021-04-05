@@ -19,6 +19,7 @@ class ComponentsWidget(QWidget):
         self.add_component = QPushButton("Add Component", self)
 
         self.title.setFont(QFont("arial", 18, 1, False))
+        self.add_component.setFont(QFont("arial", 18))
         self.title.setAlignment(Qt.AlignHCenter)
         self.list_components.setContextMenuPolicy(Qt.CustomContextMenu)
         self.list_components.setSelectionMode(QAbstractItemView.SingleSelection)
