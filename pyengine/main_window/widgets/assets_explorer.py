@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QListWidget, QHBoxLayout, QAbstractItemView, QListWidgetItem, QMenu, QAction, \
-    QInputDialog, QLineEdit, QFileDialog
-from PyQt5.QtGui import QCursor
+    QInputDialog, QLineEdit, QFileDialog, QPushButton, QSizePolicy
+from PyQt5.QtGui import QCursor, QFont
 from PyQt5.QtCore import Qt
 
 from pyengine.main_window.utils import AssetItem
@@ -22,15 +22,20 @@ class AssetsExplorer(QWidget):
         self.content_folder = QListWidget(self)
         self.content_folder.setSelectionMode(QAbstractItemView.SingleSelection)
         self.content_folder.setViewMode(QListWidget.IconMode)
+        self.add_asset = QPushButton("+", self)
+        self.add_asset.setFont(QFont("arial", 18))
+        self.add_asset.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
+        self.add_asset.clicked.connect(self.context_menu_folder)
         self.list_folder.itemClicked.connect(self.select_folder)
         self.content_folder.itemDoubleClicked.connect(self.open_content)
         self.content_folder.setContextMenuPolicy(Qt.CustomContextMenu)
         self.content_folder.customContextMenuRequested.connect(self.context_menu_folder)
 
         self.layout = QHBoxLayout()
-        self.layout.addWidget(self.list_folder, 1)
-        self.layout.addWidget(self.content_folder, 10)
+        self.layout.addWidget(self.list_folder, 3)
+        self.layout.addWidget(self.content_folder, 20)
+        self.layout.addWidget(self.add_asset, 1)
         self.layout.setContentsMargins(0, 0, 0, 0)
         self.layout.setSpacing(0)
         
@@ -117,6 +122,9 @@ class AssetsExplorer(QWidget):
             if k != "assets" and k != "main":
                 self.folders[k] = v
                 self.list_folder.addItem(AssetItem(k.capitalize(), v))
+
+        self.list_folder.setCurrentRow(0)
+        self.open_folder(self.list_folder.item(0).folder)
 
     def create_asset(self, asset):
         if asset == "scene":
