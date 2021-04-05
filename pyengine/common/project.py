@@ -73,12 +73,12 @@ class Project:
     def __launch(self):
         self.crash = False
         if os.path.exists(os.path.join("builds", self.name, self.name.title()+".py")):
-            os.chdir(os.path.join("builds", self.name))
-            sys.path.append(os.path.join("project"))
+            sys.path.append(os.path.join("builds", self.name))
             if self.module is None:
-                self.module = importlib.import_module(self.name.title(), "builds."+self.name)
+                self.module = importlib.__import__("Pong")
             else:
                 self.__reload_module()
+            os.chdir(os.path.join("builds", self.name))
             try:
                 self.module.launch()
             except Exception as e:
@@ -88,7 +88,7 @@ class Project:
             DEPTH = 32
             FLAGS = 0
             pygame.display.set_mode(DISPLAY, FLAGS, DEPTH)
-            os.chdir("..")
+            os.chdir("../..")
 
     def launch(self):
         thread = threading.Thread(target=self.__launch)
