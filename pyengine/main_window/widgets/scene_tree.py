@@ -36,7 +36,7 @@ class SceneTree(QTreeWidget):
                 objs = [self.scene]
                 parent = None
                 while parent is None:
-                    current = objs[0]
+                    current = objs.pop(0)
                     for child in current.childs:
                         if child == obj:
                             parent = current
