@@ -38,6 +38,8 @@ class ProjectBuilder:
             return ComponentBuilder.generate_spritesheet_component(text, comp)
         elif comp.name == "AutoComponent":
             return ComponentBuilder.generate_auto_component(text, comp)
+        elif comp.name == "ButtonComponent":
+            return ComponentBuilder.generate_button_component(text, comp)
         elif comp.name.startswith("ScriptComponent"):
             return ComponentBuilder.generate_script_component(text, comp)
         else:

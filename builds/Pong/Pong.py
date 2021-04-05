@@ -48,8 +48,16 @@ def launch():
     ball.add_component(autocomponent)
     ball_script = Ball_Script(engine)
     ball.add_component(ball_script)
+
+    quit_button = GameObject("quit_button")
+    transformcomponent = TransformComponent(engine, Vec2(965, 10), 0, Vec2(1.0, 1.0))
+    quit_button.add_component(transformcomponent)
+    buttoncomponent = ButtonComponent(engine, Color.from_rgba(78, 78, 78, 255), Vec2(100, 40), "quit_script - click", "Quitter", "arial", 20, False, False, False, Color.from_rgba(255, 255, 255, 255), True)
+    quit_button.add_component(buttoncomponent)
+    quit_script = Quit_Script(engine)
+    quit_button.add_component(quit_script)
     
-    entities = [left_paddle, right_paddle, score, ball]
+    entities = [left_paddle, right_paddle, score, ball, quit_button]
     game = Scene("game", Color.from_rgba(0, 0, 0, 255), entities)
     
     scenes = [game]

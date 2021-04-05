@@ -155,6 +155,54 @@
                     "name": "ScriptComponent ball_script"
                 }
             ]
+        },
+        {
+            "name": "quit_button",
+            "childs": [],
+            "components": [
+                {
+                    "name": "TransformComponent",
+                    "position": [
+                        965,
+                        10
+                    ],
+                    "rotation": 0,
+                    "scale": [
+                        1.0,
+                        1.0
+                    ]
+                },
+                {
+                    "name": "ButtonComponent",
+                    "callback": "quit_script - click",
+                    "size": [
+                        100,
+                        40
+                    ],
+                    "bg": [
+                        78,
+                        78,
+                        78,
+                        255
+                    ],
+                    "text": "Quitter",
+                    "font_name": "arial",
+                    "font_size": 20,
+                    "font_bold": false,
+                    "font_italic": false,
+                    "font_underline": false,
+                    "font_color": [
+                        255,
+                        255,
+                        255,
+                        255
+                    ],
+                    "font_antialias": true
+                },
+                {
+                    "name": "ScriptComponent quit_script"
+                }
+            ]
         }
     ],
     "components": [

@@ -39,9 +39,32 @@ class Viewport(QWidget):
                         sprite = child.get_component("SpriteComponent")
                         spritesheet = child.get_component("SpriteSheetComponent")
                         text = child.get_component("TextComponent")
+                        button = child.get_component("ButtonComponent")
                         position = transform.global_position()
                         rotation = transform.global_rotation()
                         scale = transform.global_scale()
+                        if button is not None:
+                            render = pygame.Surface(button.size.coords(), pygame.SRCALPHA, 32).convert_alpha()
+                            render.fill(button.bg.rgba())
+
+                            try:
+                                font = pygame.font.Font(button.font_name, button.font_size)
+                            except FileNotFoundError:
+                                font = pygame.font.SysFont(button.font_name, button.font_size)
+                            font.set_underline(button.font_underline)
+                            font.set_italic(button.font_italic)
+                            font.set_bold(button.font_bold)
+                            text_render = font.render(button.text, button.font_antialias, button.font_color.rgba())
+
+                            x = button.size.x - render.get_rect().width / 2 - text_render.get_rect().width / 2
+                            y = button.size.y - render.get_rect().height / 2 - text_render.get_rect().height / 2
+                            render.blit(text_render, (x, y))
+                            render = pygame.transform.rotate(render, rotation)
+                            render = pygame.transform.scale(
+                                render,
+                                [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
+                            )
+                            screen.blit(render, position.coords())
                         if sprite is not None and sprite.sprite is not None:
                             path = self.parent.project.get_texture(sprite.sprite).components[0].path
                             render = pygame.image.load(path).convert_alpha()

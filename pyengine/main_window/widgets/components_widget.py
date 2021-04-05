@@ -39,7 +39,7 @@ class ComponentsWidget(QWidget):
         if self.obj.__class__ == GameObject:
             menu = QMenu(self)
             for i in (
-                "Transform", "Sprite", "Text", "Collision", "BasicPhysic", "Control", "SpriteSheet", "Auto",
+                "Transform", "Sprite", "Text", "Collision", "BasicPhysic", "Control", "SpriteSheet", "Auto", "Button",
                 "Script"
             ):
                 action = QAction(i, self)
@@ -57,7 +57,8 @@ class ComponentsWidget(QWidget):
     def add(self):
         menu = QMenu(self)
         for i in (
-            "Transform", "Sprite", "Text", "Collision", "BasicPhysic", "Control", "SpriteSheet", "Auto", "Script"
+            "Transform", "Sprite", "Text", "Collision", "BasicPhysic", "Control", "SpriteSheet", "Auto", "Button",
+            "Script"
         ):
             action = QAction(i, self)
             action.triggered.connect(lambda _, comp=i: self.create_component(comp + "Component"))
@@ -90,6 +91,8 @@ class ComponentsWidget(QWidget):
             self.obj.components.append(components.ControlComponent(self.obj))
         elif comp == "SpriteSheetComponent":
             self.obj.components.append(components.SpriteSheetComponent(self.obj))
+        elif comp == "ButtonComponent":
+            self.obj.components.append(components.ButtonComponent(self.obj))
         elif comp == "AutoComponent":
             self.obj.components.append(components.AutoComponent(self.obj))
         self.set_obj(self.obj)
@@ -126,6 +129,8 @@ class ComponentsWidget(QWidget):
                 w = SpriteSheetComponent(self, i)
             elif i.name == "AutoComponent":
                 w = AutoComponent(self, i)
+            elif i.name == "ButtonComponent":
+                w = ButtonComponent(self, i)
             elif i.name.startswith("ScriptComponent"):
                 w = ScriptComponent(self, i)
             else:
