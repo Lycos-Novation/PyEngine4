@@ -18,26 +18,37 @@ class ControlComponent(Component):
         if transform is not None:
             position = transform.position
             cause = "UNKNOWN"
-            if key == eval("self.engine.pg_constants."+self.keys["UPJUMP"]):
-                if self.control_type in ("FOURDIRECTION", "UPDOWN"):
-                    position.y -= self.speed*deltatime
-                    cause = "UPCONTROL"
-                elif self.control_type == "CLASSICJUMP":
-                    phys = self.game_object.get_component("BasicPhysicComponent")
-                    if phys.grounded:
-                        phys.gravity = -phys.max_gravity
-            elif key == eval("self.engine.pg_constants."+self.keys["DOWN"]):
-                if self.control_type in ("FOURDIRECTION", "UPDOWN"):
-                    position.y += self.speed*deltatime
-                    cause = "DOWNCONTROL"
-            elif key == eval("self.engine.pg_constants."+self.keys["RIGHT"]):
-                if self.control_type in ("FOURDIRECTION", "LEFTRIGHT", "CLASSICJUMP"):
-                    position.x += self.speed*deltatime
-                    cause = "RIGHTCONTROL"
-            elif key == eval("self.engine.pg_constants."+self.keys["LEFT"]):
-                if self.control_type in ("FOURDIRECTION", "LEFTRIGHT", "CLASSICJUMP"):
-                    position.x -= self.speed*deltatime
-                    cause = "LEFTCONTROL"
+            for i in self.keys["UPJUMP"].split(" "):
+                if key == eval("self.engine.pg_constants."+i):
+                    if self.control_type in ("FOURDIRECTION", "UPDOWN"):
+                        position.y -= self.speed*deltatime
+                        cause = "UPCONTROL"
+                    elif self.control_type == "CLASSICJUMP":
+                        phys = self.game_object.get_component("BasicPhysicComponent")
+                        if phys.grounded:
+                            phys.gravity = -phys.max_gravity
+                    return
+
+            for i in self.keys["DOWN"].split(" "):
+                if key == eval("self.engine.pg_constants."+i):
+                    if self.control_type in ("FOURDIRECTION", "UPDOWN"):
+                        position.y += self.speed*deltatime
+                        cause = "DOWNCONTROL"
+                    return
+
+            for i in self.keys["RIGHT"].split(" "):
+                if key == eval("self.engine.pg_constants."+i):
+                    if self.control_type in ("FOURDIRECTION", "LEFTRIGHT", "CLASSICJUMP"):
+                        position.x += self.speed*deltatime
+                        cause = "RIGHTCONTROL"
+                    return
+
+            for i in self.keys["LEFT"].split(" "):
+                if key == eval("self.engine.pg_constants."+i):
+                    if self.control_type in ("FOURDIRECTION", "LEFTRIGHT", "CLASSICJUMP"):
+                        position.x -= self.speed*deltatime
+                        cause = "LEFTCONTROL"
+                    return
 
             if position != transform.position:
                 collision = self.game_object.get_component("CollisionComponent")
