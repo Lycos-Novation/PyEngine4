@@ -6,4 +6,6 @@ class Quit_Script(Script):
         super().__init__(engine, "quit_script")
     
     def click(self):
-        self.engine.stop_game()
+        self.engine.game.title = "MEGA PONG !"
+        self.engine.game.width = 800
+        self.engine.game.height = 600

@@ -5,20 +5,46 @@ pygame.init()
 
 
 class Game:
-    def __init__(self, name, width, height, scenes, engine):
+    def __init__(self, title, width, height, scenes, engine):
         self.engine = engine
         self.engine.game = self
-        self.name = name
-        self.width = width
-        self.height = height
+        self.title = title
+        self.__width = width
+        self.__height = height
         self.scenes = scenes
         self.current_scene = 0
 
-        pygame.display.set_caption(name)
-        self.screen = pygame.display.set_mode((width, height))
+        self.screen = pygame.display.set_mode((self.width, self.height))
 
         self.clock = pygame.time.Clock()
         self.is_running = False
+
+    @property
+    def width(self):
+        return self.__width
+
+    @width.setter
+    def width(self, value):
+        self.__width = value
+        self.screen = pygame.display.set_mode((self.__width, self.height))
+
+    @property
+    def height(self):
+        return self.__height
+
+    @height.setter
+    def height(self, value):
+        self.__height = value
+        self.screen = pygame.display.set_mode((self.width, self.__height))
+
+    @property
+    def title(self):
+        return self.__title
+
+    @title.setter
+    def title(self, title):
+        self.__title = title
+        pygame.display.set_caption(title)
     
     def stop(self):
         self.is_running = False
@@ -34,20 +60,16 @@ class Game:
                 if event.type == const.QUIT:
                     self.stop()
                 elif event.type == const.KEYDOWN:
-                    if event.key not in self.engine.down_keys:
-                        self.engine.down_keys.append(event.key)
+                    self.engine.down_keys.append(event.key)
                     self.scenes[self.current_scene].key_press(event)
                 elif event.type == const.KEYUP:
-                    if event.key in self.engine.down_keys:
-                        self.engine.down_keys.remove(event.key)
+                    self.engine.down_keys.remove(event.key)
                     self.scenes[self.current_scene].key_release(event)
                 elif event.type == const.MOUSEBUTTONDOWN:
-                    if event.button not in self.engine.down_mousebuttons:
-                        self.engine.down_mousebuttons.append(event.button)
+                    self.engine.down_mousebuttons.append(event.button)
                     self.scenes[self.current_scene].mouse_press(event)
                 elif event.type == const.MOUSEBUTTONUP:
-                    if event.button in self.engine.down_mousebuttons:
-                        self.engine.down_mousebuttons.remove(event.button)
+                    self.engine.down_mousebuttons.remove(event.button)
                     self.scenes[self.current_scene].mouse_release(event)
                 elif event.type == const.MOUSEWHEEL:
                     self.scenes[self.current_scene].mouse_wheel(event)
