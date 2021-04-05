@@ -20,7 +20,6 @@ class Texture(GameObject):
     
     @classmethod
     def load(cls, file):
-        print(file)
         with open(file, "r") as f:
             values = json.load(f)
         texture = Texture(values.get("name", "Unknown Texture"), values.get("path", ""))

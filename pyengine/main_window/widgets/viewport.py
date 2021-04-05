@@ -43,7 +43,6 @@ class Viewport(QWidget):
                         rotation = transform.global_rotation()
                         scale = transform.global_scale()
                         if sprite is not None and sprite.sprite is not None:
-                            print(sprite.sprite)
                             path = self.parent.project.get_texture(sprite.sprite).components[0].path
                             render = pygame.image.load(path).convert_alpha()
                             render = pygame.transform.rotate(render, rotation)
