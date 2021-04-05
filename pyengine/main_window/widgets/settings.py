@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QLineEdit, QSpinBox, QFileDialog, QPushButton
+from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QLineEdit, QSpinBox, QPushButton
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt
 
