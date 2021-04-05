@@ -10,3 +10,4 @@ from pyengine.main_window.components.control_component import ControlComponent
 from pyengine.main_window.components.spritesheet_component import SpriteSheetComponent
 from pyengine.main_window.components.auto_component import AutoComponent
 from pyengine.main_window.components.button_component import ButtonComponent
+from pyengine.main_window.components.timescale_component import TimeScaleComponent

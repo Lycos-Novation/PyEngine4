@@ -1,7 +1,8 @@
 class Scene:
-    def __init__(self, name, color, game_objects):
+    def __init__(self, name, color, timescale, game_objects):
         self.name = name
         self.bg_color = color
+        self.timescale = timescale
         self.__game_object_count = 0
         self.game_objects = []
         self.add_game_objects(game_objects)
@@ -49,6 +50,7 @@ class Scene:
             i.mouse_wheel(evt)
     
     def update(self, deltatime):
+        deltatime *= self.timescale
         for i in self.game_objects:
             i.update(deltatime)
 

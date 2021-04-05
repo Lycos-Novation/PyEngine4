@@ -11,3 +11,4 @@ from pyengine.common.components.control_component import ControlComponent
 from pyengine.common.components.spritesheet_component import SpriteSheetComponent
 from pyengine.common.components.auto_component import AutoComponent
 from pyengine.common.components.button_component import ButtonComponent
+from pyengine.common.components.timescale_component import TimeScaleComponent

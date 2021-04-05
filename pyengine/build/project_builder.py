@@ -88,6 +88,7 @@ class ProjectBuilder:
         replaces = {
             "{NAME}": str(scene.name),
             "{COLOR}": str(scene.components[0].color),
+            "{TIMESCALE}": str(scene.components[1].timescale),
             "{ENTITIES_NAMES}": str([i.name for i in scene.childs]).replace("'", "")
         }
         with open(os.path.join(ProjectBuilder.build_folders["templates"], "scene.txt"), "r") as f:

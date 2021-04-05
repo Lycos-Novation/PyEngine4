@@ -112,6 +112,8 @@ class ComponentsWidget(QWidget):
             w = None
             if i.name == "ColorComponent":
                 w = ColorComponent(self, i)
+            elif i.name == "TimeScaleComponent":
+                w = TimeScaleComponent(self, i)
             elif i.name == "TransformComponent":
                 w = TransformComponent(self, i)
             elif i.name == "PathComponent":
