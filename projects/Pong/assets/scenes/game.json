@@ -214,6 +214,10 @@
                 0,
                 255
             ]
+        },
+        {
+            "name": "TimeScaleComponent",
+            "timescale": 2.0
         }
     ]
 }

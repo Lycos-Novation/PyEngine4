@@ -34,16 +34,20 @@ class Game:
                 if event.type == const.QUIT:
                     self.stop()
                 elif event.type == const.KEYDOWN:
-                    self.engine.down_keys.append(event.key)
+                    if event.key not in self.engine.down_keys:
+                        self.engine.down_keys.append(event.key)
                     self.scenes[self.current_scene].key_press(event)
                 elif event.type == const.KEYUP:
-                    self.engine.down_keys.remove(event.key)
+                    if event.key in self.engine.down_keys:
+                        self.engine.down_keys.remove(event.key)
                     self.scenes[self.current_scene].key_release(event)
                 elif event.type == const.MOUSEBUTTONDOWN:
-                    self.engine.down_mousebuttons.append(event.button)
+                    if event.button not in self.engine.down_mousebuttons:
+                        self.engine.down_mousebuttons.append(event.button)
                     self.scenes[self.current_scene].mouse_press(event)
                 elif event.type == const.MOUSEBUTTONUP:
-                    self.engine.down_mousebuttons.remove(event.button)
+                    if event.button in self.engine.down_mousebuttons:
+                        self.engine.down_mousebuttons.remove(event.button)
                     self.scenes[self.current_scene].mouse_release(event)
                 elif event.type == const.MOUSEWHEEL:
                     self.scenes[self.current_scene].mouse_wheel(event)
