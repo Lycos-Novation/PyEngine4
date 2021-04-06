@@ -57,7 +57,8 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [~] Open a project from a different version of PE4
 - [~] Upgrade UI of ComponentsWidget and AssetsExplorer
 - [~] Can now use more than one key for ControlComponent
-- [~] Changement of Game Properties is now apply (title, width, height)
+- [~] Modification of Game Properties is now apply (title, width, height)
+- [~] You can now drag and drop scripts to ScriptComponent
 - [#] Down_keys and Down_mousebutton in Engine can make crash
 
 ### V 1.0.0 : Colombe Update - 04/04/21 (LATEST)
