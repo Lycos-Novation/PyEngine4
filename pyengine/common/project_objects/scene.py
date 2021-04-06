@@ -12,7 +12,6 @@ class Scene(GameObject):
         self.components.append(TimeScaleComponent(self))
     
     def save(self, directory):
-        print(self.components)
         values = {
             "name": self.name,
             "childs": [
