@@ -156,12 +156,12 @@ class ProjectBuilder:
 
         logger.info("COPY GAME RESOURCES : STARTED")
         for i in project.textures:
-            logger.info("GAME RESOURCE : " + i.components[0].path)
+            logger.info("GAME TEXTURE RESOURCE : " + i.components[0].path)
             ext = i.components[0].path.split(".")[-1]
             ComponentBuilder.sprites[i.name] = ext
             shutil.copyfile(
                 i.components[0].path,
-                os.path.join(ProjectBuilder.project_folders["resources"], i.name+"."+ext)
+                os.path.join(ProjectBuilder.project_folders["textures"], i.name+"."+ext)
             )
 
         for i in project.sounds:

@@ -144,7 +144,7 @@ class AssetsExplorer(QWidget):
                 self.parent.project.save()
                 self.open_folder(self.current_folder)
         elif asset == "texture":
-            name = QInputDialog.getText(self, "PyEngine4 - Create Texture", "Texture Name:", QLineEdit.Normal)
+            name = QInputDialog.getText(self, "PyEngine4 - Import Texture", "Texture Name:", QLineEdit.Normal)
             if len(name[0]) == 0:
                 return
             fileName = QFileDialog.getOpenFileName(self, "Open Image", filter="Image (*.png *.jpg)")

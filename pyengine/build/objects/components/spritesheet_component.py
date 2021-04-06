@@ -21,7 +21,7 @@ class SpriteSheetComponent(Component):
         if transform is not None:
             rotation = transform.global_rotation()
             scale = transform.global_scale()
-            image = pygame.image.load(os.path.join("resources", self.sprite)).convert_alpha()
+            image = pygame.image.load(os.path.join("resources", "textures", self.sprite)).convert_alpha()
             x_diff = image.get_rect().width // self.sprite_number[0]
             y_diff = image.get_rect().height // self.sprite_number[1]
             indexes = (
