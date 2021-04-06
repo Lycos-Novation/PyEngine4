@@ -9,6 +9,7 @@ class SpriteSheetComponent(QWidget):
         super().__init__(parent)
         self.parent = parent
         self.component = component
+        self.setAcceptDrops(True)
 
         self.name = QLabel("SpriteSheet", self)
         self.name.setAlignment(Qt.AlignHCenter)
@@ -39,6 +40,27 @@ class SpriteSheetComponent(QWidget):
         self.layout.addWidget(self.current_sprite_spin, 3, 1, 1, 4)
         self.setLayout(self.layout)
 
+    def dragEnterEvent(self, e) -> None:
+        if e.mimeData().hasFormat("assets/texture"):
+            e.accept()
+        else:
+            super().dragEnterEvent(e)
+
+    def dragMoveEvent(self, e) -> None:
+        if e.mimeData().hasFormat("assets/texture"):
+            e.setDropAction(Qt.CopyAction)
+            e.accept()
+        else:
+            super().dragMoveEvent(e)
+
+    def dropEvent(self, e) -> None:
+        if e.mimeData().hasFormat("assets/texture"):
+            data = str(e.mimeData().data("assets/texture"), "utf-8")
+            self.change_spritesheet(data)
+            e.accept()
+            return
+        super().dropEvent(e)
+
     def change_sprite(self):
         file_name = QFileDialog.getOpenFileName(
             self,
@@ -47,8 +69,11 @@ class SpriteSheetComponent(QWidget):
             "Texture (*.json)"
         )
         if len(file_name[0]) > 0:
-            self.component.sprite = os.path.basename(file_name[0].replace(".json", ""))
-            self.change_value()
+            self.change_spritesheet(file_name[0])
+
+    def change_spritesheet(self, file):
+        self.component.sprite = os.path.basename(file.replace(".json", ""))
+        self.change_value()
 
     def change_value(self):
         self.component.sprite_number = [i.value() for i in self.sprite_number_spins]

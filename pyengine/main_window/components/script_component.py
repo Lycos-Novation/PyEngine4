@@ -23,26 +23,24 @@ class ScriptComponent(QWidget):
         self.setLayout(self.layout)
 
     def dragEnterEvent(self, e) -> None:
-        if e.mimeData().hasFormat("pe4/asset"):
+        if e.mimeData().hasFormat("assets/script"):
             e.accept()
         else:
             super().dragEnterEvent(e)
 
     def dragMoveEvent(self, e) -> None:
-        if e.mimeData().hasFormat("pe4/asset"):
+        if e.mimeData().hasFormat("assets/script"):
             e.setDropAction(Qt.CopyAction)
             e.accept()
         else:
             super().dragMoveEvent(e)
 
     def dropEvent(self, e) -> None:
-        if e.mimeData().hasFormat("pe4/asset"):
-            datas = str(e.mimeData().data("pe4/asset"), "utf-8").split("-")
-            if len(datas) == 2:
-                if os.path.basename(datas[0]) == "scripts":
-                    self.change_script(datas[1])
-                    e.accept()
-                    return
+        if e.mimeData().hasFormat("assets/script"):
+            data = str(e.mimeData().data("assets/script"), "utf-8")
+            self.change_script(data)
+            e.accept()
+            return
         super().dropEvent(e)
 
     def change_value(self):

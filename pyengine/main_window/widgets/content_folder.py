@@ -2,6 +2,8 @@ from PyQt5.QtWidgets import QListWidget, QAbstractItemView
 from PyQt5.QtCore import Qt, QMimeData
 from PyQt5.QtGui import QDragMoveEvent, QDrag
 
+import os
+
 
 class ContentFolder(QListWidget):
     def __init__(self, parent):
@@ -24,7 +26,13 @@ class ContentFolder(QListWidget):
         widget = self.itemWidget(self.selectedItems()[0])
 
         mimeData = QMimeData()
-        mimeData.setData("pe4/asset", (self.parent.current_folder+"-"+widget.path).encode("utf-8"))
+        folder = os.path.basename(self.parent.current_folder)
+        if folder == "scripts":
+            mimeData.setData("assets/script", widget.path.encode("utf-8"))
+        elif folder == "textures":
+            mimeData.setData("assets/texture", widget.path.encode("utf-8"))
+        else:
+            return
 
         drag = QDrag(self)
         drag.setMimeData(mimeData)
