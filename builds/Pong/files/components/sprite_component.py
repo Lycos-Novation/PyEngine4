@@ -19,7 +19,7 @@ class SpriteComponent(Component):
         if transform is not None:
             rotation = transform.global_rotation()
             scale = transform.global_scale()
-            image = pygame.image.load(os.path.join("resources", self.sprite)).convert_alpha()
+            image = pygame.image.load(os.path.join("resources", "textures", self.sprite)).convert_alpha()
             image = pygame.transform.rotate(image, rotation)
             self.render = pygame.transform.scale(
                 image,
