@@ -58,7 +58,7 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [~] Upgrade UI of ComponentsWidget and AssetsExplorer
 - [~] Can now use more than one key for ControlComponent
 - [~] Modification of Game Properties is now apply (title, width, height)
-- [~] You can now drag and drop scripts to ScriptComponent
+- [~] You can now drag and drop scripts to ScriptComponent and textures to SpriteComponent or SpriteSheetComponent
 - [#] Down_keys and Down_mousebutton in Engine can make crash
 
 ### V 1.0.0 : Colombe Update - 04/04/21 (LATEST)
