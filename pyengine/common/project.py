@@ -147,6 +147,9 @@ class Project:
             values.get("author", "Unknown Author"),
             values.get("icon", "default")
         )
+        for i in project.folders.values():
+            os.makedirs(i, exist_ok=True)
+
         with open(os.path.join(directory, "settings.json"), "r") as f:
             project.settings = json.load(f)
         for i in os.listdir(project.folders["scripts"]):
