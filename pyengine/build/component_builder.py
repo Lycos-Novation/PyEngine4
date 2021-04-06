@@ -4,6 +4,7 @@ import os
 class ComponentBuilder:
     templates = os.path.join("pyengine", "build", "templates", "components")
     sprites = {}
+    sounds = {}
 
     @staticmethod
     def generate_script_component(text, comp):

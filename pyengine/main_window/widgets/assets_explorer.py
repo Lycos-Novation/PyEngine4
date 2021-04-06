@@ -61,6 +61,17 @@ class AssetsExplorer(QWidget):
                 remove_texture.triggered.connect(lambda: self.remove_asset("texture", widget.title.text()))
                 menu.addAction(remove_texture)
             menu.exec_(QCursor.pos())
+        elif self.current_folder == self.folders["sounds"]:
+            menu = QMenu(self.content_folder)
+            create_sound = QAction("Import Sound", self)
+            create_sound.triggered.connect(lambda: self.create_asset("sound"))
+            menu.addAction(create_sound)
+            if len(self.content_folder.selectedItems()) >= 1:
+                widget = self.content_folder.itemWidget(self.content_folder.selectedItems()[0])
+                remove_sound = QAction("Delete Sound", self)
+                remove_sound.triggered.connect(lambda: self.remove_asset("sound", widget.title.text()))
+                menu.addAction(remove_sound)
+            menu.exec_(QCursor.pos())
         elif self.current_folder == self.folders["scripts"]:
             menu = QMenu(self.content_folder)
             create_script = QAction("Create Script", self)
@@ -85,7 +96,7 @@ class AssetsExplorer(QWidget):
                 self.open_folder(widget.path)
             elif self.current_folder == self.folders["scenes"]:
                 self.parent.scene_tree.update_scene(self.parent.project.get_scene(widget.title.text()))
-            elif self.current_folder == self.folders["textures"]:
+            elif self.current_folder in (self.folders["textures"], self.folders["scripts"]):
                 self.parent.components.set_obj(self.parent.project.get_texture(widget.title.text()))
             elif self.current_folder == self.folders["scripts"]:
                 self.open_script(widget.title.text())
@@ -104,6 +115,8 @@ class AssetsExplorer(QWidget):
                 icon = os.path.join("pyengine", "resources", "folder.png")
             elif self.current_folder == self.folders["textures"]:
                 icon = self.parent.project.get_texture(i.replace(".json", "")).components[0].path
+            elif self.current_folder == self.folders["sounds"]:
+                icon = os.path.join("pyengine", "resources", "sound.png")
             else:
                 icon = os.path.join("pyengine", "resources", "file.png")
             
@@ -139,6 +152,15 @@ class AssetsExplorer(QWidget):
                 self.parent.project.textures.append(Texture(name[0], fileName[0]))
                 self.parent.project.save()
                 self.open_folder(self.current_folder)
+        elif asset == "sound":
+            name = QInputDialog.getText(self, "PyEngine4 - Import Sound", "Sound Name:", QLineEdit.Normal)
+            if len(name[0]) == 0:
+                return
+            fileName = QFileDialog.getOpenFileName(self, "Open Sound", filter="Sound (*.ogg *.wav *.mp3)")
+            if len(fileName[0]) > 0:
+                self.parent.project.sounds.append(Sound(name[0], fileName[0]))
+                self.parent.project.save()
+                self.open_folder(self.current_folder)
         elif asset == "script":
             name = QInputDialog.getText(self, "PyEngine4 - Create Script", "Script Name:", QLineEdit.Normal)
             if len(name[0]) == 0:
@@ -157,6 +179,10 @@ class AssetsExplorer(QWidget):
     def remove_asset(self, asset, name):
         if asset == "texture":
             self.parent.project.textures.remove(self.parent.project.get_texture(name))
+            self.parent.project.save()
+            self.open_folder(self.current_folder)
+        elif asset == "sound":
+            self.parent.project.sounds.remove(self.parent.project.get_sound(name))
             self.parent.project.save()
             self.open_folder(self.current_folder)
         elif asset == "scene":

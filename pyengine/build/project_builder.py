@@ -144,7 +144,9 @@ class ProjectBuilder:
             "components": os.path.join("builds", project.name, "files", "components"),
             "scripts": os.path.join("builds", project.name, "files", "scripts"),
             "utils": os.path.join("builds", project.name, "files", "utils"),
-            "resources": os.path.join("builds", project.name, "resources")
+            "resources": os.path.join("builds", project.name, "resources"),
+            "textures": os.path.join("builds", project.name, "resources", "textures"),
+            "sounds": os.path.join("builds", project.name, "resources", "sounds")
         }
         ProjectBuilder.components = {"Component": "component"}
         shutil.rmtree(os.path.join("builds", project.name), ignore_errors=True)
@@ -160,6 +162,15 @@ class ProjectBuilder:
             shutil.copyfile(
                 i.components[0].path,
                 os.path.join(ProjectBuilder.project_folders["resources"], i.name+"."+ext)
+            )
+
+        for i in project.sounds:
+            logger.info("GAME SOUND RESOURCE : " + i.components[0].path)
+            ext = i.components[0].path.split(".")[-1]
+            ComponentBuilder.sounds[i.name] = ext
+            shutil.copyfile(
+                i.components[0].path,
+                os.path.join(ProjectBuilder.project_folders["sounds"], i.name+"."+ext)
             )
         logger.info("COPY GAME RESOURCES : SUCCESSFULLY ENDED")
 

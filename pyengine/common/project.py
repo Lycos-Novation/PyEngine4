@@ -6,7 +6,7 @@ import pygame
 import shutil
 import importlib
 
-from pyengine.common.project_objects import Scene, Texture
+from pyengine.common.project_objects import Scene, Texture, Sound
 from pyengine.build import ProjectBuilder
 from pyengine.common.utils import core_logger
 from pyengine import common
@@ -25,7 +25,8 @@ class Project:
             "scripts": os.path.join("projects", self.name, "assets", "scripts"),
             "prefabs": os.path.join("projects", self.name, "assets", "prefabs"),
             "textures": os.path.join("projects", self.name, "assets", "textures"),
-            "scenes": os.path.join("projects", self.name, "assets", "scenes")
+            "scenes": os.path.join("projects", self.name, "assets", "scenes"),
+            "sounds": os.path.join("projects", self.name, "assets", "sounds")
         }
         self.settings = {
             "engine_version": common.__version__,
@@ -35,6 +36,7 @@ class Project:
         }
         self.scenes = []
         self.textures = []
+        self.sounds = []
         self.scripts = []
         self.crash = False
         self.module = None
@@ -46,6 +48,11 @@ class Project:
         
     def get_texture(self, name):
         for i in self.textures:
+            if i.name == name:
+                return i
+
+    def get_sound(self, name):
+        for i in self.sounds:
             if i.name == name:
                 return i
 
@@ -98,7 +105,7 @@ class Project:
     def save(self):
         self.settings["engine_version"] = common.__version__
 
-        removes = [self.folders["prefabs"], self.folders["textures"], self.folders["scenes"]]
+        removes = [self.folders["prefabs"], self.folders["textures"], self.folders["sounds"], self.folders["scenes"]]
         for i in removes:
             shutil.rmtree(i, ignore_errors=True)
         if os.path.exists(os.path.join(self.folders["main"], "project.json")):
@@ -125,6 +132,8 @@ class Project:
             i.save(self.folders["scenes"])
         for i in self.textures:
             i.save(self.folders["textures"])
+        for i in self.sounds:
+            i.save(self.folders["sounds"])
 
     def __str__(self):
         return f"Project(name={self.name}, author={self.author}, icon={self.icon})"
@@ -146,4 +155,6 @@ class Project:
             project.scenes.append(Scene.load(os.path.join(project.folders["scenes"], i)))
         for i in os.listdir(project.folders["textures"]):
             project.textures.append(Texture.load(os.path.join(project.folders["textures"], i)))
+        for i in os.listdir(project.folders["sounds"]):
+            project.sounds.append(Sound.load(os.path.join(project.folders["sounds"], i)))
         return project
