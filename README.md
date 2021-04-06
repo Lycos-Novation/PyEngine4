@@ -54,10 +54,12 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [+] Utility classes : Vec2, Color, Math
 - [+] requirements.txt
 - [+] Components : ButtonComponent, TimeScaleComponent
+- [+] Assets : Sounds
 - [~] Open a project from a different version of PE4
 - [~] Upgrade UI of ComponentsWidget and AssetsExplorer
 - [~] Can now use more than one key for ControlComponent
 - [~] Modification of Game Properties is now apply (title, width, height)
+- [~] Textures have their own directory in build
 - [~] You can now drag and drop scripts to ScriptComponent and textures to SpriteComponent or SpriteSheetComponent
 - [#] Down_keys and Down_mousebutton in Engine can make crash
 
