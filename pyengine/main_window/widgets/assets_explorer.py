@@ -96,8 +96,10 @@ class AssetsExplorer(QWidget):
                 self.open_folder(widget.path)
             elif self.current_folder == self.folders["scenes"]:
                 self.parent.scene_tree.update_scene(self.parent.project.get_scene(widget.title.text()))
-            elif self.current_folder in (self.folders["textures"], self.folders["scripts"]):
+            elif self.current_folder == self.folders["textures"]:
                 self.parent.components.set_obj(self.parent.project.get_texture(widget.title.text()))
+            elif self.current_folder == self.folders["sounds"]:
+                self.parent.components.set_obj(self.parent.project.get_sound(widget.title.text()))
             elif self.current_folder == self.folders["scripts"]:
                 self.open_script(widget.title.text())
     

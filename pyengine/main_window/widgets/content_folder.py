@@ -31,6 +31,8 @@ class ContentFolder(QListWidget):
             mimeData.setData("assets/script", widget.path.encode("utf-8"))
         elif folder == "textures":
             mimeData.setData("assets/texture", widget.path.encode("utf-8"))
+        elif folder == "sounds":
+            mimeData.setData("assets/sound", widget.path.encode("utf-8"))
         else:
             return
 
