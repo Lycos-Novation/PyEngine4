@@ -48,6 +48,8 @@ def launch():
     ball.add_component(autocomponent)
     ball_script = Ball_Script(engine)
     ball.add_component(ball_script)
+    musiccomponent = MusicComponent(engine, "music.mp3", 100, True)
+    ball.add_component(musiccomponent)
 
     quit_button = GameObject("quit_button")
     transformcomponent = TransformComponent(engine, Vec2(965, 10), 0, Vec2(1.0, 1.0))
