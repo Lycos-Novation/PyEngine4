@@ -40,6 +40,8 @@ class ProjectBuilder:
             return ComponentBuilder.generate_auto_component(text, comp)
         elif comp.name == "ButtonComponent":
             return ComponentBuilder.generate_button_component(text, comp)
+        elif comp.name == "MusicComponent":
+            return ComponentBuilder.generate_music_component(text, comp)
         elif comp.name.startswith("ScriptComponent"):
             return ComponentBuilder.generate_script_component(text, comp)
         else:

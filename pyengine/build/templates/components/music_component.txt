@@ -1,0 +1,2 @@
+    {NAME} = MusicComponent(engine, "{MUSIC}", {VOLUME}, {PLAY})
+{COMPONENTS}

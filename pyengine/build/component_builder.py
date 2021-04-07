@@ -139,6 +139,24 @@ class ComponentBuilder:
         return text.replace("{COMPONENTS}", template)
 
     @staticmethod
+    def generate_music_component(text, comp):
+        replaces = {
+            "{NAME}": str(comp.name.lower()),
+            "{MUSIC}": str(comp.music)+"."+ComponentBuilder.sounds[comp.music],
+            "{VOLUME}": str(comp.volume),
+            "{PLAY}": str(comp.play)
+        }
+
+        with open(os.path.join(ComponentBuilder.templates, "music_component.txt"), "r") as f:
+            template = f.read()
+
+        # GENERATE MAIN INFO
+        for k, v in replaces.items():
+            template = template.replace(k, v)
+
+        return text.replace("{COMPONENTS}", template)
+
+    @staticmethod
     def generate_spritesheet_component(text, comp):
         replaces = {
             "{NAME}": str(comp.name.lower()),
