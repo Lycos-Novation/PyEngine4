@@ -8,13 +8,15 @@ class MusicComponent(Component):
         self.volume = 100
         self.music = None
         self.play = True
+        self.loop = True
 
     def to_dict(self):
         return {
             "name": self.name,
             "volume": self.volume,
             "music": self.music,
-            "play": self.play
+            "play": self.play,
+            "loop": self.loop
         }
 
     @classmethod
@@ -23,4 +25,5 @@ class MusicComponent(Component):
         comp.volume = values.get("volume", 100)
         comp.music = values.get("music", None)
         comp.play = values.get("play", True)
+        comp.loop = values.get("loop", True)
         return comp

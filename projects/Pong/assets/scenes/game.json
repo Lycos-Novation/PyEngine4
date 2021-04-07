@@ -153,12 +153,6 @@
                 },
                 {
                     "name": "ScriptComponent ball_script"
-                },
-                {
-                    "name": "MusicComponent",
-                    "volume": 100,
-                    "music": "music",
-                    "play": true
                 }
             ]
         },

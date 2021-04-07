@@ -18,9 +18,13 @@ class MusicComponent(QWidget):
         self.volume_spin = QSpinBox(self)
         self.play = QLabel("Play", self)
         self.play_check = QCheckBox(self)
+        self.loop = QLabel("Loop", self)
+        self.loop_check = QCheckBox(self)
 
         self.play_check.setChecked(component.play)
         self.play_check.clicked.connect(self.change_value)
+        self.loop_check.setChecked(component.loop)
+        self.loop_check.clicked.connect(self.change_value)
         self.volume_spin.setRange(0, 100)
         self.volume_spin.setValue(component.volume)
         self.volume_spin.valueChanged.connect(self.change_value)
@@ -33,6 +37,8 @@ class MusicComponent(QWidget):
         self.layout.addWidget(self.volume_spin, 2, 1, 1, 4)
         self.layout.addWidget(self.play, 3, 0)
         self.layout.addWidget(self.play_check, 3, 1, 1, 4)
+        self.layout.addWidget(self.loop, 4, 0)
+        self.layout.addWidget(self.loop_check, 4, 1, 1, 4)
         self.setLayout(self.layout)
 
     def dragEnterEvent(self, e) -> None:
@@ -67,9 +73,10 @@ class MusicComponent(QWidget):
             self.change_value(file_name[0])
 
     def change_value(self, file=None):
-        if file is not None:
+        if file is not None and isinstance(file, str):
             self.component.music = os.path.basename(file.replace(".json", ""))
         self.component.volume = self.volume_spin.value()
         self.component.play = self.play_check.isChecked()
+        self.component.loop = self.loop_check.isChecked()
         self.parent.parent.project.save()
         self.parent.parent.viewport.update_screen()

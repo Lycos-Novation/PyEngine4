@@ -96,6 +96,9 @@ class Project:
             FLAGS = 0
             pygame.display.set_mode(DISPLAY, FLAGS, DEPTH)
             os.chdir("../..")
+            if pygame.mixer.music.get_busy():
+                pygame.mixer.music.stop()
+            pygame.mixer.music.unload()
 
     def launch(self):
         thread = threading.Thread(target=self.__launch)

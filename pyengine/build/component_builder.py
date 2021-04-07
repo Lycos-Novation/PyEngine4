@@ -144,7 +144,8 @@ class ComponentBuilder:
             "{NAME}": str(comp.name.lower()),
             "{MUSIC}": str(comp.music)+"."+ComponentBuilder.sounds[comp.music],
             "{VOLUME}": str(comp.volume),
-            "{PLAY}": str(comp.play)
+            "{PLAY}": str(comp.play),
+            "{LOOP}": str(comp.loop)
         }
 
         with open(os.path.join(ComponentBuilder.templates, "music_component.txt"), "r") as f:

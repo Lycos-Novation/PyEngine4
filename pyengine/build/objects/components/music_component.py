@@ -5,12 +5,13 @@ import os
 
 
 class MusicComponent(Component):
-    def __init__(self, engine, music, volume, play):
+    def __init__(self, engine, music, volume, play, loop):
         super().__init__(engine)
         self.name = "MusicComponent"
         self.__music = os.path.join("resources", "sounds", music)
         self.__volume = volume
         self.__play = play
+        self.loop = loop
         pygame.mixer.init()
 
     @property
@@ -30,7 +31,10 @@ class MusicComponent(Component):
     def play(self, value):
         self.__play = value
         if value:
-            pygame.mixer.music.play()
+            if self.loop:
+                pygame.mixer.music.play(loops=-1)
+            else:
+                pygame.mixer.music.play()
         else:
             pygame.mixer.music.stop()
 
