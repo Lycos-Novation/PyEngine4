@@ -8,7 +8,7 @@ from pyengine.common.components import PathComponent
 class Sound(GameObject):
     def __init__(self, name, path):
         super().__init__(name)
-        self.components.append(PathComponent(self, path))
+        self.components.append(PathComponent(self, path, "Sound (*.ogg *.wav *.mp3)"))
 
     def save(self, directory):
         values = {

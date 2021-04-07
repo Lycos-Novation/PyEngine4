@@ -20,7 +20,12 @@ class PathComponent(QWidget):
         self.setLayout(self.layout)
     
     def change_value(self):
-        fileName = QFileDialog.getOpenFileName(self, "Open Image", self.component.path, "Image (*.png *.jpg)")
+        fileName = QFileDialog.getOpenFileName(
+            self,
+            "Open "+self.component.type.split(" ")[0],
+            self.component.path,
+            self.component.type
+        )
         if len(fileName[0]) > 0:
             self.component.path = fileName[0]
             self.parent.parent.project.save()
