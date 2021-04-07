@@ -53,7 +53,7 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [+] Engine Settings
 - [+] Utility classes : Vec2, Color, Math
 - [+] requirements.txt
-- [+] Components : ButtonComponent, TimeScaleComponent
+- [+] Components : ButtonComponent, TimeScaleComponent, MusicComponent
 - [+] Assets : Sounds
 - [~] Open a project from a different version of PE4
 - [~] Upgrade UI of ComponentsWidget and AssetsExplorer
