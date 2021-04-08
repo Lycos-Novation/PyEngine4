@@ -12,7 +12,6 @@ class MusicComponent(Component):
         self.__volume = volume
         self.__play = play
         self.loop = loop
-        pygame.mixer.init()
 
     @property
     def volume(self):
