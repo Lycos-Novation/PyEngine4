@@ -32,7 +32,8 @@ class Project:
             "engine_version": common.__version__,
             "width": 1080,
             "height": 720,
-            "mainScene": None
+            "mainScene": None,
+            "numberMixerChannels": 8
         }
         self.scenes = []
         self.textures = []

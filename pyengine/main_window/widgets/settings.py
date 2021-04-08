@@ -17,6 +17,8 @@ class Settings(QWidget):
         self.height_spin = QSpinBox(self)
         main_scene = QLabel("Main Scene", self)
         self.main_scene_edit = QLineEdit("", self)
+        number_mixer_channel = QLabel("Number Mixer Channel", self)
+        self.number_mixer_channel_spin = QSpinBox(self)
         self.valid = QPushButton("Validate", self)
 
         title.setFont(QFont("arial", 20, 1))
@@ -24,10 +26,10 @@ class Settings(QWidget):
         width.setAlignment(Qt.AlignHCenter)
         height.setAlignment(Qt.AlignHCenter)
         main_scene.setAlignment(Qt.AlignHCenter)
-        self.width_spin.setMinimum(1)
-        self.width_spin.setMaximum(2147483647)
-        self.height_spin.setMinimum(1)
-        self.height_spin.setMaximum(2147483647)
+        number_mixer_channel.setAlignment(Qt.AlignHCenter)
+        self.width_spin.setRange(1, 2147483647)
+        self.height_spin.setRange(1, 2147483647)
+        self.number_mixer_channel_spin.setRange(1, 100)
         self.valid.clicked.connect(self.validate)
 
         self.layout = QVBoxLayout()
@@ -41,6 +43,9 @@ class Settings(QWidget):
         self.layout.addSpacing(20)
         self.layout.addWidget(main_scene)
         self.layout.addWidget(self.main_scene_edit)
+        self.layout.addSpacing(20)
+        self.layout.addWidget(number_mixer_channel)
+        self.layout.addWidget(self.number_mixer_channel_spin)
         self.layout.addSpacing(40)
         self.layout.addWidget(self.valid)
         self.layout.setContentsMargins(50, 10, 50, 10)
@@ -53,6 +58,7 @@ class Settings(QWidget):
             self.project.settings["mainScene"] = self.main_scene_edit.text()
         else:
             self.project.settings["mainScene"] = None
+        self.project.settings["numberMixerChannels"] = self.number_mixer_channel_spin.value()
         self.project.save()
         self.parent.assets_explorer.update_project()
         self.parent.viewport.update_screen()
@@ -66,3 +72,4 @@ class Settings(QWidget):
         self.width_spin.setValue(self.project.settings.get("width", 1080))
         self.height_spin.setValue(self.project.settings.get("height", 720))
         self.main_scene_edit.setText(self.project.settings.get("mainScene", ""))
+        self.number_mixer_channel_spin.setValue(self.project.settings.get("numberMixerChannels", 8))

@@ -113,6 +113,7 @@ class ProjectBuilder:
             "{NAME}": str(project.name),
             "{WIDTH}": str(project.settings.get("width", 1280)),
             "{HEIGHT}": str(project.settings.get("height", 720)),
+            "{NB_MIXER_CHANNELS}": str(project.settings.get("numberMixerChannels", 8)),
             "{SCENES_NAMES}": str([i.name for i in project.scenes]).replace("'", "")
         }
         with open(os.path.join(ProjectBuilder.build_folders["templates"], "main.txt"), "r") as f:

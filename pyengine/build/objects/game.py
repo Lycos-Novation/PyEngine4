@@ -2,10 +2,11 @@ import pygame
 import pygame.locals as const
 
 pygame.init()
+pygame.mixer.init()
 
 
 class Game:
-    def __init__(self, title, width, height, scenes, engine):
+    def __init__(self, title, width, height,  nb_mixer_channels, scenes, engine):
         self.engine = engine
         self.engine.game = self
         self.title = title
@@ -13,6 +14,7 @@ class Game:
         self.__height = height
         self.scenes = scenes
         self.current_scene = 0
+        pygame.mixer.set_num_channels(nb_mixer_channels)
 
         self.screen = pygame.display.set_mode((self.width, self.height))
 

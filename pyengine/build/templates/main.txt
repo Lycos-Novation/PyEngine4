@@ -10,7 +10,7 @@ def launch():
 
     scenes = {SCENES_NAMES}
 
-    game = Game("{NAME}", {WIDTH}, {HEIGHT}, scenes, engine)
+    game = Game("{NAME}", {WIDTH}, {HEIGHT}, {NB_MIXER_CHANNELS}, scenes, engine)
     game.run()
 
 
