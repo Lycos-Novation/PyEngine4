@@ -61,7 +61,7 @@ def launch():
     game = Scene("game", Color.from_rgba(0, 0, 0, 255), 2.0, entities)
     
     scenes = [game]
-    game = Game("Pong", 1080, 720, scenes, engine)
+    game = Game("Pong", 1080, 720, 10, scenes, engine)
     game.run()
 
 
