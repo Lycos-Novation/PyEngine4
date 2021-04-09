@@ -102,3 +102,5 @@ class MainWindow(QWidget):
         main_scene = self.project.settings.get("mainScene", None)
         if main_scene is not None and self.project.get_scene(main_scene) is not None:
             self.scene_tree.update_scene(self.project.get_scene(main_scene))
+        for i in self.project.loading_errors:
+            QMessageBox.warning(self, "PyEngine4 - Loading Error", i)
