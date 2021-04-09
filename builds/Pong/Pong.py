@@ -58,7 +58,7 @@ def launch():
     quit_button.add_component(quit_script)
     
     entities = [left_paddle, right_paddle, score, ball, quit_button]
-    game = Scene("game", Color.from_rgba(0, 0, 0, 255), 2.0, entities)
+    game = Scene("game", Color.from_rgba(0, 0, 0, 255), 1.0, entities)
     
     scenes = [game]
     game = Game("Pong", 1080, 720, 10, scenes, engine)

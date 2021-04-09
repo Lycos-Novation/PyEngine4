@@ -124,9 +124,13 @@ class ComponentBuilder:
 
     @staticmethod
     def generate_sprite_component(text, comp):
+        if ComponentBuilder.sprites[comp.sprite] is not None:
+            sprite = str(comp.sprite)+"."+ComponentBuilder.sprites[comp.sprite]
+        else:
+            sprite = None
         replaces = {
             "{NAME}": str(comp.name.lower()),
-            "{SPRITE}": str(comp.sprite)+"."+ComponentBuilder.sprites[comp.sprite]
+            "{SPRITE}": str(sprite)
         }
 
         with open(os.path.join(ComponentBuilder.templates, "sprite_component.txt"), "r") as f:
@@ -140,9 +144,13 @@ class ComponentBuilder:
 
     @staticmethod
     def generate_music_component(text, comp):
+        if ComponentBuilder.sounds[comp.music] is not None:
+            music = str(comp.music)+"."+ComponentBuilder.sounds[comp.music]
+        else:
+            music = None
         replaces = {
             "{NAME}": str(comp.name.lower()),
-            "{MUSIC}": str(comp.music)+"."+ComponentBuilder.sounds[comp.music],
+            "{MUSIC}": str(music),
             "{VOLUME}": str(comp.volume),
             "{PLAY}": str(comp.play),
             "{LOOP}": str(comp.loop)
@@ -159,9 +167,13 @@ class ComponentBuilder:
 
     @staticmethod
     def generate_spritesheet_component(text, comp):
+        if ComponentBuilder.sprites[comp.sprite] is not None:
+            sprite = str(comp.sprite)+"."+ComponentBuilder.sprites[comp.sprite]
+        else:
+            sprite = None
         replaces = {
             "{NAME}": str(comp.name.lower()),
-            "{SPRITE}": str(comp.sprite)+"."+ComponentBuilder.sprites[comp.sprite],
+            "{SPRITE}": str(sprite),
             "{SPRITE_NUMBER}": str(comp.sprite_number),
             "{CURRENT_SPRITE}": str(comp.current_sprite)
         }

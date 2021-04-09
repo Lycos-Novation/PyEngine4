@@ -39,6 +39,7 @@ class Project:
         self.textures = []
         self.sounds = []
         self.scripts = []
+        self.loading_errors = []
         self.crash = False
         self.module = None
 
@@ -161,7 +162,13 @@ class Project:
         for i in os.listdir(project.folders["scenes"]):
             project.scenes.append(Scene.load(os.path.join(project.folders["scenes"], i)))
         for i in os.listdir(project.folders["textures"]):
-            project.textures.append(Texture.load(os.path.join(project.folders["textures"], i)))
+            texture, error = Texture.load(os.path.join(project.folders["textures"], i))
+            if error is not None:
+                project.loading_errors.append(error)
+            project.textures.append(texture)
         for i in os.listdir(project.folders["sounds"]):
-            project.sounds.append(Sound.load(os.path.join(project.folders["sounds"], i)))
+            sound, error = Sound.load(os.path.join(project.folders["sounds"], i))
+            if error is not None:
+                project.loading_errors.append(error)
+            project.sounds.append(sound)
         return project

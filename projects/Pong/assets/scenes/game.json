@@ -217,7 +217,7 @@
         },
         {
             "name": "TimeScaleComponent",
-            "timescale": 2.0
+            "timescale": 1.0
         }
     ]
 }

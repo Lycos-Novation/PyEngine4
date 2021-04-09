@@ -7,8 +7,18 @@ import os
 class MusicComponent(Component):
     def __init__(self, engine, music, volume, play, loop):
         super().__init__(engine)
+
+        if music == "None":
+            music = None
+
         self.name = "MusicComponent"
-        self.__music = os.path.join("resources", "sounds", music)
+
+        if music is not None:
+            self.__music = os.path.join("resources", "sounds", music)
+            pygame.mixer.music.load(self.__music)
+        else:
+            self.__music = None
+
         self.__volume = volume
         self.__play = play
         self.loop = loop
@@ -43,8 +53,11 @@ class MusicComponent(Component):
 
     @music.setter
     def music(self, value):
-        self.__music = os.path.join("resources", "sounds", value)
-        pygame.mixer.music.load(self.__music)
+        if value is not None:
+            self.__music = os.path.join("resources", "sounds", value)
+            pygame.mixer.music.load(self.__music)
+        else:
+            self.__music = None
 
     def start(self):
         self.music = self.music

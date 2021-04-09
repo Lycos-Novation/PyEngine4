@@ -67,29 +67,31 @@ class Viewport(QWidget):
                             screen.blit(render, position.coords())
                         if sprite is not None and sprite.sprite is not None:
                             path = self.parent.project.get_texture(sprite.sprite).components[0].path
-                            render = pygame.image.load(path).convert_alpha()
-                            render = pygame.transform.rotate(render, rotation)
-                            render = pygame.transform.scale(
-                                render,
-                                [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
-                            )
-                            screen.blit(render, position.coords())
+                            if path is not None:
+                                render = pygame.image.load(path).convert_alpha()
+                                render = pygame.transform.rotate(render, rotation)
+                                render = pygame.transform.scale(
+                                    render,
+                                    [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
+                                )
+                                screen.blit(render, position.coords())
                         if spritesheet is not None and spritesheet.sprite is not None:
                             path = self.parent.project.get_texture(spritesheet.sprite).components[0].path
-                            image = pygame.image.load(path).convert_alpha()
-                            x_diff = image.get_rect().width // spritesheet.sprite_number[0]
-                            y_diff = image.get_rect().height // spritesheet.sprite_number[1]
-                            indexes = (
-                                spritesheet.current_sprite % spritesheet.sprite_number[0],
-                                spritesheet.current_sprite // spritesheet.sprite_number[0]
-                            )
-                            render = image.subsurface(pygame.Rect(indexes[0]*x_diff, indexes[1]*y_diff, x_diff, y_diff))
-                            render = pygame.transform.rotate(render, rotation)
-                            render = pygame.transform.scale(
-                                render,
-                                [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
-                            )
-                            screen.blit(render, position.coords())
+                            if path is not None:
+                                image = pygame.image.load(path).convert_alpha()
+                                x_diff = image.get_rect().width // spritesheet.sprite_number[0]
+                                y_diff = image.get_rect().height // spritesheet.sprite_number[1]
+                                indexes = (
+                                    spritesheet.current_sprite % spritesheet.sprite_number[0],
+                                    spritesheet.current_sprite // spritesheet.sprite_number[0]
+                                )
+                                render = image.subsurface(pygame.Rect(indexes[0]*x_diff, indexes[1]*y_diff, x_diff, y_diff))
+                                render = pygame.transform.rotate(render, rotation)
+                                render = pygame.transform.scale(
+                                    render,
+                                    [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
+                                )
+                                screen.blit(render, position.coords())
                         if text is not None:
                             try:
                                 font = pygame.font.Font(text.font_name, text.font_size)

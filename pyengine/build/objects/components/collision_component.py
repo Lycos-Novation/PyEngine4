@@ -52,15 +52,15 @@ class CollisionComponent(Component):
         spritesheet = self.game_object.get_component("SpriteSheetComponent")
         text = self.game_object.get_component("TextComponent")
         if transform is not None:
-            if sprite is not None:
+            if sprite is not None and sprite.render is not None:
                 rect = sprite.render.get_rect(x=position.x, y=position.y)
                 if self.__internal_collide(rect, cause):
                     return False
-            if spritesheet is not None:
+            if spritesheet is not None and spritesheet.render is not None:
                 rect = spritesheet.render.get_rect(x=position.x, y=position.y)
                 if self.__internal_collide(rect, cause):
                     return False
-            if text is not None:
+            if text is not None and text.render is not None:
                 rect = text.render.get_rect(x=position.x, y=position.y)
                 if self.__internal_collide(rect, cause):
                     return False

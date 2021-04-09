@@ -23,4 +23,8 @@ class Texture(GameObject):
         with open(file, "r") as f:
             values = json.load(f)
         texture = Texture(values.get("name", "Unknown Texture"), values.get("path", ""))
-        return texture
+        if texture.components[0].path is None or os.path.exists(texture.components[0].path):
+            return texture, None
+        else:
+            path, texture.components[0].path = texture.components[0].path, None
+            return texture, "Unknown path : "+path+"\nThis path will be set to None."

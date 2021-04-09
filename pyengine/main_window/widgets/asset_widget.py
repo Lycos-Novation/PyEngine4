@@ -16,10 +16,11 @@ class AssetWidget(QWidget):
         self.icon.setAlignment(Qt.AlignHCenter)
 
         pix = QPixmap()
-        if pix.load(icon):
-            self.icon.setPixmap(pix.scaled(64, 64, Qt.KeepAspectRatio))
-        else:
-            core_logger.error("AssetWidget : Cannot load " + icon)
+        if icon is not None:
+            if pix.load(icon):
+                self.icon.setPixmap(pix.scaled(64, 64, Qt.KeepAspectRatio))
+            else:
+                core_logger.error("AssetWidget : Cannot load " + icon)
         
         self.layout = QVBoxLayout()
 

@@ -159,22 +159,28 @@ class ProjectBuilder:
 
         logger.info("COPY GAME RESOURCES : STARTED")
         for i in project.textures:
-            logger.info("GAME TEXTURE RESOURCE : " + i.components[0].path)
-            ext = i.components[0].path.split(".")[-1]
-            ComponentBuilder.sprites[i.name] = ext
-            shutil.copyfile(
-                i.components[0].path,
-                os.path.join(ProjectBuilder.project_folders["textures"], i.name+"."+ext)
-            )
+            if i.components[0].path is not None:
+                logger.info("GAME TEXTURE RESOURCE : " + i.components[0].path)
+                ext = i.components[0].path.split(".")[-1]
+                ComponentBuilder.sprites[i.name] = ext
+                shutil.copyfile(
+                    i.components[0].path,
+                    os.path.join(ProjectBuilder.project_folders["textures"], i.name+"."+ext)
+                )
+            else:
+                ComponentBuilder.sprites[i.name] = None
 
         for i in project.sounds:
-            logger.info("GAME SOUND RESOURCE : " + i.components[0].path)
-            ext = i.components[0].path.split(".")[-1]
-            ComponentBuilder.sounds[i.name] = ext
-            shutil.copyfile(
-                i.components[0].path,
-                os.path.join(ProjectBuilder.project_folders["sounds"], i.name+"."+ext)
-            )
+            if i.components[0].path is not None:
+                logger.info("GAME SOUND RESOURCE : " + i.components[0].path)
+                ext = i.components[0].path.split(".")[-1]
+                ComponentBuilder.sounds[i.name] = ext
+                shutil.copyfile(
+                    i.components[0].path,
+                    os.path.join(ProjectBuilder.project_folders["sounds"], i.name+"."+ext)
+                )
+            else:
+                ComponentBuilder.sounds[i.name] = None
         logger.info("COPY GAME RESOURCES : SUCCESSFULLY ENDED")
 
         logger.info("COPY GAME SCRIPTS : STARTED")
