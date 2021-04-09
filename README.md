@@ -66,7 +66,7 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [#] Down_keys and Down_mousebutton in Engine can make crash
 - [#] Missing Assets make crashes
 - [#] Can't launch game if Sound or Texture path is None
-- [#] Create gameobject with opened scene make crash
+- [#] Create gameobject without opened scene make crash
 
 ### V 1.0.0 : Colombe Update - 04/04/21 (LATEST)
 
