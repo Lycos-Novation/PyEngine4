@@ -56,6 +56,9 @@ class SceneTree(QTreeWidget):
             obj = self.selectedItems()[0].obj
         else:
             obj = self.scene
+        if obj is None:
+            QMessageBox.warning(self, "PyEngine4 - Create GameObject", "Error : You must create and open a scene first.")
+            return
         if game_object == "gameobject":
             text = QInputDialog.getText(self, "PyEngine4 - Create GameObject", "GameObject Name:", QLineEdit.Normal)
             if text[1] and len(text[0]) > 0:
