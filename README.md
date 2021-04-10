@@ -56,7 +56,8 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [+] Components : ButtonComponent, TimeScaleComponent, MusicComponent
 - [+] Assets : Sounds
 - [+] Project Settings : Number of mixer channels
-- [+] Adding Pong assets in project_files (must be relinked to project)
+- [+] Pong assets in project_files (must be relinked to project)
+- [+] Color picker in components widgets
 - [~] Open a project from a different version of PE4
 - [~] Upgrade UI of ComponentsWidget and AssetsExplorer
 - [~] Can now use more than one key for ControlComponent

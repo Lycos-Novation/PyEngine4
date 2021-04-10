@@ -1,5 +1,6 @@
-from PyQt5.QtWidgets import QWidget, QLabel, QSpinBox, QGridLayout, QLineEdit, QCheckBox
+from PyQt5.QtWidgets import QWidget, QLabel, QSpinBox, QGridLayout, QLineEdit, QCheckBox, QColorDialog, QPushButton
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QColor
 
 from pyengine.common.utils import Color
 
@@ -19,6 +20,7 @@ class TextComponent(QWidget):
         self.font_size_spin = QSpinBox(self)
         self.font_color_name = QLabel("Font Color", self)
         self.font_color_spins = [QSpinBox(self), QSpinBox(self), QSpinBox(self), QSpinBox(self)]
+        self.font_color_picker = QPushButton("Color Picker")
         self.font_bold = QLabel("Font Bold", self)
         self.font_bold_check = QCheckBox(self)
         self.font_italic = QLabel("Font Italic", self)
@@ -46,6 +48,7 @@ class TextComponent(QWidget):
             self.font_color_spins[k].setMaximum(255)
             self.font_color_spins[k].setValue(v)
             self.font_color_spins[k].valueChanged.connect(self.change_value)
+        self.font_color_picker.clicked.connect(self.change_font_color)
 
         self.layout = QGridLayout()
         self.layout.addWidget(self.name, 0, 0, 1, 5)
@@ -58,21 +61,34 @@ class TextComponent(QWidget):
         self.layout.addWidget(self.font_color_name, 4, 0)
         for i in range(len(self.font_color_spins)):
             self.layout.addWidget(self.font_color_spins[i], 4, i+1)
-        self.layout.addWidget(self.font_bold, 5, 0)
-        self.layout.addWidget(self.font_bold_check, 5, 1, 1, 4)
-        self.layout.addWidget(self.font_italic, 6, 0)
-        self.layout.addWidget(self.font_italic_check, 6, 1, 1, 4)
-        self.layout.addWidget(self.font_underline, 7, 0)
-        self.layout.addWidget(self.font_underline_check, 7, 1, 1, 4)
-        self.layout.addWidget(self.font_antialias, 8, 0)
-        self.layout.addWidget(self.font_antialias_check, 8, 1, 1, 4)
+        self.layout.addWidget(self.font_color_picker, 5, 0, 1, 5)
+        self.layout.addWidget(self.font_bold, 6, 0)
+        self.layout.addWidget(self.font_bold_check, 6, 1, 1, 4)
+        self.layout.addWidget(self.font_italic, 7, 0)
+        self.layout.addWidget(self.font_italic_check, 7, 1, 1, 4)
+        self.layout.addWidget(self.font_underline, 8, 0)
+        self.layout.addWidget(self.font_underline_check, 8, 1, 1, 4)
+        self.layout.addWidget(self.font_antialias, 9, 0)
+        self.layout.addWidget(self.font_antialias_check, 9, 1, 1, 4)
         self.setLayout(self.layout)
 
-    def change_value(self):
+    def change_font_color(self):
+        color = QColorDialog.getColor(QColor(*self.component.font_color.rgba()), parent=self)
+        if color.isValid():
+            self.font_color_spins[0].setValue(color.red())
+            self.font_color_spins[1].setValue(color.green())
+            self.font_color_spins[2].setValue(color.blue())
+            self.font_color_spins[3].setValue(color.alpha())
+            self.change_value(font_color=[color.red(), color.green(), color.blue(), color.alpha()])
+
+    def change_value(self, _=None, font_color=None):
         self.component.text = self.text_edit.text()
         self.component.font_name = self.font_name_edit.text()
         self.component.font_size = self.font_size_spin.value()
-        self.component.font_color = Color.from_rgba(*(i.value() for i in self.font_color_spins))
+        if font_color is None:
+            self.component.font_color = Color.from_rgba(*(i.value() for i in self.font_color_spins))
+        else:
+            self.component.font_color = Color.from_rgba(*font_color)
         self.component.font_bold = self.font_bold_check.isChecked()
         self.component.font_italic = self.font_italic_check.isChecked()
         self.component.font_underline = self.font_underline_check.isChecked()

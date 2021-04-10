@@ -180,9 +180,9 @@
                         40
                     ],
                     "bg": [
-                        78,
-                        78,
-                        78,
+                        241,
+                        241,
+                        241,
                         255
                     ],
                     "text": "Quitter",
@@ -193,8 +193,8 @@
                     "font_underline": false,
                     "font_color": [
                         255,
-                        255,
-                        255,
+                        0,
+                        4,
                         255
                     ],
                     "font_antialias": true
