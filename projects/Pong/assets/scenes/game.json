@@ -24,7 +24,11 @@
                 {
                     "name": "CollisionComponent",
                     "solid": true,
-                    "callback": null
+                    "callback": null,
+                    "size": [
+                        10,
+                        100
+                    ]
                 },
                 {
                     "name": "ControlComponent",
@@ -65,7 +69,11 @@
                 {
                     "name": "CollisionComponent",
                     "solid": true,
-                    "callback": null
+                    "callback": null,
+                    "size": [
+                        10,
+                        100
+                    ]
                 },
                 {
                     "name": "ControlComponent",
@@ -140,7 +148,11 @@
                 {
                     "name": "CollisionComponent",
                     "solid": true,
-                    "callback": "ball_script - collide"
+                    "callback": "ball_script - collide",
+                    "size": [
+                        20,
+                        20
+                    ]
                 },
                 {
                     "name": "AutoComponent",

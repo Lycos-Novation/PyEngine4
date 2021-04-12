@@ -61,7 +61,8 @@ class ComponentBuilder:
         replaces = {
             "{NAME}": str(comp.name.lower()),
             "{SOLID}": str(comp.solid),
-            "{CALLBACK}": str(comp.callback)
+            "{CALLBACK}": str(comp.callback),
+            "{SIZE}": str(comp.size)
         }
 
         with open(os.path.join(ComponentBuilder.templates, "collision_component.txt"), "r") as f:

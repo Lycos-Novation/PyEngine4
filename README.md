@@ -61,6 +61,7 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [~] Open a project from a different version of PE4
 - [~] Upgrade UI of ComponentsWidget and AssetsExplorer
 - [~] Can now use more than one key for ControlComponent
+- [~] Specify size of collision in CollisionComponent
 - [~] Modification of Game Properties is now apply (title, width, height)
 - [~] Textures have their own directory in build
 - [~] You can now drag and drop scripts to ScriptComponent and textures to SpriteComponent or SpriteSheetComponent
