@@ -1,4 +1,4 @@
-{NAME} = GameObject("{NAME}")
+{NAME} = GameObject("{NAME}", "{TAG}")
 {COMPONENTS}
 {CHILDS}
     {ENTITIES}

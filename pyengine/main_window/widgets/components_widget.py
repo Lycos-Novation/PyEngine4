@@ -105,11 +105,16 @@ class ComponentsWidget(QWidget):
     def set_obj(self, obj):
         self.obj = obj
         self.title.setText(obj.name.replace("_", " ").title())
+        self.list_components.clear()
         if obj.__class__ == GameObject:
             self.add_component.setEnabled(True)
+            w = TagComponent(self, obj)
+            wi = QListWidgetItem()
+            wi.setSizeHint(w.sizeHint())
+            self.list_components.addItem(wi)
+            self.list_components.setItemWidget(wi, w)
         else:
             self.add_component.setEnabled(False)
-        self.list_components.clear()
         for i in self.obj.components:
             w = None
             if i.name == "ColorComponent":

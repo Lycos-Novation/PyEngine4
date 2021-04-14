@@ -30,7 +30,6 @@ class CollisionComponent(Component):
                 if e_collision is not None and e_transform is not None:
                     e_pos = e_transform.position
                     e_rect = pygame.Rect(e_pos.coords(), e_collision.size.coords())
-                    print(e_rect)
                     if self.__rect_collide(rect, e_rect, game_object, cause, e_collision):
                         return True
         return False

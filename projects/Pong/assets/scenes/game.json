@@ -3,6 +3,7 @@
     "childs": [
         {
             "name": "left_paddle",
+            "tag": "Object",
             "childs": [],
             "components": [
                 {
@@ -48,6 +49,7 @@
         },
         {
             "name": "right_paddle",
+            "tag": "Object",
             "childs": [],
             "components": [
                 {
@@ -93,6 +95,7 @@
         },
         {
             "name": "score",
+            "tag": "Object",
             "childs": [],
             "components": [
                 {
@@ -127,6 +130,7 @@
         },
         {
             "name": "ball",
+            "tag": "Object",
             "childs": [],
             "components": [
                 {
@@ -170,6 +174,7 @@
         },
         {
             "name": "quit_button",
+            "tag": "Object",
             "childs": [],
             "components": [
                 {

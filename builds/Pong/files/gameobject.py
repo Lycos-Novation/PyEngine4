@@ -1,6 +1,7 @@
 class GameObject:
-    def __init__(self, name):
+    def __init__(self, name, tag):
         self.name = name
+        self.tag = tag
         self.parent = None
         self.childs = []
         self.components = []

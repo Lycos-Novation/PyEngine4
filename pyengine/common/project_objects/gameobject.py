@@ -4,6 +4,7 @@ from pyengine.common.components import *
 class GameObject:
     def __init__(self, name):
         self.name = name
+        self.tag = "Object"
         self.childs = []
         self.components = []
         self.parent = None
@@ -16,6 +17,7 @@ class GameObject:
     def to_dict(self):
         return {
             "name": self.name,
+            "tag": self.tag,
             "childs": [
                 i.to_dict() for i in self.childs
             ],
@@ -27,6 +29,7 @@ class GameObject:
     @classmethod
     def from_dict(cls, values):
         obj = GameObject(values.get("name", "Unknown Object"))
+        obj.tag = values.get("tag", "Object")
         obj.childs = values.get("childs", [])
         obj.childs = []
         for i in values.get("childs", []):

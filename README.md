@@ -58,6 +58,7 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [+] Project Settings : Number of mixer channels
 - [+] Pong assets in project_files (must be relinked to project)
 - [+] Color picker in components widgets
+- [+] Tag in GameObject
 - [~] Open a project from a different version of PE4
 - [~] Upgrade UI of ComponentsWidget and AssetsExplorer
 - [~] Can now use more than one key for ControlComponent
