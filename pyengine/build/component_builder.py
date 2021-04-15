@@ -167,6 +167,27 @@ class ComponentBuilder:
         return text.replace("{COMPONENTS}", template)
 
     @staticmethod
+    def generate_sound_component(text, comp):
+        if ComponentBuilder.sounds[comp.sound] is not None:
+            sound = str(comp.sound)+"."+ComponentBuilder.sounds[comp.sound]
+        else:
+            sound = None
+        replaces = {
+            "{NAME}": str(comp.name.lower()),
+            "{SOUND}": str(sound),
+            "{VOLUME}": str(comp.volume)
+        }
+
+        with open(os.path.join(ComponentBuilder.templates, "sound_component.txt"), "r") as f:
+            template = f.read()
+
+        # GENERATE MAIN INFO
+        for k, v in replaces.items():
+            template = template.replace(k, v)
+
+        return text.replace("{COMPONENTS}", template)
+
+    @staticmethod
     def generate_spritesheet_component(text, comp):
         if ComponentBuilder.sprites[comp.sprite] is not None:
             sprite = str(comp.sprite)+"."+ComponentBuilder.sprites[comp.sprite]

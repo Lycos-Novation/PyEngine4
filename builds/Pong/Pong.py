@@ -56,6 +56,8 @@ def launch():
     quit_button.add_component(buttoncomponent)
     quit_script = Quit_Script(engine)
     quit_button.add_component(quit_script)
+    soundcomponent = SoundComponent(engine, "music.mp3", 100)
+    quit_button.add_component(soundcomponent)
     
     entities = [left_paddle, right_paddle, score, ball, quit_button]
     game = Scene("game", Color.from_rgba(0, 0, 0, 255), 1.0, entities)

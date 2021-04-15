@@ -218,6 +218,11 @@
                 },
                 {
                     "name": "ScriptComponent quit_script"
+                },
+                {
+                    "name": "SoundComponent",
+                    "volume": 100,
+                    "sound": "music"
                 }
             ]
         }

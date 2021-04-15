@@ -13,3 +13,4 @@ from pyengine.main_window.components.button_component import ButtonComponent
 from pyengine.main_window.components.timescale_component import TimeScaleComponent
 from pyengine.main_window.components.music_component import MusicComponent
 from pyengine.main_window.components.tag_component import TagComponent
+from pyengine.main_window.components.sound_component import SoundComponent

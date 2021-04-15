@@ -9,3 +9,4 @@ class Quit_Script(Script):
         self.engine.game.title = "MEGA PONG !"
         self.engine.game.width = 800
         self.engine.game.height = 600
+        self.game_object.get_component("SoundComponent").play()

@@ -13,3 +13,4 @@ from pyengine.common.components.auto_component import AutoComponent
 from pyengine.common.components.button_component import ButtonComponent
 from pyengine.common.components.timescale_component import TimeScaleComponent
 from pyengine.common.components.music_component import MusicComponent
+from pyengine.common.components.sound_component import SoundComponent

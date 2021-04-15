@@ -41,7 +41,7 @@ class ComponentsWidget(QWidget):
             menu = QMenu(self)
             for i in (
                 "Transform", "Sprite", "Text", "Collision", "BasicPhysic", "Control", "SpriteSheet", "Auto", "Button",
-                "Music", "Script"
+                "Music", "Sound", "Script"
             ):
                 action = QAction(i, self)
                 action.triggered.connect(lambda _, comp=i: self.create_component(comp + "Component"))
@@ -59,7 +59,7 @@ class ComponentsWidget(QWidget):
         menu = QMenu(self)
         for i in (
             "Transform", "Sprite", "Text", "Collision", "BasicPhysic", "Control", "SpriteSheet", "Auto", "Button",
-            "Music", "Script"
+            "Music", "Sound", "Script"
         ):
             action = QAction(i, self)
             action.triggered.connect(lambda _, comp=i: self.create_component(comp + "Component"))
@@ -96,6 +96,8 @@ class ComponentsWidget(QWidget):
             self.obj.components.append(components.ButtonComponent(self.obj))
         elif comp == "AutoComponent":
             self.obj.components.append(components.AutoComponent(self.obj))
+        elif comp == "SoundComponent":
+            self.obj.components.append(components.SoundComponent(self.obj))
         elif comp == "MusicComponent":
             self.obj.components.append(components.MusicComponent(self.obj))
         self.set_obj(self.obj)
@@ -143,6 +145,8 @@ class ComponentsWidget(QWidget):
                 w = ButtonComponent(self, i)
             elif i.name == "MusicComponent":
                 w = MusicComponent(self, i)
+            elif i.name == "SoundComponent":
+                w = SoundComponent(self, i)
             elif i.name.startswith("ScriptComponent"):
                 w = ScriptComponent(self, i)
             else:
