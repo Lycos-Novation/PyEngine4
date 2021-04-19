@@ -8,3 +8,4 @@ from files.components.text_component import TextComponent
 from files.components.auto_component import AutoComponent
 from files.components.button_component import ButtonComponent
 from files.components.sound_component import SoundComponent
+from files.components.anim_component import AnimComponent

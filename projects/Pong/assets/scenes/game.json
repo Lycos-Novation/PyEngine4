@@ -225,6 +225,49 @@
                     "sound": "music"
                 }
             ]
+        },
+        {
+            "name": "anim_testing",
+            "tag": "Object",
+            "childs": [],
+            "components": [
+                {
+                    "name": "TransformComponent",
+                    "position": [
+                        850,
+                        10
+                    ],
+                    "rotation": 0,
+                    "scale": [
+                        0.2,
+                        0.2
+                    ]
+                },
+                {
+                    "name": "AnimComponent",
+                    "anims": [
+                        {
+                            "name": "test",
+                            "sprite_sheet": "sprite_sheet",
+                            "type": "Sheet",
+                            "sprite_number": [
+                                3,
+                                2
+                            ]
+                        },
+                        {
+                            "name": "test2",
+                            "sprites": [
+                                "ball",
+                                "paddle"
+                            ],
+                            "type": "Sprite"
+                        }
+                    ],
+                    "fps": 10,
+                    "playing": "test"
+                }
+            ]
         }
     ],
     "components": [

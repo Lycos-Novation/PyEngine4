@@ -1,0 +1,2 @@
+    {NAME} = AnimComponent(engine, {ANIMS}, {FPS}, "{PLAYING}")
+{COMPONENTS}

@@ -53,7 +53,7 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [+] Engine Settings
 - [+] Utility classes : Vec2, Color, Math
 - [+] requirements.txt
-- [+] Components : ButtonComponent, TimeScaleComponent, MusicComponent, SoundComponent
+- [+] Components : ButtonComponent, TimeScaleComponent, MusicComponent, SoundComponent, AnimComponent
 - [+] Assets : Sounds
 - [+] Project Settings : Number of mixer channels
 - [+] Pong assets in project_files (must be relinked to project)

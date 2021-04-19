@@ -58,8 +58,14 @@ def launch():
     quit_button.add_component(quit_script)
     soundcomponent = SoundComponent(engine, "music.mp3", 100)
     quit_button.add_component(soundcomponent)
+
+    anim_testing = GameObject("anim_testing", "Object")
+    transformcomponent = TransformComponent(engine, Vec2(850, 10), 0, Vec2(0.2, 0.2))
+    anim_testing.add_component(transformcomponent)
+    animcomponent = AnimComponent(engine, [{'name': 'test', 'sprite_sheet': 'sprite_sheet.png', 'type': 'Sheet', 'sprite_number': [3, 2]}, {'name': 'test2', 'sprites': ['ball.png', 'paddle.png'], 'type': 'Sprite'}], 10, "test")
+    anim_testing.add_component(animcomponent)
     
-    entities = [left_paddle, right_paddle, score, ball, quit_button]
+    entities = [left_paddle, right_paddle, score, ball, quit_button, anim_testing]
     game = Scene("game", Color.from_rgba(0, 0, 0, 255), 1.0, entities)
     
     scenes = [game]

@@ -210,6 +210,32 @@ class ComponentBuilder:
         return text.replace("{COMPONENTS}", template)
 
     @staticmethod
+    def generate_anim_component(text, comp):
+        anims = []
+        for i in comp.anims:
+            anim = i.to_dict()
+            if anim["type"] == "Sprite":
+                anim["sprites"] = [str(y)+"."+ComponentBuilder.sprites[y] for y in anim["sprites"]]
+            elif anim["type"] == "Sheet":
+                anim["sprite_sheet"] = str(anim["sprite_sheet"])+"."+ComponentBuilder.sprites[anim["sprite_sheet"]]
+            anims.append(anim)
+        replaces = {
+            "{NAME}": str(comp.name.lower()),
+            "{ANIMS}": str(anims),
+            "{FPS}": str(comp.fps),
+            "{PLAYING}": str(comp.playing)
+        }
+
+        with open(os.path.join(ComponentBuilder.templates, "anim_component.txt"), "r") as f:
+            template = f.read()
+
+        # GENERATE MAIN INFO
+        for k, v in replaces.items():
+            template = template.replace(k, v)
+
+        return text.replace("{COMPONENTS}", template)
+
+    @staticmethod
     def generate_auto_component(text, comp):
         replaces = {
             "{NAME}": str(comp.name.lower()),

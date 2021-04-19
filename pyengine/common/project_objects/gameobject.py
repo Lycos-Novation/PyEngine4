@@ -61,6 +61,8 @@ class GameObject:
                 obj.components.append(ButtonComponent.from_dict(obj, i))
             elif i.get("name", "") == "SoundComponent":
                 obj.components.append(SoundComponent.from_dict(obj, i))
+            elif i.get("name", "") == "AnimComponent":
+                obj.components.append(AnimComponent.from_dict(obj, i))
             elif i.get("name", "").startswith("ScriptComponent"):
                 obj.components.append(ScriptComponent.from_dict(obj, i))
         return obj

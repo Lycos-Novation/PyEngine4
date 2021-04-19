@@ -40,6 +40,7 @@ class Viewport(QWidget):
                         spritesheet = child.get_component("SpriteSheetComponent")
                         text = child.get_component("TextComponent")
                         button = child.get_component("ButtonComponent")
+                        anim = child.get_component("AnimComponent")
                         position = transform.global_position()
                         rotation = transform.global_rotation()
                         scale = transform.global_scale()
@@ -107,6 +108,39 @@ class Viewport(QWidget):
                                 [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
                             )
                             screen.blit(render, position.coords())
+                        if anim is not None:
+                            if anim.playing != "":
+                                for i in anim.anims:
+                                    if i.name == anim.playing:
+                                        if i.type_ == "Sprite":
+                                            path = self.parent.project.get_texture(i.sprites[0]).components[0].path
+                                            if path is not None:
+                                                render = pygame.image.load(path).convert_alpha()
+                                                render = pygame.transform.rotate(render, rotation)
+                                                render = pygame.transform.scale(
+                                                    render,
+                                                    [int(render.get_rect().width * scale.x),
+                                                     int(render.get_rect().height * scale.y)]
+                                                )
+                                                screen.blit(render, position.coords())
+                                        elif i.type_ == "Sheet":
+                                            path = self.parent.project.get_texture(i.sprite_sheet).components[
+                                                0].path
+                                            if path is not None:
+                                                image = pygame.image.load(path).convert_alpha()
+                                                x_diff = image.get_rect().width // i.sprite_number[0]
+                                                y_diff = image.get_rect().height // i.sprite_number[1]
+                                                render = image.subsurface(
+                                                    pygame.Rect(0, 0, x_diff,
+                                                                y_diff))
+                                                render = pygame.transform.rotate(render, rotation)
+                                                render = pygame.transform.scale(
+                                                    render,
+                                                    [int(render.get_rect().width * scale.x),
+                                                     int(render.get_rect().height * scale.y)]
+                                                )
+                                                screen.blit(render, position.coords())
+                                        break
                     objs.append(child)
 
         w = screen.get_width()
