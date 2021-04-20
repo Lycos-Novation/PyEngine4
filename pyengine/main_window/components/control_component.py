@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QComboBox, QGridLayout, QSpinBox
+from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QComboBox, QGridLayout, QSpinBox, QPushButton
 from PyQt5.QtCore import Qt
 
 
@@ -10,6 +10,7 @@ class ControlComponent(QWidget):
         self.types = ["FOURDIRECTION", "UPDOWN", "LEFTRIGHT", "CLASSICJUMP"]
 
         self.name = QLabel("Control", self)
+        self.delete_btn = QPushButton("Delete", self)
         self.name.setAlignment(Qt.AlignHCenter)
         self.key_labels = [
             QLabel("Up/Jump Key", self),
@@ -36,9 +37,11 @@ class ControlComponent(QWidget):
         self.speed_spin.setRange(1, 2147483647)
         self.speed_spin.setValue(self.component.speed)
         self.speed_spin.valueChanged.connect(self.change_value)
+        self.delete_btn.clicked.connect(self.delete)
 
         self.layout = QGridLayout()
-        self.layout.addWidget(self.name, 0, 0, 1, 5)
+        self.layout.addWidget(self.name, 0, 1, 1, 3)
+        self.layout.addWidget(self.delete_btn, 0, 4)
         for i in range(len(self.key_labels)):
             self.layout.addWidget(self.key_labels[i], i+1, 0)
             self.layout.addWidget(self.key_edits[i], i+1, 1, 1, 4)
@@ -47,6 +50,9 @@ class ControlComponent(QWidget):
         self.layout.addWidget(self.speed, len(self.key_labels)+2, 0)
         self.layout.addWidget(self.speed_spin, len(self.key_labels)+2, 1, 1, 4)
         self.setLayout(self.layout)
+
+    def delete(self):
+        self.parent.remove_component(self.component.name)
 
     def change_value(self):
         self.component.control_type = self.types[self.control_type_combobox.currentIndex()]

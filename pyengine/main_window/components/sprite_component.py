@@ -13,14 +13,20 @@ class SpriteComponent(QWidget):
         
         self.name = QLabel("Sprite", self)
         self.name.setAlignment(Qt.AlignHCenter)
+        self.delete_btn = QPushButton("Delete", self)
         self.sprite_edit = QPushButton("Change Sprite", self)
 
         self.sprite_edit.clicked.connect(self.change_value)
+        self.delete_btn.clicked.connect(self.delete)
         
         self.layout = QGridLayout()
-        self.layout.addWidget(self.name, 0, 0)
-        self.layout.addWidget(self.sprite_edit, 1, 0)
+        self.layout.addWidget(self.name, 0, 1, 1, 3)
+        self.layout.addWidget(self.delete_btn, 0, 4)
+        self.layout.addWidget(self.sprite_edit, 1, 0, 1, 5)
         self.setLayout(self.layout)
+
+    def delete(self):
+        self.parent.remove_component(self.component.name)
 
     def dragEnterEvent(self, e) -> None:
         if e.mimeData().hasFormat("assets/texture"):

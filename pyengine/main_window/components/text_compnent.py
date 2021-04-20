@@ -12,6 +12,7 @@ class TextComponent(QWidget):
         self.component = component
 
         self.name = QLabel("Text", self)
+        self.delete_btn = QPushButton("Delete", self)
         self.text = QLabel("Text", self)
         self.text_edit = QLineEdit(self.component.text, self)
         self.font_name = QLabel("Font Name", self)
@@ -49,9 +50,11 @@ class TextComponent(QWidget):
             self.font_color_spins[k].setValue(v)
             self.font_color_spins[k].valueChanged.connect(self.change_value)
         self.font_color_picker.clicked.connect(self.change_font_color)
+        self.delete_btn.clicked.connect(self.delete)
 
         self.layout = QGridLayout()
-        self.layout.addWidget(self.name, 0, 0, 1, 5)
+        self.layout.addWidget(self.name, 0, 1, 1, 3)
+        self.layout.addWidget(self.delete_btn, 0, 4)
         self.layout.addWidget(self.text, 1, 0)
         self.layout.addWidget(self.text_edit, 1, 1, 1, 4)
         self.layout.addWidget(self.font_name, 2, 0)
@@ -71,6 +74,9 @@ class TextComponent(QWidget):
         self.layout.addWidget(self.font_antialias, 9, 0)
         self.layout.addWidget(self.font_antialias_check, 9, 1, 1, 4)
         self.setLayout(self.layout)
+
+    def delete(self):
+        self.parent.remove_component(self.component.name)
 
     def change_font_color(self):
         color = QColorDialog.getColor(QColor(*self.component.font_color.rgba()), parent=self)

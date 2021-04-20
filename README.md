@@ -21,13 +21,15 @@ Documentation : <https://pyengine4-docs.readthedocs.io/>
 
 ## Features
 
-- Assets : Textures, Scripts, Scenes
+- Assets : Textures, Scripts, Scenes, Sound
 - Child system
 - Rotation, scale, position with a component
-- Sprite, Spritesheet and Text rendering
+- Animation, Sprite, Spritesheet and Text rendering
+- Sound and Music playing
 - Collision detection with Callback
 - Ultra-basic physics (only Gravity) without engine
 - Build and Launch System
+- Utility Classes
 
 ## Uncoming Features
 

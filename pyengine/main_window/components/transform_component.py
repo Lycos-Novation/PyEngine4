@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QLabel, QSpinBox, QGridLayout, QDoubleSpinBox
+from PyQt5.QtWidgets import QWidget, QLabel, QSpinBox, QGridLayout, QDoubleSpinBox, QPushButton
 from PyQt5.QtCore import Qt
 
 from pyengine.common.utils import Vec2
@@ -12,6 +12,7 @@ class TransformComponent(QWidget):
         
         self.name = QLabel("Transform", self)
         self.name.setAlignment(Qt.AlignHCenter)
+        self.delete_btn = QPushButton("Delete", self)
         self.pos_name = QLabel("Position", self)
         self.pos_spins = [QSpinBox(self), QSpinBox(self)]
         self.rot_name = QLabel("Rotation", self)
@@ -32,9 +33,11 @@ class TransformComponent(QWidget):
         spins = self.pos_spins + self.scale_spins + [self.rot_spin]
         for spin in spins:
             spin.valueChanged.connect(self.change_value)
+        self.delete_btn.clicked.connect(self.delete)
         
         self.layout = QGridLayout()
-        self.layout.addWidget(self.name, 0, 0, 1, 5)
+        self.layout.addWidget(self.name, 0, 1, 1, 3)
+        self.layout.addWidget(self.delete_btn, 0, 4)
         self.layout.addWidget(self.pos_name, 1, 0)
         self.layout.addWidget(self.pos_spins[0], 1, 1, 1, 2)
         self.layout.addWidget(self.pos_spins[1], 1, 3, 1, 2)
@@ -45,6 +48,9 @@ class TransformComponent(QWidget):
         self.layout.addWidget(self.scale_spins[1], 3, 3, 1, 2)
 
         self.setLayout(self.layout)
+
+    def delete(self):
+        self.parent.remove_component(self.component.name)
     
     def change_value(self):
         self.component.position = Vec2(*(i.value() for i in self.pos_spins))

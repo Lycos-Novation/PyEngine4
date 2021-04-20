@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QListWidget, QPushButton, QListWidgetItem, QMenu, QAction, \
-    QAbstractItemView, QMessageBox
+    QAbstractItemView, QMessageBox, QHBoxLayout
 from PyQt5.QtGui import QFont, QCursor
 from PyQt5.QtCore import Qt
 
@@ -16,25 +16,44 @@ class ComponentsWidget(QWidget):
 
         self.title = QLabel("None", self)
         self.list_components = QListWidget(self)
-        self.add_component = QPushButton("Add Component", self)
+        self.add_component = QPushButton("Add", self)
+        self.del_component = QPushButton("Remove", self)
 
         self.title.setFont(QFont("arial", 18, 1, False))
         self.add_component.setFont(QFont("arial", 18))
+        self.del_component.setFont(QFont("arial", 18))
         self.title.setAlignment(Qt.AlignHCenter)
         self.list_components.setContextMenuPolicy(Qt.CustomContextMenu)
         self.list_components.setSelectionMode(QAbstractItemView.SingleSelection)
         self.add_component.setEnabled(False)
+        self.del_component.setEnabled(False)
 
         self.add_component.clicked.connect(self.add)
+        self.del_component.clicked.connect(self.remove_component)
+        self.list_components.itemClicked.connect(self.select_component)
         self.list_components.customContextMenuRequested.connect(self.components_context_menu)
 
         self.layout = QVBoxLayout(self)
         self.layout.addWidget(self.title)
         self.layout.addWidget(self.list_components)
-        self.layout.addWidget(self.add_component)
+        internal_layout = QHBoxLayout(self)
+        internal_layout.addWidget(self.add_component)
+        internal_layout.addWidget(self.del_component)
+        self.layout.addLayout(internal_layout)
         self.layout.setContentsMargins(0, 0, 0, 0)
         self.layout.setSpacing(0)
         self.setLayout(self.layout)
+
+    def select_component(self):
+        if len(self.list_components.selectedItems()) >= 1:
+            widget = self.list_components.itemWidget(self.list_components.selectedItems()[0])
+            if not isinstance(widget, TagComponent) and not isinstance(widget, TimeScaleComponent) and \
+                    widget.component.name not in ("ColorComponent", "PathComponent"):
+                self.del_component.setEnabled(True)
+            else:
+                self.del_component.setEnabled(False)
+        else:
+            self.del_component.setEnabled(False)
 
     def components_context_menu(self):
         if self.obj.__class__ == GameObject:
@@ -51,7 +70,7 @@ class ComponentsWidget(QWidget):
                 if widget.component.name not in ("ColorComponent", "PathComponent"):
                     menu.addSeparator()
                     remove = QAction("Delete Component", self)
-                    remove.triggered.connect(lambda: self.remove_component(widget.component.name))
+                    remove.triggered.connect(lambda: self.remove_component(comp=widget.component.name))
                     menu.addAction(remove)
             menu.exec_(QCursor.pos())
 
@@ -66,7 +85,14 @@ class ComponentsWidget(QWidget):
             menu.addAction(action)
         menu.exec_(QCursor.pos())
 
-    def remove_component(self, comp):
+    def remove_component(self, _=None, comp=None):
+        if comp is None:
+            if len(self.list_components.selectedItems()) >= 1:
+                widget = self.list_components.itemWidget(self.list_components.selectedItems()[0])
+                if widget.component.name not in ("ColorComponent", "PathComponent", "TimeScaleComponent", "TagComponent"):
+                    self.remove_component(comp=widget.component.name)
+            return
+        print(comp, self.obj.get_component(comp))
         self.obj.components.remove(self.obj.get_component(comp))
         self.set_obj(self.obj)
         self.parent.project.save()
@@ -110,6 +136,7 @@ class ComponentsWidget(QWidget):
         self.obj = obj
         self.title.setText(obj.name.replace("_", " ").title())
         self.list_components.clear()
+        self.del_component.setEnabled(False)
         if obj.__class__ == GameObject:
             self.add_component.setEnabled(True)
             w = TagComponent(self, obj)

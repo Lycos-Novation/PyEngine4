@@ -14,13 +14,19 @@ class ScriptComponent(QWidget):
         comp_name = self.component.name.split(" ")[-1] if len(self.component.name.split(" ")[-1]) > 0 else "None"
         self.name = QLabel("Script : " + comp_name, self)
         self.name.setAlignment(Qt.AlignHCenter)
+        self.delete_btn = QPushButton("Delete", self)
         self.script_edit = QPushButton("Change Script", self)
         self.script_edit.clicked.connect(self.change_value)
+        self.delete_btn.clicked.connect(self.delete)
 
         self.layout = QGridLayout()
-        self.layout.addWidget(self.name, 0, 0)
-        self.layout.addWidget(self.script_edit, 1, 0)
+        self.layout.addWidget(self.name, 0, 1, 1, 3)
+        self.layout.addWidget(self.delete_btn, 0, 4)
+        self.layout.addWidget(self.script_edit, 1, 0, 1, 5)
         self.setLayout(self.layout)
+
+    def delete(self):
+        self.parent.remove_component(self.component.name)
 
     def dragEnterEvent(self, e) -> None:
         if e.mimeData().hasFormat("assets/script"):

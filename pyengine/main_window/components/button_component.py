@@ -15,6 +15,7 @@ class ButtonComponent(QWidget):
 
         self.name = QLabel("Button", self)
         self.text = QLabel("Text", self)
+        self.delete_btn = QPushButton("Delete", self)
         self.text_edit = QLineEdit(self.component.text, self)
         self.callback = QLabel("Callback", self)
         self.callback_script_edit = QLineEdit(names[0], self)
@@ -68,9 +69,11 @@ class ButtonComponent(QWidget):
             self.size_spins[k].setValue(v)
         self.bg_picker.clicked.connect(self.change_bg)
         self.font_color_picker.clicked.connect(self.change_font_color)
+        self.delete_btn.clicked.connect(self.delete)
 
         self.layout = QGridLayout()
-        self.layout.addWidget(self.name, 0, 0, 1, 5)
+        self.layout.addWidget(self.name, 0, 1, 1, 3)
+        self.layout.addWidget(self.delete_btn, 0, 4)
         self.layout.addWidget(self.text, 1, 0)
         self.layout.addWidget(self.text_edit, 1, 1, 1, 4)
         self.layout.addWidget(self.callback, 2, 0)
@@ -100,6 +103,9 @@ class ButtonComponent(QWidget):
         self.layout.addWidget(self.font_antialias, 13, 0)
         self.layout.addWidget(self.font_antialias_check, 13, 1, 1, 4)
         self.setLayout(self.layout)
+
+    def delete(self):
+        self.parent.remove_component(self.component.name)
 
     def change_bg(self):
         color = QColorDialog.getColor(QColor(*self.component.bg.rgba()), parent=self)

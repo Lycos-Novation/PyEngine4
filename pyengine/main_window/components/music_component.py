@@ -13,6 +13,7 @@ class MusicComponent(QWidget):
 
         self.name = QLabel("Music", self)
         self.name.setAlignment(Qt.AlignHCenter)
+        self.delete_btn = QPushButton("Delete", self)
         self.music_edit = QPushButton("Change Music", self)
         self.volume = QLabel("Volume", self)
         self.volume_spin = QSpinBox(self)
@@ -29,9 +30,11 @@ class MusicComponent(QWidget):
         self.volume_spin.setValue(component.volume)
         self.volume_spin.valueChanged.connect(self.change_value)
         self.music_edit.clicked.connect(self.change_music)
+        self.delete_btn.clicked.connect(self.delete)
 
         self.layout = QGridLayout()
-        self.layout.addWidget(self.name, 0, 0, 1, 5)
+        self.layout.addWidget(self.name, 0, 1, 1, 3)
+        self.layout.addWidget(self.delete_btn, 0, 4)
         self.layout.addWidget(self.music_edit, 1, 0, 1, 5)
         self.layout.addWidget(self.volume, 2, 0)
         self.layout.addWidget(self.volume_spin, 2, 1, 1, 4)
@@ -40,6 +43,9 @@ class MusicComponent(QWidget):
         self.layout.addWidget(self.loop, 4, 0)
         self.layout.addWidget(self.loop_check, 4, 1, 1, 4)
         self.setLayout(self.layout)
+
+    def delete(self):
+        self.parent.remove_component(self.component.name)
 
     def dragEnterEvent(self, e) -> None:
         if e.mimeData().hasFormat("assets/sound"):

@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QGridLayout, QSpinBox, QListWidget, QListWidgetItem, QPushButton, QInputDialog, QMessageBox, QAbstractItemView, QFileDialog
+from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QGridLayout, QSpinBox, QListWidget, QListWidgetItem, \
+    QPushButton, QInputDialog, QMessageBox, QAbstractItemView, QFileDialog, QLayout, QSizePolicy
 from PyQt5.QtCore import Qt
 
 import os
@@ -87,9 +88,11 @@ class AnimComponent(QWidget):
         super().__init__(parent)
         self.parent = parent
         self.component = component
+        self.is_shrink = False
 
         self.name = QLabel("Anim", self)
         self.name.setAlignment(Qt.AlignHCenter)
+        self.delete_btn = QPushButton("Delete", self)
         self.fps = QLabel("FPS", self)
         self.fps_spin = QSpinBox(self)
         self.playing = QLabel("Playing", self)
@@ -104,6 +107,7 @@ class AnimComponent(QWidget):
         for k, i in enumerate(self.component.anims):
             self.create_anim(i.name, i.type_, k)
 
+        self.delete_btn.clicked.connect(self.delete)
         self.anims_add.clicked.connect(self.add_anim)
         self.anims_remove.clicked.connect(self.remove_anim)
         self.fps_spin.setValue(self.component.fps)
@@ -111,7 +115,8 @@ class AnimComponent(QWidget):
         self.playing_edit.textChanged.connect(self.change_value)
 
         self.layout = QGridLayout()
-        self.layout.addWidget(self.name, 0, 0, 1, 5)
+        self.layout.addWidget(self.name, 0, 1, 1, 3)
+        self.layout.addWidget(self.delete_btn, 0, 4)
         self.layout.addWidget(self.fps, 1, 0)
         self.layout.addWidget(self.fps_spin, 1, 1, 1, 4)
         self.layout.addWidget(self.playing, 2, 0)
@@ -121,6 +126,9 @@ class AnimComponent(QWidget):
         self.layout.addWidget(self.anims_add, 5, 0, 1, 2)
         self.layout.addWidget(self.anims_remove, 5, 3, 1, 2)
         self.setLayout(self.layout)
+
+    def delete(self):
+        self.parent.remove_component(self.component.name)
 
     def add_anim(self):
         text = QInputDialog.getText(self, "PyEngine4 - Create Anim", "Anim Name:", QLineEdit.Normal)
