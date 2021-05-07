@@ -28,6 +28,7 @@ Documentation : <https://pyengine4-docs.readthedocs.io/>
 - Sound and Music playing
 - Collision detection with Callback
 - Ultra-basic physics (only Gravity) without engine
+- Basic UI with Buttons
 - Build and Launch System
 - Utility Classes
 
@@ -40,17 +41,17 @@ Documentation : <https://pyengine4-docs.readthedocs.io/>
 - Translation System
 - Save System
 - Player Settings System
-- UI
+- More UI
 - Translation of PyEngine4
 - Themes for PyEngine4
-- New Components : ShapeComponent, AnimComponent
+- New Components : ShapeComponent
 - Integration of a 2D physics Engine
 
 ## Changelog
 
 Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix 
 
-### V 1.1.0 : Kisure Update - XX/XX/XX (INDEV)
+### V 1.1.0 : Kisure Update - 09/05/21 (INDEV)
 
 - [+] Engine Settings
 - [+] Utility classes : Vec2, Color, Math
