@@ -128,7 +128,7 @@ class AnimComponent(QWidget):
         self.setLayout(self.layout)
 
     def delete(self):
-        self.parent.remove_component(self.component.name)
+        self.parent.remove_component(comp=self.component.name)
 
     def add_anim(self):
         text = QInputDialog.getText(self, "PyEngine4 - Create Anim", "Anim Name:", QLineEdit.Normal)

@@ -28,7 +28,7 @@ class BasicPhysicComponent(QWidget):
         self.setLayout(self.layout)
 
     def delete(self):
-        self.parent.remove_component(self.component.name)
+        self.parent.remove_component(comp=self.component.name)
 
     def change_value(self):
         self.component.gravity = self.gravity_spin.value()

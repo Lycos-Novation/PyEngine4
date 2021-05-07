@@ -92,7 +92,6 @@ class ComponentsWidget(QWidget):
                 if widget.component.name not in ("ColorComponent", "PathComponent", "TimeScaleComponent", "TagComponent"):
                     self.remove_component(comp=widget.component.name)
             return
-        print(comp, self.obj.get_component(comp))
         self.obj.components.remove(self.obj.get_component(comp))
         self.set_obj(self.obj)
         self.parent.project.save()

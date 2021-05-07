@@ -44,7 +44,7 @@ class SpriteSheetComponent(QWidget):
         self.setLayout(self.layout)
 
     def delete(self):
-        self.parent.remove_component(self.component.name)
+        self.parent.remove_component(comp=self.component.name)
 
     def dragEnterEvent(self, e) -> None:
         if e.mimeData().hasFormat("assets/texture"):

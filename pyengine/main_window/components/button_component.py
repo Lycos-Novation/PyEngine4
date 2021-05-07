@@ -105,7 +105,7 @@ class ButtonComponent(QWidget):
         self.setLayout(self.layout)
 
     def delete(self):
-        self.parent.remove_component(self.component.name)
+        self.parent.remove_component(comp=self.component.name)
 
     def change_bg(self):
         color = QColorDialog.getColor(QColor(*self.component.bg.rgba()), parent=self)

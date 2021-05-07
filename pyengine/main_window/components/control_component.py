@@ -52,7 +52,7 @@ class ControlComponent(QWidget):
         self.setLayout(self.layout)
 
     def delete(self):
-        self.parent.remove_component(self.component.name)
+        self.parent.remove_component(comp=self.component.name)
 
     def change_value(self):
         self.component.control_type = self.types[self.control_type_combobox.currentIndex()]

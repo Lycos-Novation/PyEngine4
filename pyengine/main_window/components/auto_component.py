@@ -48,7 +48,7 @@ class AutoComponent(QWidget):
         self.setLayout(self.layout)
 
     def delete(self):
-        self.parent.remove_component(self.component.name)
+        self.parent.remove_component(comp=self.component.name)
 
     def change_value(self):
         self.component.move = Vec2(self.move_spins[0].value(), self.move_spins[1].value())
