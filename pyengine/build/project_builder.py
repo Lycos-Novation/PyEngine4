@@ -239,14 +239,16 @@ class ProjectBuilder:
                 os.path.join(ProjectBuilder.project_folders["scripts"], i)
             )
 
-        shutil.copyfile(
-            os.path.join("pyengine", "build", "objects", "utils", "__init__.py"),
-            os.path.join(ProjectBuilder.project_folders["utils"], "__init__.py")
-        )
         for i in ("color.py", "vec2.py", "math.py"):
             logger.info("CORE UTILS FILE : "+i)
             shutil.copyfile(
                 os.path.join(ProjectBuilder.build_folders["utils"], i),
+                os.path.join(ProjectBuilder.project_folders["utils"], i)
+            )
+        for i in os.listdir(os.path.join("pyengine", "build", "objects", "utils")):
+            logger.info("CORE UTILS FILE : "+i)
+            shutil.copyfile(
+                os.path.join("pyengine", "build", "objects", "utils", i),
                 os.path.join(ProjectBuilder.project_folders["utils"], i)
             )
 
