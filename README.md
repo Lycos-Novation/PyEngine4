@@ -74,6 +74,6 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [#] Can't launch game if Sound or Texture path is None
 - [#] Create gameobject without opened scene make crash
 
-### V 1.0.0 : Colombe Update - 04/04/21 (LATEST)
+### V 1.0.0 : Colombe Update - 04/04/21
 
 - First version
