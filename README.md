@@ -51,7 +51,12 @@ Documentation : <https://pyengine4-docs.readthedocs.io/>
 
 Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix 
 
-### V 1.1.0 : Kisure Update - 09/05/21 (INDEV)
+### V 1.2.0 : Vildiur Update - XX/XX/21 (INDEV)
+
+- [+] Game Save System
+- [~] Little work on Project Building
+
+### V 1.1.0 : Kisure Update - 09/05/21 (LATEST)
 
 - [+] Engine Settings
 - [+] Utility classes : Vec2, Color, Math

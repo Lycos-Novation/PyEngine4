@@ -1,4 +1,5 @@
 import pygame.locals
+from files.utils import Save
 
 
 class Engine:
@@ -7,6 +8,7 @@ class Engine:
         self.pg_constants = pygame.locals
         self.down_keys = []
         self.down_mousebuttons = []
+        self.save = Save
 
     def get_game_object(self, id_):
         return self.game.scenes[self.game.current_scene].get_game_object(id_)
