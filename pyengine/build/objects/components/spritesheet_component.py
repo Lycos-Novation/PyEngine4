@@ -42,9 +42,9 @@ class SpriteSheetComponent(Component):
         else:
             self.render = None
 
-    def show(self, screen):
+    def show(self, screen, camera_pos):
         if self.render is not None:
             transform = self.game_object.get_component("TransformComponent")
             if transform is not None:
-                position = transform.global_position()
+                position = transform.global_position() - camera_pos
                 screen.blit(self.render, position.coords())

@@ -15,3 +15,4 @@ from pyengine.common.components.timescale_component import TimeScaleComponent
 from pyengine.common.components.music_component import MusicComponent
 from pyengine.common.components.sound_component import SoundComponent
 from pyengine.common.components.anim_component import AnimComponent
+from pyengine.common.components.camera_component import CameraComponent

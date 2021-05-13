@@ -9,7 +9,7 @@ class Component:
     def update(self, deltatime):
         pass
 
-    def show(self, screen):
+    def show(self, screen, camera_pos):
         pass
 
     def key_press(self, evt):

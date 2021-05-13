@@ -240,6 +240,13 @@
         {
             "name": "TimeScaleComponent",
             "timescale": 1.0
+        },
+        {
+            "name": "CameraComponent",
+            "position": [
+                100,
+                100
+            ]
         }
     ]
 }

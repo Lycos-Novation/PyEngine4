@@ -2,7 +2,7 @@ import json
 import os
 
 from pyengine.common.project_objects.gameobject import GameObject
-from pyengine.common.components import ColorComponent, TimeScaleComponent
+from pyengine.common.components import ColorComponent, TimeScaleComponent, CameraComponent
 
 
 class Scene(GameObject):
@@ -10,6 +10,7 @@ class Scene(GameObject):
         super().__init__(name)
         self.components.append(ColorComponent(self))
         self.components.append(TimeScaleComponent(self))
+        self.components.append(CameraComponent(self))
     
     def save(self, directory):
         values = {
@@ -40,11 +41,15 @@ class Scene(GameObject):
                 scene.components.append(ColorComponent.from_dict(scene, i))
             elif i.get("name", "") == "TimeScaleComponent":
                 scene.components.append(TimeScaleComponent.from_dict(scene, i))
+            elif i.get("name", "") == "CameraComponent":
+                scene.components.append(CameraComponent.from_dict(scene, i))
 
         names = [i.name for i in scene.components]
         if "ColorComponent" not in names:
             scene.components.append(ColorComponent(scene))
         if "TimeScaleComponent" not in names:
             scene.components.append(TimeScaleComponent(scene))
+        if "CameraComponent" not in names:
+            scene.components.append(CameraComponent(scene))
 
         return scene

@@ -96,6 +96,7 @@ class ProjectBuilder:
             "{NAME}": str(scene.name),
             "{COLOR}": str(scene.components[0].color),
             "{TIMESCALE}": str(scene.components[1].timescale),
+            "{CAMERA_POSITION}": str(scene.components[2].position),
             "{ENTITIES_NAMES}": str([i.name for i in scene.childs]).replace("'", "")
         }
         with open(os.path.join(ProjectBuilder.build_folders["templates"], "scene.txt"), "r") as f:
@@ -239,7 +240,7 @@ class ProjectBuilder:
                 os.path.join(ProjectBuilder.project_folders["scripts"], i)
             )
 
-        for i in ("color.py", "vec2.py", "math.py"):
+        for i in ("color.py", "vec2.py"):
             logger.info("CORE UTILS FILE : "+i)
             shutil.copyfile(
                 os.path.join(ProjectBuilder.build_folders["utils"], i),

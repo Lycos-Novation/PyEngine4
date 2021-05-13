@@ -68,8 +68,8 @@ class GameObject:
         for i in self.childs:
             i.update(deltatime)
 
-    def show(self, screen):
+    def show(self, screen, camera_pos):
         for i in self.components:
-            i.show(screen)
+            i.show(screen, camera_pos)
         for i in self.childs:
-            i.show(screen)
+            i.show(screen, camera_pos)

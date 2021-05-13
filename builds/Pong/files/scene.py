@@ -1,8 +1,9 @@
 class Scene:
-    def __init__(self, name, color, timescale, game_objects):
+    def __init__(self, name, color, timescale, camera_position, game_objects):
         self.name = name
         self.bg_color = color
         self.timescale = timescale
+        self.camera_position = camera_position
         self.__game_object_count = 0
         self.game_objects = []
         self.add_game_objects(game_objects)
@@ -58,4 +59,4 @@ class Scene:
         screen.fill(self.bg_color.rgba())
 
         for i in self.game_objects:
-            i.show(screen)
+            i.show(screen, self.camera_position)

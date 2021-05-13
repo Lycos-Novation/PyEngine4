@@ -89,7 +89,9 @@ class ComponentsWidget(QWidget):
         if comp is None:
             if len(self.list_components.selectedItems()) >= 1:
                 widget = self.list_components.itemWidget(self.list_components.selectedItems()[0])
-                if widget.component.name not in ("ColorComponent", "PathComponent", "TimeScaleComponent", "TagComponent"):
+                if widget.component.name not in (
+                        "ColorComponent", "PathComponent", "TimeScaleComponent", "TagComponent", "CameraComponent"
+                ):
                     self.remove_component(comp=widget.component.name)
             return
         self.obj.components.remove(self.obj.get_component(comp))
@@ -177,6 +179,8 @@ class ComponentsWidget(QWidget):
                 w = SoundComponent(self, i)
             elif i.name == "AnimComponent":
                 w = AnimComponent(self, i)
+            elif i.name == "CameraComponent":
+                w = CameraComponent(self, i)
             elif i.name.startswith("ScriptComponent"):
                 w = ScriptComponent(self, i)
             else:

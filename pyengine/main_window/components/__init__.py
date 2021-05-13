@@ -15,3 +15,4 @@ from pyengine.main_window.components.music_component import MusicComponent
 from pyengine.main_window.components.tag_component import TagComponent
 from pyengine.main_window.components.sound_component import SoundComponent
 from pyengine.main_window.components.anim_component import AnimComponent
+from pyengine.main_window.components.camera_component import CameraComponent

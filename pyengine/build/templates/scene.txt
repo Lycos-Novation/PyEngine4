@@ -1,5 +1,5 @@
 {ENTITIES}
 
     entities = {ENTITIES_NAMES}
-    {NAME} = Scene("{NAME}", {COLOR}, {TIMESCALE}, entities)
+    {NAME} = Scene("{NAME}", {COLOR}, {TIMESCALE}, {CAMERA_POSITION}, entities)
     {SCENES}
