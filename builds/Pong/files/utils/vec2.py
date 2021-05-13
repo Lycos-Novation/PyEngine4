@@ -19,38 +19,42 @@ class Vec2:
         else:
             return Vec2(int(self.x / len(self)), int(self.y / len(self)))
 
+    def distance(self, vec):
+        return math.sqrt((self.x - vec.x) ** 2 + (self.y - vec.y) ** 2)
+
     def __len__(self):
         return math.sqrt(self.x ** 2 + self.y ** 2)
 
     def __add__(self, other):
-        if isinstance(other, Vec2):
-            return Vec2(self.x + other.x, self.y + other.y)
-        else:
+        print(self, other, type(other))
+        if isinstance(other, (int, float)):
             return Vec2(self.x + other, self.y + other)
+        else:
+            return Vec2(self.x + other.x, self.y + other.y)
 
     def __sub__(self, other):
-        if isinstance(other, Vec2):
-            return Vec2(self.x - other.x, self.y - other.y)
-        else:
+        if isinstance(other, (int, float)):
             return Vec2(self.x - other, self.y - other)
+        else:
+            return Vec2(self.x - other.x, self.y - other.y)
 
     def __rsub__(self, other):
-        if isinstance(other, Vec2):
-            return Vec2(other.x - self.x, other.y - self.y)
-        else:
+        if isinstance(other, (int, float)):
             return Vec2(other - self.x, other - self.y)
+        else:
+            return Vec2(other.x - self.x, other.y - self.y)
 
     def __mul__(self, other):
-        if isinstance(other, Vec2):
-            return Vec2(self.x * other.x, self.y * other.y)
-        else:
+        if isinstance(other, (int, float)):
             return Vec2(self.x * other, self.y * other)
+        else:
+            return Vec2(self.x * other.x, self.y * other.y)
 
     def __truediv__(self, other):
-        if isinstance(other, Vec2):
-            return Vec2(int(self.x / other.x), int(self.y / other.y))
-        else:
+        if isinstance(other, (int, float)):
             return Vec2(int(self.x / other), int(self.y / other))
+        else:
+            return Vec2(int(self.x / other.x), int(self.y / other.y))
 
     def __iter__(self):
         yield self.x
