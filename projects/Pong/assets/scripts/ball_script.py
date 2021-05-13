@@ -1,5 +1,5 @@
 from files.scripts.script import Script
-from files.utils import Vec2
+from files.utils import Vec2, distance_between_rect
 
 
 class Ball_Script(Script):
@@ -10,6 +10,8 @@ class Ball_Script(Script):
     def update(self, deltatime):
         transform = self.game_object.get_component("TransformComponent")
         auto = self.game_object.get_component("AutoComponent")
+
+        print(distance_between_rect(transform.position, Vec2(20, 20), Vec2(530, 350), Vec2(1, 1)))
 
         if self.time > 0.75:
             auto.move.x *= 1.05
