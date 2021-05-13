@@ -54,7 +54,10 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 ### V 1.2.0 : Vildiur Update - XX/XX/21 (INDEV)
 
 - [+] Game Save System
+- [+] Camera System
+- [+] Utils functions : distance_between_rect
 - [~] Little work on Project Building
+- [~] Little work on Vec2 (and some Bug Fixes)
 
 ### V 1.1.0 : Kisure Update - 09/05/21 (LATEST)
 
