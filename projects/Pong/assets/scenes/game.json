@@ -4,6 +4,7 @@
         {
             "name": "left_paddle",
             "tag": "Object",
+            "zindex": 0,
             "childs": [],
             "components": [
                 {
@@ -50,6 +51,7 @@
         {
             "name": "right_paddle",
             "tag": "Object",
+            "zindex": 0,
             "childs": [],
             "components": [
                 {
@@ -96,6 +98,7 @@
         {
             "name": "score",
             "tag": "Object",
+            "zindex": 0,
             "childs": [],
             "components": [
                 {
@@ -131,6 +134,7 @@
         {
             "name": "ball",
             "tag": "Object",
+            "zindex": 0,
             "childs": [],
             "components": [
                 {
@@ -175,6 +179,7 @@
         {
             "name": "quit_button",
             "tag": "Object",
+            "zindex": 0,
             "childs": [],
             "components": [
                 {

@@ -1,0 +1,59 @@
+from files.components.component import Component
+
+
+class ControlComponent(Component):
+    def __init__(self, engine, keys, type_, speed):
+        super().__init__(engine)
+        self.name = "TransformComponent"
+        self.keys = keys
+        self.control_type = type_
+        self.speed = speed
+
+    def update(self, deltatime):
+        for i in self.engine.down_keys:
+            self.move_by_key(i, deltatime)
+
+    def move_by_key(self, key, deltatime):
+        transform = self.game_object.get_component("TransformComponent")
+        if transform is not None:
+            position = transform.position
+            cause = "UNKNOWN"
+            for i in self.keys["UPJUMP"].split(" "):
+                if key == eval("self.engine.pg_constants."+i):
+                    if self.control_type in ("FOURDIRECTION", "UPDOWN"):
+                        position.y -= self.speed*deltatime
+                        cause = "UPCONTROL"
+                    elif self.control_type == "CLASSICJUMP":
+                        phys = self.game_object.get_component("BasicPhysicComponent")
+                        if phys.grounded:
+                            phys.gravity = -phys.max_gravity
+                    return
+
+            for i in self.keys["DOWN"].split(" "):
+                if key == eval("self.engine.pg_constants."+i):
+                    if self.control_type in ("FOURDIRECTION", "UPDOWN"):
+                        position.y += self.speed*deltatime
+                        cause = "DOWNCONTROL"
+                    return
+
+            for i in self.keys["RIGHT"].split(" "):
+                if key == eval("self.engine.pg_constants."+i):
+                    if self.control_type in ("FOURDIRECTION", "LEFTRIGHT", "CLASSICJUMP"):
+                        position.x += self.speed*deltatime
+                        cause = "RIGHTCONTROL"
+                    return
+
+            for i in self.keys["LEFT"].split(" "):
+                if key == eval("self.engine.pg_constants."+i):
+                    if self.control_type in ("FOURDIRECTION", "LEFTRIGHT", "CLASSICJUMP"):
+                        position.x -= self.speed*deltatime
+                        cause = "LEFTCONTROL"
+                    return
+
+            if position != transform.position:
+                collision = self.game_object.get_component("CollisionComponent")
+                if collision is None:
+                    transform.position = position
+                else:
+                    if collision.can_go(position, cause):
+                        transform.position = position

@@ -1,0 +1,7 @@
+{
+    "engine_version": "Vildiur",
+    "width": 1080,
+    "height": 720,
+    "mainScene": "base",
+    "numberMixerChannels": 8
+}
