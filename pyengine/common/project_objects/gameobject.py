@@ -5,6 +5,7 @@ class GameObject:
     def __init__(self, name):
         self.name = name
         self.tag = "Object"
+        self.zindex = 0
         self.childs = []
         self.components = []
         self.parent = None
@@ -18,6 +19,7 @@ class GameObject:
         return {
             "name": self.name,
             "tag": self.tag,
+            "zindex": self.zindex,
             "childs": [
                 i.to_dict() for i in self.childs
             ],
@@ -30,6 +32,7 @@ class GameObject:
     def from_dict(cls, values):
         obj = GameObject(values.get("name", "Unknown Object"))
         obj.tag = values.get("tag", "Object")
+        obj.zindex = values.get("zindex", 0)
         obj.childs = values.get("childs", [])
         obj.childs = []
         for i in values.get("childs", []):

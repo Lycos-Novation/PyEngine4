@@ -56,7 +56,8 @@ class ProjectBuilder:
         logger.info("GENERATE GAMEOBJECT : "+gameobject.name)
         replaces = {
             "{NAME}": str(gameobject.name),
-            "{TAG}": str(gameobject.tag)
+            "{TAG}": str(gameobject.tag),
+            "{ZINDEX}": str(gameobject.zindex)
         }
         with open(os.path.join(ProjectBuilder.build_folders["templates"], "gameobject.txt"), "r") as f:
             template = f.read()

@@ -47,7 +47,7 @@ class ComponentsWidget(QWidget):
     def select_component(self):
         if len(self.list_components.selectedItems()) >= 1:
             widget = self.list_components.itemWidget(self.list_components.selectedItems()[0])
-            if not isinstance(widget, TagComponent) and not isinstance(widget, TimeScaleComponent) and \
+            if not isinstance(widget, GameObjectPropertiesComponent) and not isinstance(widget, TimeScaleComponent) and\
                     widget.component.name not in ("ColorComponent", "PathComponent"):
                 self.del_component.setEnabled(True)
             else:
@@ -140,7 +140,7 @@ class ComponentsWidget(QWidget):
         self.del_component.setEnabled(False)
         if obj.__class__ == GameObject:
             self.add_component.setEnabled(True)
-            w = TagComponent(self, obj)
+            w = GameObjectPropertiesComponent(self, obj)
             wi = QListWidgetItem()
             wi.setSizeHint(w.sizeHint())
             self.list_components.addItem(wi)

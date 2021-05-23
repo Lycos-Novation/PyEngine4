@@ -58,5 +58,5 @@ class Scene:
     def show(self, screen):
         screen.fill(self.bg_color.rgba())
 
-        for i in self.game_objects:
+        for i in sorted(self.game_objects, key=lambda x: x.zindex):
             i.show(screen, self.camera_position)
