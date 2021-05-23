@@ -56,8 +56,10 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [+] Game Save System
 - [+] Camera System
 - [+] Utils functions : distance_between_rect
+- [+] Z-Index
 - [~] Little work on Project Building
 - [~] Little work on Vec2 (and some Bug Fixes)
+- [#] Project with other name than Pong can't be launched
 
 ### V 1.1.0 : Kisure Update - 09/05/21 (LATEST)
 
