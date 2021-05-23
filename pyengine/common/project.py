@@ -84,7 +84,7 @@ class Project:
         if os.path.exists(os.path.join("builds", self.name, self.name.title()+".py")):
             sys.path.append(os.path.join("builds", self.name))
             if self.module is None:
-                self.module = importlib.__import__("Pong")
+                self.module = importlib.__import__(self.name.title())
             else:
                 self.__reload_module()
             os.chdir(os.path.join("builds", self.name))
