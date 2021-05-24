@@ -60,7 +60,7 @@ class ComponentsWidget(QWidget):
             menu = QMenu(self)
             for i in (
                 "Transform", "Sprite", "Text", "Collision", "BasicPhysic", "Control", "SpriteSheet", "Auto", "Button",
-                "Music", "Sound", "Anim", "Script"
+                "Music", "Sound", "Anim", "Particle", "Script"
             ):
                 action = QAction(i, self)
                 action.triggered.connect(lambda _, comp=i: self.create_component(comp + "Component"))
@@ -78,7 +78,7 @@ class ComponentsWidget(QWidget):
         menu = QMenu(self)
         for i in (
             "Transform", "Sprite", "Text", "Collision", "BasicPhysic", "Control", "SpriteSheet", "Auto", "Button",
-            "Music", "Sound", "Anim", "Script"
+            "Music", "Sound", "Anim", "Particle", "Script"
         ):
             action = QAction(i, self)
             action.triggered.connect(lambda _, comp=i: self.create_component(comp + "Component"))
@@ -129,6 +129,8 @@ class ComponentsWidget(QWidget):
             self.obj.components.append(components.MusicComponent(self.obj))
         elif comp == "AnimComponent":
             self.obj.components.append(components.AnimComponent(self.obj))
+        elif comp == "ParticleComponent":
+            self.obj.components.append(components.ParticleComponent(self.obj))
         self.set_obj(self.obj)
         self.parent.project.save()
         self.parent.viewport.update_screen()
@@ -181,6 +183,8 @@ class ComponentsWidget(QWidget):
                 w = AnimComponent(self, i)
             elif i.name == "CameraComponent":
                 w = CameraComponent(self, i)
+            elif i.name == "ParticleComponent":
+                w = ParticleComponent(self, i)
             elif i.name.startswith("ScriptComponent"):
                 w = ScriptComponent(self, i)
             else:

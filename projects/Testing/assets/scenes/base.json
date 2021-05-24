@@ -33,6 +33,35 @@
                     },
                     "control_type": "FOURDIRECTION",
                     "speed": 200
+                },
+                {
+                    "name": "ParticleComponent",
+                    "color": [
+                        255,
+                        255,
+                        255,
+                        255
+                    ],
+                    "final_color": [
+                        255,
+                        255,
+                        255,
+                        255
+                    ],
+                    "size": [
+                        20,
+                        20
+                    ],
+                    "final_size": [
+                        20,
+                        20
+                    ],
+                    "direction": [
+                        0,
+                        0
+                    ],
+                    "random_direction": false,
+                    "lifetime": 2
                 }
             ]
         },

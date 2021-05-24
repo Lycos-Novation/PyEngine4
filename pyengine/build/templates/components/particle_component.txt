@@ -1,0 +1,2 @@
+    {NAME} = ParticleComponent(engine, {COLOR}, {FINAL_COLOR}, {SIZE}, {FINAL_SIZE}, {DIRECTION}, {RANDOM_DIRECTION}, {LIFETIME})
+{COMPONENTS}

@@ -55,6 +55,7 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 
 - [+] Game Save System
 - [+] Camera System
+- [+] Particle System [WIP]
 - [+] Utils functions : distance_between_rect
 - [+] Z-Index
 - [~] Little work on Project Building

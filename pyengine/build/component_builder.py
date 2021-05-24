@@ -23,6 +23,28 @@ class ComponentBuilder:
         return text.replace("{COMPONENTS}", template)
 
     @staticmethod
+    def generate_particle_component(text, comp):
+        replaces = {
+            "{NAME}": str(comp.name.lower()),
+            "{COLOR}": str(comp.color),
+            "{FINAL_COLOR}": str(comp.final_color),
+            "{SIZE}": str(comp.size),
+            "{FINAL_SIZE}": str(comp.final_size),
+            "{DIRECTION}": str(comp.direction),
+            "{RANDOM_DIRECTION}": str(comp.random_direction),
+            "{LIFETIME}": str(comp.lifetime)
+        }
+
+        with open(os.path.join(ComponentBuilder.templates, "particle_component.txt"), "r") as f:
+            template = f.read()
+
+        # GENERATE MAIN INFO
+        for k, v in replaces.items():
+            template = template.replace(k, v)
+
+        return text.replace("{COMPONENTS}", template)
+
+    @staticmethod
     def generate_control_component(text, comp):
         replaces = {
             "{NAME}": str(comp.name.lower()),

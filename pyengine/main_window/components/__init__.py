@@ -16,3 +16,4 @@ from pyengine.main_window.components.gameobjectproperties_component import GameO
 from pyengine.main_window.components.sound_component import SoundComponent
 from pyengine.main_window.components.anim_component import AnimComponent
 from pyengine.main_window.components.camera_component import CameraComponent
+from pyengine.main_window.components.particle_component import ParticleComponent
