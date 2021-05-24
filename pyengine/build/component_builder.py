@@ -30,8 +30,8 @@ class ComponentBuilder:
             "{FINAL_COLOR}": str(comp.final_color),
             "{SIZE}": str(comp.size),
             "{FINAL_SIZE}": str(comp.final_size),
-            "{DIRECTION}": str(comp.direction),
-            "{RANDOM_DIRECTION}": str(comp.random_direction),
+            "{ANGLE_RANGE}": str(comp.angle_range),
+            "{FORCE_RANGE}": str(comp.force_range),
             "{LIFETIME}": str(comp.lifetime),
             "{SPAWN_TIME}": str(comp.spawn_time)
         }

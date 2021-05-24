@@ -37,6 +37,18 @@ class Color:
     def __repr__(self):
         return "Color.from_rgba"+str(self.rgba())
 
+    def __mul__(self, other):
+        if isinstance(other, (int, float)):
+            return Color.from_rgba(*(i * other for i in self.rgba()))
+        else:
+            return Color.from_rgba(self.r * other.r, self.g * other.g, self.b * other.a, self.a * other.a)
+
+    def __add__(self, other):
+        if isinstance(other, (int, float)):
+            return Color.from_rgba(*(i + other for i in self.rgba()))
+        else:
+            return Color.from_rgba(self.r + other.r, self.g + other.g, self.b + other.a, self.a + other.a)
+
     @classmethod
     def from_rgb(cls, r, g, b):
         color = cls()

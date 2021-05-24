@@ -24,16 +24,15 @@ class ParticleComponent(QWidget):
         self.size_spins = [QSpinBox(self), QSpinBox(self)]
         self.final_size_name = QLabel("Final Size", self)
         self.final_size_spins = [QSpinBox(self), QSpinBox(self)]
-        self.direction_name = QLabel("Direction", self)
-        self.direction_spins = [QSpinBox(self), QSpinBox(self)]
-        self.random_direction = QCheckBox("Random Direction", self)
+        self.angle_range_name = QLabel("Angle", self)
+        self.angle_range_spins = [QSpinBox(self), QSpinBox(self)]
+        self.force_range_name = QLabel("Force", self)
+        self.force_range_spins = [QSpinBox(self), QSpinBox(self)]
         self.lifetime = QLabel("Life Time")
         self.lifetime_spin = QSpinBox(self)
         self.spawn_time = QLabel("Spawn Time")
         self.spawn_time_spin = QDoubleSpinBox(self)
 
-        self.random_direction.setChecked(self.component.random_direction)
-        self.random_direction.clicked.connect(self.change_value)
         self.color_picker.clicked.connect(self.select_color)
         self.lifetime_spin.setRange(-2147483648, 2147483647)
         self.lifetime_spin.setValue(self.component.lifetime)
@@ -61,11 +60,15 @@ class ParticleComponent(QWidget):
             self.final_size_spins[k].setRange(-2147483648, 2147483647)
             self.final_size_spins[k].setValue(v)
 
-        for k, v in enumerate(self.component.direction.coords()):
-            self.direction_spins[k].setRange(-2147483648, 2147483647)
-            self.direction_spins[k].setValue(v)
+        for k, v in enumerate(self.component.angle_range.coords()):
+            self.angle_range_spins[k].setRange(0, 359)
+            self.angle_range_spins[k].setValue(v)
 
-        spins = self.size_spins + self.final_size_spins + self.direction_spins
+        for k, v in enumerate(self.component.force_range.coords()):
+            self.force_range_spins[k].setRange(-2147483648, 2147483647)
+            self.force_range_spins[k].setValue(v)
+
+        spins = self.size_spins + self.final_size_spins + self.angle_range_spins + self.force_range_spins
         for spin in spins:
             spin.valueChanged.connect(self.change_value)
 
@@ -88,10 +91,12 @@ class ParticleComponent(QWidget):
         self.layout.addWidget(self.final_size_name, 6, 0)
         self.layout.addWidget(self.final_size_spins[0], 6, 1, 1, 2)
         self.layout.addWidget(self.final_size_spins[1], 6, 3, 1, 2)
-        self.layout.addWidget(self.direction_name, 7, 0)
-        self.layout.addWidget(self.direction_spins[0], 7, 1, 1, 2)
-        self.layout.addWidget(self.direction_spins[1], 7, 3, 1, 2)
-        self.layout.addWidget(self.random_direction, 8, 2)
+        self.layout.addWidget(self.angle_range_name, 7, 0)
+        self.layout.addWidget(self.angle_range_spins[0], 7, 1, 1, 2)
+        self.layout.addWidget(self.angle_range_spins[1], 7, 3, 1, 2)
+        self.layout.addWidget(self.force_range_name, 8, 0)
+        self.layout.addWidget(self.force_range_spins[0], 8, 1, 1, 2)
+        self.layout.addWidget(self.force_range_spins[1], 8, 3, 1, 2)
         self.layout.addWidget(self.lifetime, 9, 0)
         self.layout.addWidget(self.lifetime_spin, 9, 1, 1, 4)
         self.layout.addWidget(self.spawn_time, 10, 0)
@@ -132,8 +137,8 @@ class ParticleComponent(QWidget):
 
         self.component.size = Vec2(*(i.value() for i in self.size_spins))
         self.component.final_size = Vec2(*(i.value() for i in self.final_size_spins))
-        self.component.direction = Vec2(*(i.value() for i in self.direction_spins))
-        self.component.random_direction = self.random_direction.isChecked()
+        self.component.angle_range = Vec2(*(i.value() for i in self.angle_range_spins))
+        self.component.forge_range = Vec2(*(i.value() for i in self.force_range_spins))
         self.component.lifetime = self.lifetime_spin.value()
         self.component.spawn_time = self.spawn_time_spin.value()
 

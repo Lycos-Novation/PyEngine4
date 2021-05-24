@@ -44,23 +44,26 @@
                     ],
                     "final_color": [
                         255,
-                        255,
-                        255,
+                        0,
+                        0,
                         255
                     ],
                     "size": [
-                        20,
-                        20
+                        30,
+                        30
                     ],
                     "final_size": [
-                        20,
-                        20
+                        0,
+                        0
                     ],
-                    "direction": [
-                        10,
-                        2
+                    "angle_range": [
+                        0,
+                        359
                     ],
-                    "random_direction": true,
+                    "force_range": [
+                        50,
+                        50
+                    ],
                     "lifetime": 1,
                     "spawn_time": 0.01
                 }

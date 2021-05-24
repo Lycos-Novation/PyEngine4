@@ -10,8 +10,8 @@ class ParticleComponent(Component):
         self.final_color = Color.from_rgb(255, 255, 255)
         self.size = Vec2(20, 20)
         self.final_size = Vec2(20, 20)
-        self.direction = Vec2(0, 0)
-        self.random_direction = False
+        self.angle_range = Vec2(0, 359)
+        self.force_range = Vec2(50, 50)
         self.lifetime = 2
         self.spawn_time = 1
 
@@ -22,8 +22,8 @@ class ParticleComponent(Component):
             "final_color": self.final_color.rgba(),
             "size": self.size.coords(),
             "final_size": self.final_size.coords(),
-            "direction": self.direction.coords(),
-            "random_direction": self.random_direction,
+            "angle_range": self.angle_range.coords(),
+            "force_range": self.force_range.coords(),
             "lifetime": self.lifetime,
             "spawn_time": self.spawn_time
         }
@@ -35,8 +35,8 @@ class ParticleComponent(Component):
         comp.final_color = Color.from_rgba(*values.get("final_color", (255, 255, 255, 255)))
         comp.size = Vec2(*values.get("size", (20, 20)))
         comp.final_size = Vec2(*values.get("final_size", (20, 20)))
-        comp.direction = Vec2(*values.get("direction", (0, 0)))
-        comp.random_direction = values.get("random_direction", False)
+        comp.angle_range = Vec2(*values.get("angle_range", (0, 359)))
+        comp.force_range = Vec2(*values.get("force_range", (50, 50)))
         comp.lifetime = values.get("lifetime", 2)
         comp.spawn_time = values.get("spawn_time", 1)
         return comp

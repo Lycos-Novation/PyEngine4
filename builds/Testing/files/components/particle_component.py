@@ -2,6 +2,7 @@ from files.components.component import Component
 from files.utils import Vec2
 
 from random import randint
+import math
 
 
 class Particle:
@@ -9,13 +10,14 @@ class Particle:
         self.system = system
         self.color = color
         self.final_color = final_color
+        self.current_color = color
         self.size = size
         self.final_size = final_size
+        self.current_size = size
         self.direction = direction
         self.position = start_pos
         self.lifetime = lifetime
         self.time = 0
-        self.use_position_of_parent = False
 
     def update(self, deltatime):
         self.time += deltatime
@@ -24,23 +26,28 @@ class Particle:
         else:
             self.position += self.direction * deltatime
 
-    def show(self, screen, component_position, camera_pos):
-        if self.use_position_of_parent:
-            screen.fill(self.color.rgba(), ((self.position + component_position - camera_pos).coords(),
-                                            self.size.coords()))
-        else:
-            screen.fill(self.color.rgba(), ((self.position - camera_pos).coords(), self.size.coords()))
+        if self.color != self.final_color:
+            p = self.time / self.lifetime
+            self.current_color = self.color * (1 - p) + self.final_color * p
+
+        if self.size != self.final_size:
+            p = self.time / self.lifetime
+            self.current_size = self.size * (1 - p) + self.final_size * p
+
+    def show(self, screen, camera_pos):
+        screen.fill(self.current_color.rgba(), ((self.position - camera_pos / 2).coords(),
+                                                self.current_size.coords()))
 
 
 class ParticleComponent(Component):
-    def __init__(self, engine, color, final_color, size, final_size, direction, random_direction, lifetime, spawn_time):
+    def __init__(self, engine, color, final_color, size, final_size, angle_range, force_range, lifetime, spawn_time):
         super().__init__(engine)
         self.color = color
         self.final_color = final_color
         self.size = size
         self.final_size = final_size
-        self.direction = direction
-        self.random_direction = random_direction
+        self.angle_range = angle_range
+        self.force_range = force_range
         self.lifetime = lifetime
         self.spawn_time = spawn_time
         self.time = 0
@@ -56,21 +63,15 @@ class ParticleComponent(Component):
             self.time += deltatime
             if self.time > self.spawn_time:
                 self.time = 0
-                if self.random_direction:
-                    self.particles.append(Particle(self, position, self.lifetime,
-                                                   Vec2(randint(-50, 50), randint(-50, 50)), self.size, self.final_size,
-                                                   self.color, self.final_color))
-                else:
-                    self.particles.append(Particle(self, position, self.lifetime, self.direction, self.size,
-                                                   self.final_size, self.color, self.final_color))
+                force = randint(self.force_range.x, self.force_range.y)
+                angle = math.radians(randint(self.angle_range.x, self.angle_range.y))
+                self.particles.append(Particle(self, position, self.lifetime,
+                                               Vec2(force*math.cos(angle), force*math.sin(angle)), self.size,
+                                               self.final_size, self.color, self.final_color))
             for i in self.particles:
                 i.update(deltatime)
 
     def show(self, screen, camera_pos):
         if len(self.particles):
-            print(len(self.particles))
-            transform = self.game_object.get_component("TransformComponent")
-            if transform is not None:
-                position = transform.global_position()
-                for i in self.particles:
-                    i.show(screen, position - i.position, camera_pos)
+            for i in self.particles:
+                i.show(screen, camera_pos)
