@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QLabel, QSpinBox, QGridLayout, QColorDialog, QPushButton, QCheckBox
+from PyQt5.QtWidgets import QWidget, QLabel, QSpinBox, QGridLayout, QColorDialog, QPushButton, QCheckBox, QDoubleSpinBox
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor
 
@@ -29,6 +29,8 @@ class ParticleComponent(QWidget):
         self.random_direction = QCheckBox("Random Direction", self)
         self.lifetime = QLabel("Life Time")
         self.lifetime_spin = QSpinBox(self)
+        self.spawn_time = QLabel("Spawn Time")
+        self.spawn_time_spin = QDoubleSpinBox(self)
 
         self.random_direction.setChecked(self.component.random_direction)
         self.random_direction.clicked.connect(self.change_value)
@@ -36,6 +38,10 @@ class ParticleComponent(QWidget):
         self.lifetime_spin.setRange(-2147483648, 2147483647)
         self.lifetime_spin.setValue(self.component.lifetime)
         self.lifetime_spin.valueChanged.connect(self.change_value)
+        self.spawn_time_spin.setRange(-2147483648, 2147483647)
+        self.spawn_time_spin.setValue(self.component.spawn_time)
+        self.spawn_time_spin.setSingleStep(0.01)
+        self.spawn_time_spin.valueChanged.connect(self.change_value)
         for k, v in enumerate(component.color.rgba()):
             self.color_spins[k].setRange(0, 255)
             self.color_spins[k].setValue(v)
@@ -88,6 +94,8 @@ class ParticleComponent(QWidget):
         self.layout.addWidget(self.random_direction, 8, 2)
         self.layout.addWidget(self.lifetime, 9, 0)
         self.layout.addWidget(self.lifetime_spin, 9, 1, 1, 4)
+        self.layout.addWidget(self.spawn_time, 10, 0)
+        self.layout.addWidget(self.spawn_time_spin, 10, 1, 1, 4)
         self.setLayout(self.layout)
 
     def delete(self):
@@ -127,6 +135,7 @@ class ParticleComponent(QWidget):
         self.component.direction = Vec2(*(i.value() for i in self.direction_spins))
         self.component.random_direction = self.random_direction.isChecked()
         self.component.lifetime = self.lifetime_spin.value()
+        self.component.spawn_time = self.spawn_time_spin.value()
 
         self.parent.parent.project.save()
         self.parent.parent.viewport.update_screen()

@@ -13,6 +13,7 @@ class ParticleComponent(Component):
         self.direction = Vec2(0, 0)
         self.random_direction = False
         self.lifetime = 2
+        self.spawn_time = 1
 
     def to_dict(self):
         return {
@@ -23,7 +24,8 @@ class ParticleComponent(Component):
             "final_size": self.final_size.coords(),
             "direction": self.direction.coords(),
             "random_direction": self.random_direction,
-            "lifetime": self.lifetime
+            "lifetime": self.lifetime,
+            "spawn_time": self.spawn_time
         }
 
     @classmethod
@@ -36,4 +38,5 @@ class ParticleComponent(Component):
         comp.direction = Vec2(*values.get("direction", (0, 0)))
         comp.random_direction = values.get("random_direction", False)
         comp.lifetime = values.get("lifetime", 2)
+        comp.spawn_time = values.get("spawn_time", 1)
         return comp

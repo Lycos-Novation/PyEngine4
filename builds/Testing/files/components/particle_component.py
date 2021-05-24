@@ -15,6 +15,7 @@ class Particle:
         self.position = start_pos
         self.lifetime = lifetime
         self.time = 0
+        self.use_position_of_parent = False
 
     def update(self, deltatime):
         self.time += deltatime
@@ -23,8 +24,12 @@ class Particle:
         else:
             self.position += self.direction * deltatime
 
-    def show(self, screen, camera_pos):
-        screen.fill(self.color.rgba(), ((self.position - camera_pos).coords(), self.size.coords()))
+    def show(self, screen, component_position, camera_pos):
+        if self.use_position_of_parent:
+            screen.fill(self.color.rgba(), ((self.position + component_position - camera_pos).coords(),
+                                            self.size.coords()))
+        else:
+            screen.fill(self.color.rgba(), ((self.position - camera_pos).coords(), self.size.coords()))
 
 
 class ParticleComponent(Component):
@@ -63,5 +68,9 @@ class ParticleComponent(Component):
 
     def show(self, screen, camera_pos):
         if len(self.particles):
-            for i in self.particles:
-                i.show(screen, camera_pos)
+            print(len(self.particles))
+            transform = self.game_object.get_component("TransformComponent")
+            if transform is not None:
+                position = transform.global_position()
+                for i in self.particles:
+                    i.show(screen, position - i.position, camera_pos)

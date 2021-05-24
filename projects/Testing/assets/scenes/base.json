@@ -57,11 +57,12 @@
                         20
                     ],
                     "direction": [
-                        0,
-                        0
+                        10,
+                        2
                     ],
-                    "random_direction": false,
-                    "lifetime": 2
+                    "random_direction": true,
+                    "lifetime": 1,
+                    "spawn_time": 0.01
                 }
             ]
         },

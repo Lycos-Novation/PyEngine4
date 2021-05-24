@@ -32,7 +32,8 @@ class ComponentBuilder:
             "{FINAL_SIZE}": str(comp.final_size),
             "{DIRECTION}": str(comp.direction),
             "{RANDOM_DIRECTION}": str(comp.random_direction),
-            "{LIFETIME}": str(comp.lifetime)
+            "{LIFETIME}": str(comp.lifetime),
+            "{SPAWN_TIME}": str(comp.spawn_time)
         }
 
         with open(os.path.join(ComponentBuilder.templates, "particle_component.txt"), "r") as f:
