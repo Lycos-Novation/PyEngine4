@@ -249,9 +249,10 @@
         {
             "name": "CameraComponent",
             "position": [
-                100,
-                100
-            ]
+                0,
+                0
+            ],
+            "follow_entity": null
         }
     ]
 }

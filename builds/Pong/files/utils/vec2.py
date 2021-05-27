@@ -26,7 +26,6 @@ class Vec2:
         return math.sqrt(self.x ** 2 + self.y ** 2)
 
     def __add__(self, other):
-        print(self, other, type(other))
         if isinstance(other, (int, float)):
             return Vec2(self.x + other, self.y + other)
         else:

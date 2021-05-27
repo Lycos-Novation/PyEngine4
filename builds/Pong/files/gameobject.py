@@ -1,8 +1,9 @@
 class GameObject:
-    def __init__(self, name, tag):
+    def __init__(self, name, tag, zindex):
         self.name = name
         self.tag = tag
         self.parent = None
+        self.zindex = zindex
         self.childs = []
         self.components = []
         self.id_ = -1
