@@ -55,8 +55,9 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 
 - [+] Game Save System
 - [+] Camera System
-- [+] Particle System [WIP]
+- [+] Particle System
 - [+] Utils functions : distance_between_rect
+- [+] Engine functions : get_game_size
 - [+] Z-Index
 - [~] Little work on Project Building
 - [~] Little work on Vec2 (and some Bug Fixes)
