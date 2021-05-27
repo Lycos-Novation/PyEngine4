@@ -32,6 +32,8 @@ class ParticleComponent(QWidget):
         self.lifetime_spin = QSpinBox(self)
         self.spawn_time = QLabel("Spawn Time")
         self.spawn_time_spin = QDoubleSpinBox(self)
+        self.spawn_number = QLabel("Spawn Number")
+        self.spawn_number_spin = QSpinBox(self)
 
         self.color_picker.clicked.connect(self.select_color)
         self.lifetime_spin.setRange(-2147483648, 2147483647)
@@ -41,6 +43,9 @@ class ParticleComponent(QWidget):
         self.spawn_time_spin.setValue(self.component.spawn_time)
         self.spawn_time_spin.setSingleStep(0.01)
         self.spawn_time_spin.valueChanged.connect(self.change_value)
+        self.spawn_number_spin.setRange(-2147483648, 2147483647)
+        self.spawn_number_spin.setValue(self.component.spawn_number)
+        self.spawn_number_spin.valueChanged.connect(self.change_value)
         for k, v in enumerate(component.color.rgba()):
             self.color_spins[k].setRange(0, 255)
             self.color_spins[k].setValue(v)
@@ -101,6 +106,8 @@ class ParticleComponent(QWidget):
         self.layout.addWidget(self.lifetime_spin, 9, 1, 1, 4)
         self.layout.addWidget(self.spawn_time, 10, 0)
         self.layout.addWidget(self.spawn_time_spin, 10, 1, 1, 4)
+        self.layout.addWidget(self.spawn_number, 11, 0)
+        self.layout.addWidget(self.spawn_number_spin, 11, 1, 1, 4)
         self.setLayout(self.layout)
 
     def delete(self):
@@ -141,6 +148,7 @@ class ParticleComponent(QWidget):
         self.component.forge_range = Vec2(*(i.value() for i in self.force_range_spins))
         self.component.lifetime = self.lifetime_spin.value()
         self.component.spawn_time = self.spawn_time_spin.value()
+        self.component.spawn_number = self.spawn_number_spin.value()
 
         self.parent.parent.project.save()
         self.parent.parent.viewport.update_screen()

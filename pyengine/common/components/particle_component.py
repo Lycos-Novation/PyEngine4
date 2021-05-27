@@ -14,6 +14,7 @@ class ParticleComponent(Component):
         self.force_range = Vec2(50, 50)
         self.lifetime = 2
         self.spawn_time = 1
+        self.spawn_number = 1
 
     def to_dict(self):
         return {
@@ -25,7 +26,8 @@ class ParticleComponent(Component):
             "angle_range": self.angle_range.coords(),
             "force_range": self.force_range.coords(),
             "lifetime": self.lifetime,
-            "spawn_time": self.spawn_time
+            "spawn_time": self.spawn_time,
+            "spawn_number": self.spawn_number
         }
 
     @classmethod
@@ -39,4 +41,5 @@ class ParticleComponent(Component):
         comp.force_range = Vec2(*values.get("force_range", (50, 50)))
         comp.lifetime = values.get("lifetime", 2)
         comp.spawn_time = values.get("spawn_time", 1)
+        comp.spawn_number = values.get("spawn_number", 1)
         return comp

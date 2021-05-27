@@ -27,9 +27,9 @@
                     "name": "ControlComponent",
                     "keys": {
                         "UPJUMP": "K_UP",
+                        "DOWN": "K_DOWN",
                         "LEFT": "K_LEFT",
-                        "RIGHT": "K_RIGHT",
-                        "DOWN": "K_DOWN"
+                        "RIGHT": "K_RIGHT"
                     },
                     "control_type": "FOURDIRECTION",
                     "speed": 200
@@ -38,14 +38,14 @@
                     "name": "ParticleComponent",
                     "color": [
                         255,
-                        255,
-                        255,
+                        0,
+                        0,
                         255
                     ],
                     "final_color": [
+                        0,
+                        0,
                         255,
-                        0,
-                        0,
                         255
                     ],
                     "size": [
@@ -65,7 +65,8 @@
                         50
                     ],
                     "lifetime": 1,
-                    "spawn_time": 0.01
+                    "spawn_time": 0.1,
+                    "spawn_number": 5
                 }
             ]
         },

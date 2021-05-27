@@ -40,7 +40,8 @@ class Particle:
 
 
 class ParticleComponent(Component):
-    def __init__(self, engine, color, final_color, size, final_size, angle_range, force_range, lifetime, spawn_time):
+    def __init__(self, engine, color, final_color, size, final_size, angle_range, force_range, lifetime, spawn_time,
+                 spawn_number):
         super().__init__(engine)
         self.color = color
         self.final_color = final_color
@@ -50,6 +51,7 @@ class ParticleComponent(Component):
         self.force_range = force_range
         self.lifetime = lifetime
         self.spawn_time = spawn_time
+        self.spawn_number = spawn_number
         self.time = 0
         self.particles = []
 
@@ -63,11 +65,12 @@ class ParticleComponent(Component):
             self.time += deltatime
             if self.time > self.spawn_time:
                 self.time = 0
-                force = randint(self.force_range.x, self.force_range.y)
-                angle = math.radians(randint(self.angle_range.x, self.angle_range.y))
-                self.particles.append(Particle(self, position, self.lifetime,
-                                               Vec2(force*math.cos(angle), force*math.sin(angle)), self.size,
-                                               self.final_size, self.color, self.final_color))
+                for i in range(self.spawn_number):
+                    force = randint(self.force_range.x, self.force_range.y)
+                    angle = math.radians(randint(self.angle_range.x, self.angle_range.y))
+                    self.particles.append(Particle(self, position, self.lifetime,
+                                                   Vec2(force*math.cos(angle), force*math.sin(angle)), self.size,
+                                                   self.final_size, self.color, self.final_color))
             for i in self.particles:
                 i.update(deltatime)
 

@@ -12,9 +12,9 @@ def launch():
     e1.add_component(transformcomponent)
     spritecomponent = SpriteComponent(engine, "e1.png")
     e1.add_component(spritecomponent)
-    controlcomponent = ControlComponent(engine, {'UPJUMP': 'K_UP', 'LEFT': 'K_LEFT', 'RIGHT': 'K_RIGHT', 'DOWN': 'K_DOWN'}, "FOURDIRECTION", 200)
+    controlcomponent = ControlComponent(engine, {'UPJUMP': 'K_UP', 'DOWN': 'K_DOWN', 'LEFT': 'K_LEFT', 'RIGHT': 'K_RIGHT'}, "FOURDIRECTION", 200)
     e1.add_component(controlcomponent)
-    particlecomponent = ParticleComponent(engine, Color.from_rgba(255, 255, 255, 255), Color.from_rgba(255, 0, 0, 255), Vec2(30, 30), Vec2(0, 0), Vec2(0, 359), Vec2(50, 50), 1, 0.01)
+    particlecomponent = ParticleComponent(engine, Color.from_rgba(255, 0, 0, 255), Color.from_rgba(0, 0, 255, 255), Vec2(30, 30), Vec2(0, 0), Vec2(0, 359), Vec2(50, 50), 1, 0.1, 5)
     e1.add_component(particlecomponent)
 
     e2 = GameObject("e2", "Object", 0)

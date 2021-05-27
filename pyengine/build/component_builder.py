@@ -33,7 +33,8 @@ class ComponentBuilder:
             "{ANGLE_RANGE}": str(comp.angle_range),
             "{FORCE_RANGE}": str(comp.force_range),
             "{LIFETIME}": str(comp.lifetime),
-            "{SPAWN_TIME}": str(comp.spawn_time)
+            "{SPAWN_TIME}": str(comp.spawn_time),
+            "{SPAWN_NUMBER}": str(comp.spawn_number)
         }
 
         with open(os.path.join(ComponentBuilder.templates, "particle_component.txt"), "r") as f:
