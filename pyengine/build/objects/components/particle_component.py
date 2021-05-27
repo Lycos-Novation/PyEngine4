@@ -43,6 +43,7 @@ class ParticleComponent(Component):
     def __init__(self, engine, color, final_color, size, final_size, angle_range, force_range, lifetime, spawn_time,
                  spawn_number):
         super().__init__(engine)
+        self.name = "ParticleComponent"
         self.color = color
         self.final_color = final_color
         self.size = size
