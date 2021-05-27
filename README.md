@@ -31,16 +31,16 @@ Documentation : <https://pyengine4-docs.readthedocs.io/>
 - Basic UI with Buttons
 - Build and Launch System
 - Utility Classes
+- Particles System
+- Save System
+- Player Settings System
 
 ## Uncoming Features
 
 *Warning : This is a non-exhaustive list and subject to change.*
 
 - Prefabs
-- Particles System
 - Translation System
-- Save System
-- Player Settings System
 - More UI
 - Translation of PyEngine4
 - Themes for PyEngine4
@@ -54,6 +54,7 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 ### V 1.2.0 : Vildiur Update - XX/XX/21 (INDEV)
 
 - [+] Game Save System
+- [+] Game Settings
 - [+] Camera System
 - [+] Particle System
 - [+] Utils functions : distance_between_rect
