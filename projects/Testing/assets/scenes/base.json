@@ -114,7 +114,8 @@
             "position": [
                 0,
                 0
-            ]
+            ],
+            "follow_entity": "e1"
         }
     ]
 }

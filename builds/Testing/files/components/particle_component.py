@@ -35,7 +35,7 @@ class Particle:
             self.current_size = self.size * (1 - p) + self.final_size * p
 
     def show(self, screen, camera_pos):
-        screen.fill(self.current_color.rgba(), ((self.position - camera_pos / 2).coords(),
+        screen.fill(self.current_color.rgba(), ((self.position - camera_pos).coords(),
                                                 self.current_size.coords()))
 
 
@@ -64,7 +64,6 @@ class ParticleComponent(Component):
             position = transform.global_position()
             self.time += deltatime
             if self.time > self.spawn_time:
-                print("FPS : ", self.engine.game.get_fps(), "- Number Particles : ", len(self.particles))
                 self.time = 0
                 for i in range(self.spawn_number):
                     force = randint(self.force_range.x, self.force_range.y)

@@ -1,9 +1,11 @@
 class Scene:
-    def __init__(self, name, color, timescale, camera_position, game_objects):
+    def __init__(self, engine, name, color, timescale, camera_position, camera_follow, game_objects):
+        self.engine = engine
         self.name = name
         self.bg_color = color
         self.timescale = timescale
         self.camera_position = camera_position
+        self.camera_follow = camera_follow
         self.__game_object_count = 0
         self.game_objects = []
         self.add_game_objects(game_objects)
@@ -52,6 +54,12 @@ class Scene:
     
     def update(self, deltatime):
         deltatime *= self.timescale
+
+        if self.camera_follow is not None:
+            if self.camera_follow is not None and self.camera_follow.get_component("TransformComponent") is not None:
+                self.camera_position = self.camera_follow.get_component("TransformComponent").position - \
+                                       self.engine.get_game_size() / 2
+
         for i in self.game_objects:
             i.update(deltatime)
 

@@ -24,7 +24,7 @@ def launch():
     e2.add_component(spritecomponent)
     
     entities = [e1, e2]
-    base = Scene("base", Color.from_rgba(0, 0, 0, 255), 1, Vec2(0, 0), entities)
+    base = Scene(engine, "base", Color.from_rgba(0, 0, 0, 255), 1, Vec2(0, 0), e1, entities)
     
     scenes = [base]
     game = Game("Testing", 1080, 720, 8, scenes, engine)
