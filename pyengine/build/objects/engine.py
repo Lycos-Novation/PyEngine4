@@ -1,6 +1,7 @@
 import pygame.locals
 
 from files.utils import Vec2
+from files.utils.settings import Settings
 
 
 class Engine:
@@ -9,6 +10,7 @@ class Engine:
         self.pg_constants = pygame.locals
         self.down_keys = []
         self.down_mousebuttons = []
+        self.settings = Settings()
 
     def get_game_size(self):
         return Vec2(self.game.width, self.game.height)
