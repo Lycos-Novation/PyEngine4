@@ -83,3 +83,4 @@ class Game:
 
             self.clock.tick()
             pygame.display.update()
+        self.engine.settings.save()

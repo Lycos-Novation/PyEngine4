@@ -37,20 +37,20 @@
                 {
                     "name": "ParticleComponent",
                     "color": [
+                        252,
                         255,
-                        0,
-                        0,
+                        255,
                         255
                     ],
                     "final_color": [
                         0,
                         0,
-                        255,
+                        0,
                         255
                     ],
                     "size": [
-                        30,
-                        30
+                        20,
+                        20
                     ],
                     "final_size": [
                         0,
@@ -64,9 +64,18 @@
                         50,
                         50
                     ],
-                    "lifetime": 1,
-                    "spawn_time": 0.1,
-                    "spawn_number": 5
+                    "lifetime": 2,
+                    "spawn_time": 1.0,
+                    "spawn_number": 2
+                },
+                {
+                    "name": "CollisionComponent",
+                    "solid": true,
+                    "callback": null,
+                    "size": [
+                        20,
+                        20
+                    ]
                 }
             ]
         },
@@ -91,6 +100,15 @@
                 {
                     "name": "SpriteComponent",
                     "sprite": "e2"
+                },
+                {
+                    "name": "CollisionComponent",
+                    "solid": true,
+                    "callback": null,
+                    "size": [
+                        10,
+                        100
+                    ]
                 }
             ]
         }

@@ -1,5 +1,7 @@
 from files.components.component import Component
 
+import copy
+
 
 class ControlComponent(Component):
     def __init__(self, engine, keys, type_, speed):
@@ -16,7 +18,7 @@ class ControlComponent(Component):
     def move_by_key(self, key, deltatime):
         transform = self.game_object.get_component("TransformComponent")
         if transform is not None:
-            position = transform.position
+            position = copy.copy(transform.position)
             cause = "UNKNOWN"
             for i in self.keys["UPJUMP"].split(" "):
                 if key == eval("self.engine.pg_constants."+i):
@@ -27,33 +29,38 @@ class ControlComponent(Component):
                         phys = self.game_object.get_component("BasicPhysicComponent")
                         if phys.grounded:
                             phys.gravity = -phys.max_gravity
-                    return
+                    break
 
             for i in self.keys["DOWN"].split(" "):
                 if key == eval("self.engine.pg_constants."+i):
                     if self.control_type in ("FOURDIRECTION", "UPDOWN"):
                         position.y += self.speed*deltatime
                         cause = "DOWNCONTROL"
-                    return
+                    break
 
             for i in self.keys["RIGHT"].split(" "):
                 if key == eval("self.engine.pg_constants."+i):
                     if self.control_type in ("FOURDIRECTION", "LEFTRIGHT", "CLASSICJUMP"):
                         position.x += self.speed*deltatime
                         cause = "RIGHTCONTROL"
-                    return
+                    break
 
             for i in self.keys["LEFT"].split(" "):
                 if key == eval("self.engine.pg_constants."+i):
                     if self.control_type in ("FOURDIRECTION", "LEFTRIGHT", "CLASSICJUMP"):
                         position.x -= self.speed*deltatime
                         cause = "LEFTCONTROL"
-                    return
+                    break
+
+            print(position, transform.position)
 
             if position != transform.position:
+                print("CHEH")
                 collision = self.game_object.get_component("CollisionComponent")
                 if collision is None:
+                    print("NOT VERIFY CAN GO")
                     transform.position = position
                 else:
+                    print("VERIFY CAN GO")
                     if collision.can_go(position, cause):
                         transform.position = position
