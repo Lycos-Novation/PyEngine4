@@ -10,6 +10,12 @@ class GameObject:
         self.components = []
         self.parent = None
 
+    def get_all_childs(self):
+        childs = self.childs.copy()
+        for i in self.childs:
+            childs += i.get_all_childs()
+        return childs
+
     def get_component(self, name):
         for i in self.components:
             if i.name == name:

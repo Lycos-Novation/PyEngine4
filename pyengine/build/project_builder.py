@@ -100,6 +100,7 @@ class ProjectBuilder:
             "{COLOR}": str(scene.components[0].color),
             "{TIMESCALE}": str(scene.components[1].timescale),
             "{CAMERA_POSITION}": str(scene.components[2].position),
+            "{FOLLOW_ENTITY}": str(scene.components[2].follow_entity),
             "{ENTITIES_NAMES}": str([i.name for i in scene.childs]).replace("'", "")
         }
         with open(os.path.join(ProjectBuilder.build_folders["templates"], "scene.txt"), "r") as f:
