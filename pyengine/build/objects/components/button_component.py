@@ -58,7 +58,7 @@ class ButtonComponent(Component):
     def show(self, screen, camera_pos):
         transform = self.game_object.get_component("TransformComponent")
         if transform is not None:
-            position = transform.global_position() - camera_pos
+            position = transform.global_position()
             screen.blit(self.render, position.coords())
 
     def mouse_press(self, evt):
