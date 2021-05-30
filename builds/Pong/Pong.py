@@ -5,7 +5,7 @@ from files.utils import *
 
 
 def launch():
-    engine = Engine()
+    engine = Engine("None")
 
     left_paddle = GameObject("left_paddle", "Object", 0)
     transformcomponent = TransformComponent(engine, Vec2(50, 310), 0, Vec2(1.0, 1.0))

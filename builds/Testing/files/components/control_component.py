@@ -52,15 +52,10 @@ class ControlComponent(Component):
                         cause = "LEFTCONTROL"
                     break
 
-            print(position, transform.position)
-
             if position != transform.position:
-                print("CHEH")
                 collision = self.game_object.get_component("CollisionComponent")
                 if collision is None:
-                    print("NOT VERIFY CAN GO")
                     transform.position = position
                 else:
-                    print("VERIFY CAN GO")
                     if collision.can_go(position, cause):
                         transform.position = position

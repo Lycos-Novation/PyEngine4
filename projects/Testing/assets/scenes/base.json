@@ -111,6 +111,56 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "button",
+            "tag": "Object",
+            "zindex": 0,
+            "childs": [],
+            "components": [
+                {
+                    "name": "TransformComponent",
+                    "position": [
+                        10,
+                        10
+                    ],
+                    "rotation": 0,
+                    "scale": [
+                        1.0,
+                        1.0
+                    ]
+                },
+                {
+                    "name": "ButtonComponent",
+                    "callback": "printLang - clicked",
+                    "size": [
+                        100,
+                        40
+                    ],
+                    "bg": [
+                        255,
+                        0,
+                        0,
+                        255
+                    ],
+                    "text": "Print",
+                    "font_name": "arial",
+                    "font_size": 20,
+                    "font_bold": true,
+                    "font_italic": false,
+                    "font_underline": true,
+                    "font_color": [
+                        255,
+                        255,
+                        255,
+                        255
+                    ],
+                    "font_antialias": true
+                },
+                {
+                    "name": "ScriptComponent printLang"
+                }
+            ]
         }
     ],
     "components": [
