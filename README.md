@@ -32,6 +32,7 @@ Documentation : <https://pyengine4-docs.readthedocs.io/>
 - Build and Launch System
 - Utility Classes
 - Particles System
+- Translation System
 - Save System
 - Player Settings System
 
@@ -40,7 +41,6 @@ Documentation : <https://pyengine4-docs.readthedocs.io/>
 *Warning : This is a non-exhaustive list and subject to change.*
 
 - Prefabs
-- Translation System
 - More UI
 - Translation of PyEngine4
 - Themes for PyEngine4
@@ -57,6 +57,7 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [+] Game Settings
 - [+] Camera System
 - [+] Particle System
+- [+] Translation System
 - [+] Utils functions : distance_between_rect
 - [+] Engine functions : get_game_size
 - [+] Z-Index
