@@ -124,7 +124,8 @@ class ProjectBuilder:
             "{WIDTH}": str(project.settings.get("width", 1280)),
             "{HEIGHT}": str(project.settings.get("height", 720)),
             "{NB_MIXER_CHANNELS}": str(project.settings.get("numberMixerChannels", 8)),
-            "{SCENES_NAMES}": str([i.name for i in project.scenes]).replace("'", "")
+            "{SCENES_NAMES}": str([i.name for i in project.scenes]).replace("'", ""),
+            "{DEFAULT_LANG}": str(project.settings.get("defaultLang", None))
         }
         with open(os.path.join(ProjectBuilder.build_folders["templates"], "main.txt"), "r") as f:
             template = f.read()
@@ -159,7 +160,8 @@ class ProjectBuilder:
             "utils": os.path.join("builds", project.name, "files", "utils"),
             "resources": os.path.join("builds", project.name, "resources"),
             "textures": os.path.join("builds", project.name, "resources", "textures"),
-            "sounds": os.path.join("builds", project.name, "resources", "sounds")
+            "sounds": os.path.join("builds", project.name, "resources", "sounds"),
+            "langs": os.path.join("builds", project.name, "resources", "langs")
         }
         ProjectBuilder.components = {"Component": "component"}
         shutil.rmtree(os.path.join("builds", project.name), ignore_errors=True)
@@ -191,6 +193,15 @@ class ProjectBuilder:
                 )
             else:
                 ComponentBuilder.sounds[i.name] = None
+
+        for i in project.langs:
+            if i.components[0].path is not None:
+                logger.info("GAME LANG RESOURCE : " + i.components[0].path)
+                ext = i.components[0].path.split(".")[-1]
+                shutil.copyfile(
+                    i.components[0].path,
+                    os.path.join(ProjectBuilder.project_folders["langs"], i.name+"."+ext)
+                )
         logger.info("COPY GAME RESOURCES : SUCCESSFULLY ENDED")
 
         logger.info("COPY GAME SCRIPTS : STARTED")

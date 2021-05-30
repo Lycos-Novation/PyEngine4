@@ -5,7 +5,7 @@ from files.utils import *
 
 
 def launch():
-    engine = Engine()
+    engine = Engine("{DEFAULT_LANG}")
     {SCENES}
 
     scenes = {SCENES_NAMES}

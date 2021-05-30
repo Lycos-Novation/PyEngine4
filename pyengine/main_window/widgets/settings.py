@@ -19,6 +19,8 @@ class Settings(QWidget):
         self.main_scene_edit = QLineEdit("", self)
         number_mixer_channel = QLabel("Number Mixer Channel", self)
         self.number_mixer_channel_spin = QSpinBox(self)
+        default_lang = QLabel("Current Language Name")
+        self.default_lang_edit = QLineEdit("", self)
         self.valid = QPushButton("Validate", self)
 
         title.setFont(QFont("arial", 20, 1))
@@ -27,6 +29,7 @@ class Settings(QWidget):
         height.setAlignment(Qt.AlignHCenter)
         main_scene.setAlignment(Qt.AlignHCenter)
         number_mixer_channel.setAlignment(Qt.AlignHCenter)
+        default_lang.setAlignment(Qt.AlignHCenter)
         self.width_spin.setRange(1, 2147483647)
         self.height_spin.setRange(1, 2147483647)
         self.number_mixer_channel_spin.setRange(1, 100)
@@ -46,6 +49,9 @@ class Settings(QWidget):
         self.layout.addSpacing(20)
         self.layout.addWidget(number_mixer_channel)
         self.layout.addWidget(self.number_mixer_channel_spin)
+        self.layout.addSpacing(20)
+        self.layout.addWidget(default_lang)
+        self.layout.addWidget(self.default_lang_edit)
         self.layout.addSpacing(40)
         self.layout.addWidget(self.valid)
         self.layout.setContentsMargins(50, 10, 50, 10)
@@ -59,6 +65,10 @@ class Settings(QWidget):
         else:
             self.project.settings["mainScene"] = None
         self.project.settings["numberMixerChannels"] = self.number_mixer_channel_spin.value()
+        if len(self.default_lang_edit.text()) > 1:
+            self.project.settings["defaultLang"] = self.default_lang_edit.text()
+        else:
+            self.project.settings["defaultLang"] = None
         self.project.save()
         self.parent.assets_explorer.update_project()
         self.parent.viewport.update_screen()
@@ -73,3 +83,4 @@ class Settings(QWidget):
         self.height_spin.setValue(self.project.settings.get("height", 720))
         self.main_scene_edit.setText(self.project.settings.get("mainScene", ""))
         self.number_mixer_channel_spin.setValue(self.project.settings.get("numberMixerChannels", 8))
+        self.default_lang_edit.setText(self.project.settings.get("defaultLang", ""))

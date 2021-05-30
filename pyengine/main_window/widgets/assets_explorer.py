@@ -72,6 +72,17 @@ class AssetsExplorer(QWidget):
                 remove_sound.triggered.connect(lambda: self.remove_asset("sound", widget.title.text()))
                 menu.addAction(remove_sound)
             menu.exec_(QCursor.pos())
+        elif self.current_folder == self.folders["langs"]:
+            menu = QMenu(self.content_folder)
+            create_lang = QAction("Import Lang", self)
+            create_lang.triggered.connect(lambda: self.create_asset("lang"))
+            menu.addAction(create_lang)
+            if len(self.content_folder.selectedItems()) >= 1:
+                widget = self.content_folder.itemWidget(self.content_folder.selectedItems()[0])
+                remove_lang = QAction("Delete Lang", self)
+                remove_lang.triggered.connect(lambda: self.remove_asset("lang", widget.title.text()))
+                menu.addAction(remove_lang)
+            menu.exec_(QCursor.pos())
         elif self.current_folder == self.folders["scripts"]:
             menu = QMenu(self.content_folder)
             create_script = QAction("Create Script", self)
@@ -100,6 +111,8 @@ class AssetsExplorer(QWidget):
                 self.parent.components.set_obj(self.parent.project.get_texture(widget.title.text()))
             elif self.current_folder == self.folders["sounds"]:
                 self.parent.components.set_obj(self.parent.project.get_sound(widget.title.text()))
+            elif self.current_folder == self.folders["langs"]:
+                self.parent.components.set_obj(self.parent.project.get_lang(widget.title.text()))
             elif self.current_folder == self.folders["scripts"]:
                 self.open_script(widget.title.text())
     
@@ -163,6 +176,15 @@ class AssetsExplorer(QWidget):
                 self.parent.project.sounds.append(Sound(name[0], fileName[0]))
                 self.parent.project.save()
                 self.open_folder(self.current_folder)
+        elif asset == "lang":
+            name = QInputDialog.getText(self, "PyEngine4 - Import Lang", "Lang Name:", QLineEdit.Normal)
+            if len(name[0]) == 0:
+                return
+            fileName = QFileDialog.getOpenFileName(self, "Open Lang", filter="Lang (*.json)")
+            if len(fileName[0]) > 0:
+                self.parent.project.langs.append(Lang(name[0], fileName[0]))
+                self.parent.project.save()
+                self.open_folder(self.current_folder)
         elif asset == "script":
             name = QInputDialog.getText(self, "PyEngine4 - Create Script", "Script Name:", QLineEdit.Normal)
             if len(name[0]) == 0:
@@ -189,6 +211,10 @@ class AssetsExplorer(QWidget):
             self.open_folder(self.current_folder)
         elif asset == "scene":
             self.parent.project.scenes.remove(self.parent.project.get_scene(name))
+            self.parent.project.save()
+            self.open_folder(self.current_folder)
+        elif asset == "lang":
+            self.parent.project.langs.remove(self.parent.project.get_lang(name))
             self.parent.project.save()
             self.open_folder(self.current_folder)
         elif asset == "script":

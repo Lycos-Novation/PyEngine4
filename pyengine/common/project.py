@@ -6,7 +6,7 @@ import pygame
 import shutil
 import importlib
 
-from pyengine.common.project_objects import Scene, Texture, Sound
+from pyengine.common.project_objects import Scene, Texture, Sound, Lang
 from pyengine.build import ProjectBuilder
 from pyengine.common.utils import core_logger
 from pyengine import common
@@ -26,19 +26,22 @@ class Project:
             "prefabs": os.path.join("projects", self.name, "assets", "prefabs"),
             "textures": os.path.join("projects", self.name, "assets", "textures"),
             "scenes": os.path.join("projects", self.name, "assets", "scenes"),
-            "sounds": os.path.join("projects", self.name, "assets", "sounds")
+            "sounds": os.path.join("projects", self.name, "assets", "sounds"),
+            "langs": os.path.join("projects", self.name, "assets", "langs")
         }
         self.settings = {
             "engine_version": common.__version__,
             "width": 1080,
             "height": 720,
             "mainScene": None,
-            "numberMixerChannels": 8
+            "numberMixerChannels": 8,
+            "defaultLang": None
         }
         self.scenes = []
         self.textures = []
         self.sounds = []
         self.scripts = []
+        self.langs = []
         self.loading_errors = []
         self.crash = False
         self.module = None
@@ -55,6 +58,11 @@ class Project:
 
     def get_sound(self, name):
         for i in self.sounds:
+            if i.name == name:
+                return i
+
+    def get_lang(self, name):
+        for i in self.langs:
             if i.name == name:
                 return i
 
@@ -110,7 +118,10 @@ class Project:
     def save(self):
         self.settings["engine_version"] = common.__version__
 
-        removes = [self.folders["prefabs"], self.folders["textures"], self.folders["sounds"], self.folders["scenes"]]
+        removes = [
+            self.folders["prefabs"], self.folders["textures"], self.folders["sounds"], self.folders["scenes"],
+            self.folders["langs"]
+        ]
         for i in removes:
             shutil.rmtree(i, ignore_errors=True)
         if os.path.exists(os.path.join(self.folders["main"], "project.json")):
@@ -139,6 +150,8 @@ class Project:
             i.save(self.folders["textures"])
         for i in self.sounds:
             i.save(self.folders["sounds"])
+        for i in self.langs:
+            i.save(self.folders["langs"])
 
     def __str__(self):
         return f"Project(name={self.name}, author={self.author}, icon={self.icon})"
@@ -171,4 +184,9 @@ class Project:
             if error is not None:
                 project.loading_errors.append(error)
             project.sounds.append(sound)
+        for i in os.listdir(project.folders["langs"]):
+            lang, error = Lang.load(os.path.join(project.folders["langs"], i))
+            if error is not None:
+                project.loading_errors.append(error)
+            project.langs.append(lang)
         return project
