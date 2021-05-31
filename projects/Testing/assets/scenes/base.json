@@ -65,12 +65,12 @@
                         0
                     ],
                     "offset_min": [
-                        10,
-                        10
+                        0,
+                        0
                     ],
                     "offset_max": [
-                        10,
-                        10
+                        0,
+                        0
                     ],
                     "lifetime": 1,
                     "spawn_time": 0.0,
@@ -129,8 +129,8 @@
                 {
                     "name": "TransformComponent",
                     "position": [
-                        970,
-                        10
+                        1020,
+                        30
                     ],
                     "rotation": 0,
                     "scale": [

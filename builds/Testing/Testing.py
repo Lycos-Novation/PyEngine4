@@ -14,7 +14,7 @@ def launch():
     e1.add_component(spritecomponent)
     controlcomponent = ControlComponent(engine, {'UPJUMP': 'K_UP', 'DOWN': 'K_DOWN', 'LEFT': 'K_LEFT', 'RIGHT': 'K_RIGHT'}, "FOURDIRECTION", 200)
     e1.add_component(controlcomponent)
-    particlecomponent = ParticleComponent(engine, Color.from_rgba(255, 255, 255, 255), Color.from_rgba(0, 0, 0, 255), Vec2(20, 20), Vec2(0, 0), Vec2(0, 359), Vec2(0, 0), Vec2(10, 10), Vec2(10, 10), 1, 0.0, 1)
+    particlecomponent = ParticleComponent(engine, Color.from_rgba(255, 255, 255, 255), Color.from_rgba(0, 0, 0, 255), Vec2(20, 20), Vec2(0, 0), Vec2(0, 359), Vec2(0, 0), Vec2(0, 0), Vec2(0, 0), 1, 0.0, 1)
     e1.add_component(particlecomponent)
     collisioncomponent = CollisionComponent(engine, True, "None", Vec2(20, 20))
     e1.add_component(collisioncomponent)
@@ -28,7 +28,7 @@ def launch():
     e2.add_component(collisioncomponent)
 
     button = GameObject("button", "Object", 0)
-    transformcomponent = TransformComponent(engine, Vec2(970, 10), 0, Vec2(1.0, 1.0))
+    transformcomponent = TransformComponent(engine, Vec2(1020, 30), 0, Vec2(1.0, 1.0))
     button.add_component(transformcomponent)
     buttoncomponent = ButtonComponent(engine, Color.from_rgba(255, 0, 0, 255), Vec2(100, 40), "printLang - clicked", "Print", "arial", 20, True, False, True, Color.from_rgba(255, 255, 255, 255), True)
     button.add_component(buttoncomponent)

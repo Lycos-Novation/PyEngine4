@@ -10,8 +10,8 @@
                 {
                     "name": "TransformComponent",
                     "position": [
-                        50,
-                        310
+                        55,
+                        360
                     ],
                     "rotation": 0,
                     "scale": [
@@ -57,8 +57,8 @@
                 {
                     "name": "TransformComponent",
                     "position": [
-                        1020,
-                        310
+                        1025,
+                        360
                     ],
                     "rotation": 0,
                     "scale": [
@@ -104,8 +104,8 @@
                 {
                     "name": "TransformComponent",
                     "position": [
-                        10,
-                        10
+                        100,
+                        20
                     ],
                     "rotation": 0,
                     "scale": [
@@ -140,8 +140,8 @@
                 {
                     "name": "TransformComponent",
                     "position": [
-                        530,
-                        350
+                        540,
+                        360
                     ],
                     "rotation": 0,
                     "scale": [
@@ -185,8 +185,8 @@
                 {
                     "name": "TransformComponent",
                     "position": [
-                        965,
-                        10
+                        1015,
+                        30
                     ],
                     "rotation": 0,
                     "scale": [

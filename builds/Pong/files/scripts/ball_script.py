@@ -17,9 +17,9 @@ class Ball_Script(Script):
             self.time = 0
         self.time += deltatime
 
-        if transform.position.y < 0 or transform.position.y > 710:
+        if transform.position.y < 10 or transform.position.y > 710:
             auto.move.y = -auto.move.y
-        if transform.position.x < 0:
+        if transform.position.x < 10:
             score = self.engine.get_game_object(2)
             text = score.get_component("TextComponent")
             scores = text.text.split(" - ")
@@ -34,7 +34,7 @@ class Ball_Script(Script):
         
     def update_score(self, text, transform, auto, new_score):
         text.update_render()
-        transform.position = Vec2(530, 350)
+        transform.position = Vec2(540, 360)
         if new_score == 5:
             text.text += "     ENDED"
             text.update_render()

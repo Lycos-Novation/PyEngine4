@@ -2,6 +2,8 @@ from PyQt5.QtWidgets import QWidget
 from PyQt5.QtGui import QImage, QPainter, QPixmap
 from PyQt5.QtCore import QPoint
 
+from pyengine.common.utils import Vec2
+
 import pygame
 import os
 
@@ -65,7 +67,8 @@ class Viewport(QWidget):
                                 render,
                                 [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
                             )
-                            screen.blit(render, position.coords())
+                            screen.blit(render, (position - Vec2(render.get_rect().width,
+                                                                 render.get_rect().height) / 2).coords())
                         if sprite is not None and sprite.sprite is not None:
                             path = self.parent.project.get_texture(sprite.sprite).components[0].path
                             if path is not None:
@@ -75,7 +78,8 @@ class Viewport(QWidget):
                                     render,
                                     [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
                                 )
-                                screen.blit(render, position.coords())
+                                screen.blit(render, (position - Vec2(render.get_rect().width,
+                                                                     render.get_rect().height) / 2).coords())
                         if spritesheet is not None and spritesheet.sprite is not None:
                             path = self.parent.project.get_texture(spritesheet.sprite).components[0].path
                             if path is not None:
@@ -92,7 +96,8 @@ class Viewport(QWidget):
                                     render,
                                     [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
                                 )
-                                screen.blit(render, position.coords())
+                                screen.blit(render, (position - Vec2(render.get_rect().width,
+                                                                     render.get_rect().height) / 2).coords())
                         if text is not None:
                             try:
                                 font = pygame.font.Font(text.font_name, text.font_size)
@@ -107,7 +112,8 @@ class Viewport(QWidget):
                                 render,
                                 [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
                             )
-                            screen.blit(render, position.coords())
+                            screen.blit(render, (position - Vec2(render.get_rect().width,
+                                                                 render.get_rect().height) / 2).coords())
                         if anim is not None:
                             if anim.playing != "":
                                 for i in anim.anims:
@@ -122,7 +128,9 @@ class Viewport(QWidget):
                                                     [int(render.get_rect().width * scale.x),
                                                      int(render.get_rect().height * scale.y)]
                                                 )
-                                                screen.blit(render, position.coords())
+                                                screen.blit(render,
+                                                            (position - Vec2(render.get_rect().width,
+                                                                             render.get_rect().height) / 2).coords())
                                         elif i.type_ == "Sheet":
                                             path = self.parent.project.get_texture(i.sprite_sheet).components[
                                                 0].path
@@ -139,7 +147,9 @@ class Viewport(QWidget):
                                                     [int(render.get_rect().width * scale.x),
                                                      int(render.get_rect().height * scale.y)]
                                                 )
-                                                screen.blit(render, position.coords())
+                                                screen.blit(render,
+                                                            (position - Vec2(render.get_rect().width,
+                                                                             render.get_rect().height) / 2).coords())
                                         break
                     objs.append(child)
 

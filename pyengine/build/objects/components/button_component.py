@@ -58,13 +58,13 @@ class ButtonComponent(Component):
     def show(self, screen, camera_pos):
         transform = self.game_object.get_component("TransformComponent")
         if transform is not None:
-            position = transform.global_position()
+            position = transform.global_position() - self.size / 2
             screen.blit(self.render, position.coords())
 
     def mouse_press(self, evt):
         transform = self.game_object.get_component("TransformComponent")
         if transform is not None:
-            position = transform.global_position()
+            position = transform.global_position() - self.size / 2
             if evt.button == pygame.locals.BUTTON_LEFT and \
                     self.render.get_rect(x=position.x, y=position.y).collidepoint(*evt.pos):
                 if self.callback is not None:

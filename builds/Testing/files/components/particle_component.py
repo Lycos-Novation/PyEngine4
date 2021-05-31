@@ -35,7 +35,7 @@ class Particle:
             self.current_size = self.size * (1 - p) + self.final_size * p
 
     def show(self, screen, camera_pos):
-        screen.fill(self.current_color.rgba(), ((self.position - camera_pos).coords(),
+        screen.fill(self.current_color.rgba(), ((self.position - camera_pos - self.current_size / 2).coords(),
                                                 self.current_size.coords()))
 
 

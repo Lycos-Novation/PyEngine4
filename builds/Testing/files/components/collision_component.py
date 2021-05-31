@@ -29,7 +29,7 @@ class CollisionComponent(Component):
                 e_collision = game_object.get_component("CollisionComponent")
                 if e_collision is not None and e_transform is not None:
                     e_pos = e_transform.position
-                    e_rect = pygame.Rect(e_pos.coords(), e_collision.size.coords())
+                    e_rect = pygame.Rect((e_pos - e_collision.size / 2).coords(), e_collision.size.coords())
                     if self.__rect_collide(rect, e_rect, game_object, cause, e_collision):
                         return True
         return False
@@ -37,7 +37,7 @@ class CollisionComponent(Component):
     def can_go(self, position, cause="UNKNOWN"):
         transform = self.game_object.get_component("TransformComponent")
         if transform is not None:
-            rect = pygame.Rect(position.coords(), self.size.coords())
+            rect = pygame.Rect((position - self.size / 2).coords(), self.size.coords())
             if self.__internal_collide(rect, cause):
                 return False
         return True

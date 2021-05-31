@@ -1,4 +1,5 @@
 from files.components.component import Component
+from files.utils import Vec2
 
 import pygame
 import os
@@ -46,5 +47,6 @@ class SpriteSheetComponent(Component):
         if self.render is not None:
             transform = self.game_object.get_component("TransformComponent")
             if transform is not None:
-                position = transform.global_position() - camera_pos
+                position = transform.global_position() - camera_pos - Vec2(self.render.get_rect().width,
+                                                                           self.render.get_rect().height) / 2
                 screen.blit(self.render, position.coords())

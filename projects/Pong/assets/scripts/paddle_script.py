@@ -8,4 +8,4 @@ class Paddle_Script(Script):
     
     def update(self, deltatime):
         transform = self.game_object.get_component("TransformComponent")
-        transform.position.y = clamp(transform.position.y, 0, 620)
+        transform.position.y = clamp(transform.position.y, 50, 670)

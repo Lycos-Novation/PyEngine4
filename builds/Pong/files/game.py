@@ -6,7 +6,7 @@ pygame.mixer.init()
 
 
 class Game:
-    def __init__(self, title, width, height,  nb_mixer_channels, scenes, engine):
+    def __init__(self, title, width, height,  nb_mixer_channels, debug, scenes, engine):
         self.engine = engine
         self.engine.game = self
         self.title = title
@@ -14,12 +14,16 @@ class Game:
         self.__height = height
         self.scenes = scenes
         self.current_scene = 0
+        self.debug = debug
+        self.debug_font = pygame.font.SysFont("arial", 15)
+        self.update_fps = 0.49
         pygame.mixer.set_num_channels(nb_mixer_channels)
 
         self.screen = pygame.display.set_mode((self.width, self.height))
 
         self.clock = pygame.time.Clock()
         self.is_running = False
+        self.fps_render = self.debug_font.render("FPS : "+str(round(self.get_fps(), 2)), True, (255, 128, 0, 255))
 
     @property
     def width(self):
@@ -78,8 +82,18 @@ class Game:
                 elif event.type == const.MOUSEMOTION:
                     self.scenes[self.current_scene].mouse_motion(event)
 
-            self.scenes[self.current_scene].update(self.clock.get_time() / 1000)
+            deltatime = self.clock.get_time() / 1000
+
+            self.scenes[self.current_scene].update(deltatime)
             self.scenes[self.current_scene].show(self.screen)
+
+            if self.debug:
+                self.update_fps += deltatime
+                if self.update_fps > 0.5:
+                    self.update_fps = 0
+                    self.fps_render = self.debug_font.render("FPS : " + str(round(self.get_fps(), 2)), True,
+                                                             (255, 128, 0, 255))
+                self.screen.blit(self.fps_render, (10, 10))
 
             self.clock.tick()
             pygame.display.update()
