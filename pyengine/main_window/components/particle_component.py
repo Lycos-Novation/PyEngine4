@@ -28,6 +28,10 @@ class ParticleComponent(QWidget):
         self.angle_range_spins = [QSpinBox(self), QSpinBox(self)]
         self.force_range_name = QLabel("Force", self)
         self.force_range_spins = [QSpinBox(self), QSpinBox(self)]
+        self.offset_min_name = QLabel("Offset Minimum", self)
+        self.offset_min_spins = [QSpinBox(self), QSpinBox(self)]
+        self.offset_max_name = QLabel("Offset Maximum", self)
+        self.offset_max_spins = [QSpinBox(self), QSpinBox(self)]
         self.lifetime = QLabel("Life Time")
         self.lifetime_spin = QSpinBox(self)
         self.spawn_time = QLabel("Spawn Time")
@@ -73,7 +77,16 @@ class ParticleComponent(QWidget):
             self.force_range_spins[k].setRange(-2147483648, 2147483647)
             self.force_range_spins[k].setValue(v)
 
-        spins = self.size_spins + self.final_size_spins + self.angle_range_spins + self.force_range_spins
+        for k, v in enumerate(self.component.offset_min.coords()):
+            self.offset_min_spins[k].setRange(-2147483648, 2147483647)
+            self.offset_min_spins[k].setValue(v)
+
+        for k, v in enumerate(self.component.offset_max.coords()):
+            self.offset_max_spins[k].setRange(-2147483648, 2147483647)
+            self.offset_max_spins[k].setValue(v)
+
+        spins = self.size_spins + self.final_size_spins + self.angle_range_spins + self.force_range_spins + \
+                self.offset_min_spins + self.offset_max_spins
         for spin in spins:
             spin.valueChanged.connect(self.change_value)
 
@@ -102,12 +115,18 @@ class ParticleComponent(QWidget):
         self.layout.addWidget(self.force_range_name, 8, 0)
         self.layout.addWidget(self.force_range_spins[0], 8, 1, 1, 2)
         self.layout.addWidget(self.force_range_spins[1], 8, 3, 1, 2)
-        self.layout.addWidget(self.lifetime, 9, 0)
-        self.layout.addWidget(self.lifetime_spin, 9, 1, 1, 4)
-        self.layout.addWidget(self.spawn_time, 10, 0)
-        self.layout.addWidget(self.spawn_time_spin, 10, 1, 1, 4)
-        self.layout.addWidget(self.spawn_number, 11, 0)
-        self.layout.addWidget(self.spawn_number_spin, 11, 1, 1, 4)
+        self.layout.addWidget(self.offset_min_name, 9, 0)
+        self.layout.addWidget(self.offset_min_spins[0], 9, 1, 1, 2)
+        self.layout.addWidget(self.offset_min_spins[1], 9, 3, 1, 2)
+        self.layout.addWidget(self.offset_max_name, 10, 0)
+        self.layout.addWidget(self.offset_max_spins[0], 10, 1, 1, 2)
+        self.layout.addWidget(self.offset_max_spins[1], 10, 3, 1, 2)
+        self.layout.addWidget(self.lifetime, 11, 0)
+        self.layout.addWidget(self.lifetime_spin, 11, 1, 1, 4)
+        self.layout.addWidget(self.spawn_time, 12, 0)
+        self.layout.addWidget(self.spawn_time_spin, 12, 1, 1, 4)
+        self.layout.addWidget(self.spawn_number, 13, 0)
+        self.layout.addWidget(self.spawn_number_spin, 13, 1, 1, 4)
         self.setLayout(self.layout)
 
     def delete(self):
@@ -146,6 +165,8 @@ class ParticleComponent(QWidget):
         self.component.final_size = Vec2(*(i.value() for i in self.final_size_spins))
         self.component.angle_range = Vec2(*(i.value() for i in self.angle_range_spins))
         self.component.force_range = Vec2(*(i.value() for i in self.force_range_spins))
+        self.component.offset_min = Vec2(*(i.value() for i in self.offset_min_spins))
+        self.component.offset_max = Vec2(*(i.value() for i in self.offset_max_spins))
         self.component.lifetime = self.lifetime_spin.value()
         self.component.spawn_time = self.spawn_time_spin.value()
         self.component.spawn_number = self.spawn_number_spin.value()

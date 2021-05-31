@@ -37,7 +37,7 @@
                 {
                     "name": "ParticleComponent",
                     "color": [
-                        252,
+                        255,
                         255,
                         255,
                         255
@@ -61,8 +61,16 @@
                         359
                     ],
                     "force_range": [
-                        100,
-                        100
+                        0,
+                        0
+                    ],
+                    "offset_min": [
+                        10,
+                        10
+                    ],
+                    "offset_max": [
+                        10,
+                        10
                     ],
                     "lifetime": 1,
                     "spawn_time": 0.01,
