@@ -125,7 +125,8 @@ class ProjectBuilder:
             "{HEIGHT}": str(project.settings.get("height", 720)),
             "{NB_MIXER_CHANNELS}": str(project.settings.get("numberMixerChannels", 8)),
             "{SCENES_NAMES}": str([i.name for i in project.scenes]).replace("'", ""),
-            "{DEFAULT_LANG}": str(project.settings.get("defaultLang", None))
+            "{DEFAULT_LANG}": str(project.settings.get("defaultLang", None)),
+            "{DEBUG}": str(project.settings.get("debug", False))
         }
         with open(os.path.join(ProjectBuilder.build_folders["templates"], "main.txt"), "r") as f:
             template = f.read()

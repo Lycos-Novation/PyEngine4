@@ -35,7 +35,8 @@ class Project:
             "height": 720,
             "mainScene": None,
             "numberMixerChannels": 8,
-            "defaultLang": None
+            "defaultLang": None,
+            "debug": False
         }
         self.scenes = []
         self.textures = []

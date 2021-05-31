@@ -53,6 +53,7 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 
 ### V 1.2.0 : Vildiur Update - XX/XX/21 (INDEV)
 
+- [+] Debug Mode
 - [+] Game Save System
 - [+] Game Settings
 - [+] Camera System

@@ -4,5 +4,6 @@
     "height": 720,
     "mainScene": "base",
     "numberMixerChannels": 8,
-    "defaultLang": "en"
+    "defaultLang": "en",
+    "debug": true
 }

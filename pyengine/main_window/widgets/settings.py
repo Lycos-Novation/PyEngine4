@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QLineEdit, QSpinBox, QPushButton
+from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QLineEdit, QSpinBox, QPushButton, QCheckBox
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt
 
@@ -21,6 +21,7 @@ class Settings(QWidget):
         self.number_mixer_channel_spin = QSpinBox(self)
         default_lang = QLabel("Current Language Name")
         self.default_lang_edit = QLineEdit("", self)
+        self.debug_check = QCheckBox("Debug Mode", self)
         self.valid = QPushButton("Validate", self)
 
         title.setFont(QFont("arial", 20, 1))
@@ -37,22 +38,24 @@ class Settings(QWidget):
 
         self.layout = QVBoxLayout()
         self.layout.addWidget(title)
-        self.layout.addSpacing(40)
+        self.layout.addSpacing(20)
         self.layout.addWidget(width)
         self.layout.addWidget(self.width_spin)
-        self.layout.addSpacing(20)
+        self.layout.addSpacing(10)
         self.layout.addWidget(height)
         self.layout.addWidget(self.height_spin)
-        self.layout.addSpacing(20)
+        self.layout.addSpacing(10)
         self.layout.addWidget(main_scene)
         self.layout.addWidget(self.main_scene_edit)
-        self.layout.addSpacing(20)
+        self.layout.addSpacing(10)
         self.layout.addWidget(number_mixer_channel)
         self.layout.addWidget(self.number_mixer_channel_spin)
-        self.layout.addSpacing(20)
+        self.layout.addSpacing(10)
         self.layout.addWidget(default_lang)
         self.layout.addWidget(self.default_lang_edit)
-        self.layout.addSpacing(40)
+        self.layout.addSpacing(10)
+        self.layout.addWidget(self.debug_check)
+        self.layout.addSpacing(20)
         self.layout.addWidget(self.valid)
         self.layout.setContentsMargins(50, 10, 50, 10)
         self.setLayout(self.layout)
@@ -69,6 +72,7 @@ class Settings(QWidget):
             self.project.settings["defaultLang"] = self.default_lang_edit.text()
         else:
             self.project.settings["defaultLang"] = None
+        self.project.settings["debug"] = self.debug_check.isChecked()
         self.project.save()
         self.parent.assets_explorer.update_project()
         self.parent.viewport.update_screen()
@@ -84,3 +88,4 @@ class Settings(QWidget):
         self.main_scene_edit.setText(self.project.settings.get("mainScene", ""))
         self.number_mixer_channel_spin.setValue(self.project.settings.get("numberMixerChannels", 8))
         self.default_lang_edit.setText(self.project.settings.get("defaultLang", ""))
+        self.debug_check.setChecked(self.project.settings.get("debug", False))

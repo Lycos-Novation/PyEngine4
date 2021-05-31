@@ -4,7 +4,7 @@
         {
             "name": "e1",
             "tag": "Object",
-            "zindex": -1,
+            "zindex": 1,
             "childs": [],
             "components": [
                 {
@@ -61,12 +61,12 @@
                         359
                     ],
                     "force_range": [
-                        50,
-                        50
+                        100,
+                        100
                     ],
-                    "lifetime": 2,
-                    "spawn_time": 1.0,
-                    "spawn_number": 2
+                    "lifetime": 1,
+                    "spawn_time": 0.01,
+                    "spawn_number": 10
                 },
                 {
                     "name": "CollisionComponent",
@@ -121,7 +121,7 @@
                 {
                     "name": "TransformComponent",
                     "position": [
-                        10,
+                        970,
                         10
                     ],
                     "rotation": 0,
