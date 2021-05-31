@@ -145,7 +145,7 @@ class ParticleComponent(QWidget):
         self.component.size = Vec2(*(i.value() for i in self.size_spins))
         self.component.final_size = Vec2(*(i.value() for i in self.final_size_spins))
         self.component.angle_range = Vec2(*(i.value() for i in self.angle_range_spins))
-        self.component.forge_range = Vec2(*(i.value() for i in self.force_range_spins))
+        self.component.force_range = Vec2(*(i.value() for i in self.force_range_spins))
         self.component.lifetime = self.lifetime_spin.value()
         self.component.spawn_time = self.spawn_time_spin.value()
         self.component.spawn_number = self.spawn_number_spin.value()
