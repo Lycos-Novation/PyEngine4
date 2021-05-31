@@ -59,7 +59,7 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [+] Particle System
 - [+] Translation System
 - [+] Utils functions : distance_between_rect
-- [+] Engine functions : get_game_size
+- [+] Engine functions : get_game_size, take_screenshot
 - [+] Z-Index
 - [~] Little work on Project Building
 - [~] Little work on Vec2 (and some Bug Fixes)

@@ -8,3 +8,4 @@ class Printlang(Script):
     def clicked(self):
         print(self.engine.lang_manager.get_langs())
         print(self.engine.lang_manager.get_translate("bonjour", "NOOOO"))
+        self.engine.take_screenshot()

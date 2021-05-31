@@ -18,6 +18,14 @@ class Engine:
             self.lang_manager.add_lang(i.replace(".json", ""), os.path.join("resources", "langs", i))
         self.lang_manager.change_lang(default_lang)
 
+    def take_screenshot(self, path="screenshot.jpg", pos=Vec2(0, 0), size=None):
+        if size is None:
+            size = self.get_game_size() - pos
+
+        rect = pygame.Rect(pos.coords(), size.coords())
+        sub = self.game.screen.subsurface(rect)
+        pygame.image.save(sub, path)
+
     def get_game_size(self):
         return Vec2(self.game.width, self.game.height)
 
