@@ -64,6 +64,7 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [+] Z-Index
 - [~] Little work on Project Building
 - [~] Little work on Vec2 (and some Bug Fixes)
+- [~] Move graphic anchor to the center of game object
 - [#] Project with other name than Pong can't be launched
 
 ### V 1.1.0 : Kisure Update - 09/05/21 (LATEST)
