@@ -69,12 +69,24 @@ class ParticleComponent(Component):
             if self.time > self.spawn_time:
                 self.time = 0
                 for i in range(self.spawn_number):
-                    force = randint(self.force_range.x, self.force_range.y)
-                    angle = math.radians(randint(self.angle_range.x, self.angle_range.y))
-                    offset = Vec2(
-                        randint(self.offset_min.x, self.offset_max.x),
-                        randint(self.offset_min.y, self.offset_max.y)
-                    )
+                    if self.force_range.x != self.force_range.y:
+                        force = randint(self.force_range.x, self.force_range.y)
+                    else:
+                        force = self.force_range.x
+
+                    if self.angle_range.x != self.angle_range.y:
+                        angle = math.radians(randint(self.angle_range.x, self.angle_range.y))
+                    else:
+                        angle = math.radians(self.angle_range.x)
+
+                    if self.offset_min != self.offset_max:
+                        offset = Vec2(
+                            randint(self.offset_min.x, self.offset_max.x),
+                            randint(self.offset_min.y, self.offset_max.y)
+                        )
+                    else:
+                        offset = self.offset_min
+
                     self.particles.append(Particle(self, position + offset, self.lifetime,
                                                    Vec2(force*math.cos(angle), force*math.sin(angle)), self.size,
                                                    self.final_size, self.color, self.final_color))

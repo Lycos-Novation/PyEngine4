@@ -73,8 +73,8 @@
                         10
                     ],
                     "lifetime": 1,
-                    "spawn_time": 0.01,
-                    "spawn_number": 10
+                    "spawn_time": 0.0,
+                    "spawn_number": 1
                 },
                 {
                     "name": "CollisionComponent",
