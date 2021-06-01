@@ -27,8 +27,10 @@ class Viewport(QWidget):
         )
         if self.parent.scene_tree.scene is not None:
             screen.fill(self.parent.scene_tree.scene.get_component("ColorComponent").color.rgba())
+            camera_pos = self.parent.scene_tree.scene.get_component("CameraComponent").position
         else:
             screen.fill((0, 0, 0))
+            camera_pos = Vec2(0, 0)
 
         if self.parent.scene_tree.scene is not None:
             objs = [self.parent.scene_tree.scene]
@@ -67,8 +69,9 @@ class Viewport(QWidget):
                                 render,
                                 [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
                             )
-                            screen.blit(render, (position - Vec2(render.get_rect().width,
-                                                                 render.get_rect().height) / 2).coords())
+                            screen.blit(render,
+                                        (position - Vec2(render.get_rect().width,
+                                                         render.get_rect().height) / 2).coords())
                         if sprite is not None and sprite.sprite is not None:
                             path = self.parent.project.get_texture(sprite.sprite).components[0].path
                             if path is not None:
@@ -78,8 +81,9 @@ class Viewport(QWidget):
                                     render,
                                     [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
                                 )
-                                screen.blit(render, (position - Vec2(render.get_rect().width,
-                                                                     render.get_rect().height) / 2).coords())
+                                screen.blit(render,
+                                            (position - Vec2(render.get_rect().width,
+                                                             render.get_rect().height) / 2 - camera_pos / 2).coords())
                         if spritesheet is not None and spritesheet.sprite is not None:
                             path = self.parent.project.get_texture(spritesheet.sprite).components[0].path
                             if path is not None:
@@ -96,8 +100,9 @@ class Viewport(QWidget):
                                     render,
                                     [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
                                 )
-                                screen.blit(render, (position - Vec2(render.get_rect().width,
-                                                                     render.get_rect().height) / 2).coords())
+                                screen.blit(render,
+                                            (position - Vec2(render.get_rect().width,
+                                                             render.get_rect().height) / 2 - camera_pos / 2).coords())
                         if text is not None:
                             try:
                                 font = pygame.font.Font(text.font_name, text.font_size)
@@ -112,8 +117,9 @@ class Viewport(QWidget):
                                 render,
                                 [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
                             )
-                            screen.blit(render, (position - Vec2(render.get_rect().width,
-                                                                 render.get_rect().height) / 2).coords())
+                            screen.blit(render,
+                                        (position - Vec2(render.get_rect().width,
+                                                         render.get_rect().height) / 2 - camera_pos / 2).coords())
                         if anim is not None:
                             if anim.playing != "":
                                 for i in anim.anims:
@@ -129,8 +135,9 @@ class Viewport(QWidget):
                                                      int(render.get_rect().height * scale.y)]
                                                 )
                                                 screen.blit(render,
-                                                            (position - Vec2(render.get_rect().width,
-                                                                             render.get_rect().height) / 2).coords())
+                                                            (position -
+                                                             Vec2(render.get_rect().width, render.get_rect().height) / 2
+                                                             - camera_pos / 2).coords())
                                         elif i.type_ == "Sheet":
                                             path = self.parent.project.get_texture(i.sprite_sheet).components[
                                                 0].path
@@ -148,8 +155,9 @@ class Viewport(QWidget):
                                                      int(render.get_rect().height * scale.y)]
                                                 )
                                                 screen.blit(render,
-                                                            (position - Vec2(render.get_rect().width,
-                                                                             render.get_rect().height) / 2).coords())
+                                                            (position -
+                                                             Vec2(render.get_rect().width, render.get_rect().height) / 2
+                                                             - camera_pos / 2).coords())
                                         break
                     objs.append(child)
 
