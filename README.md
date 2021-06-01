@@ -65,6 +65,7 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [~] Little work on Project Building
 - [~] Little work on Vec2 (and some Bug Fixes)
 - [~] Move graphic anchor to the center of game object
+- [~] Create submenus to components adding menu
 - [#] Project with other name than Pong can't be launched
 - [#] Crash when rightclick on GameObjectPropertiesComponent
 

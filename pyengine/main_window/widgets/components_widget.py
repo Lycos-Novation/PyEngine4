@@ -58,13 +58,28 @@ class ComponentsWidget(QWidget):
     def components_context_menu(self):
         if self.obj.__class__ == GameObject:
             menu = QMenu(self)
-            for i in (
-                "Transform", "Sprite", "Text", "Collision", "BasicPhysic", "Control", "SpriteSheet", "Auto", "Button",
-                "Music", "Sound", "Anim", "Particle", "Script"
-            ):
-                action = QAction(i, self)
-                action.triggered.connect(lambda _, comp=i: self.create_component(comp + "Component"))
-                menu.addAction(action)
+            menus = {
+                "Graphics": ("Sprite", "Text", "Spritesheet", "Anim", "Particle"),
+                "UI": "Button",
+                "Physics": "BasicPhysic",
+                "Audio": ("Music", "Sound"),
+                "default": ("Transform", "Collision", "Control", "Auto", "Script")
+            }
+            for k, v in menus:
+                if k != "default":
+                    current_menu = menu.addMenu(k)
+                else:
+                    current_menu = menu
+
+                if isinstance(v, tuple):
+                    for i in v:
+                        action = QAction(i, self)
+                        action.triggered.connect(lambda _, comp=i: self.create_component(comp + "Component"))
+                        current_menu.addAction(action)
+                else:
+                    action = QAction(v, self)
+                    action.triggered.connect(lambda _, comp=v: self.create_component(comp + "Component"))
+                    current_menu.addAction(action)
             if len(self.list_components.selectedItems()) >= 1:
                 widget = self.list_components.itemWidget(self.list_components.selectedItems()[0])
                 if widget.__class__ != GameObjectPropertiesComponent and widget.component.name not in ("ColorComponent",
@@ -77,13 +92,29 @@ class ComponentsWidget(QWidget):
 
     def add(self):
         menu = QMenu(self)
-        for i in (
-            "Transform", "Sprite", "Text", "Collision", "BasicPhysic", "Control", "SpriteSheet", "Auto", "Button",
-            "Music", "Sound", "Anim", "Particle", "Script"
-        ):
-            action = QAction(i, self)
-            action.triggered.connect(lambda _, comp=i: self.create_component(comp + "Component"))
-            menu.addAction(action)
+        menus = {
+            "Graphics": ("Sprite", "Text", "Spritesheet", "Anim", "Particle"),
+            "UI": "Button",
+            "Physics": "BasicPhysic",
+            "Audio": ("Music", "Sound"),
+            "default": ("Transform", "Collision", "Control", "Auto", "Script")
+        }
+        for k, v in menus.items():
+            if k != "default":
+                current_menu = menu.addMenu(k)
+            else:
+                current_menu = menu
+
+            if isinstance(v, tuple):
+                for i in v:
+                    action = QAction(i, self)
+                    action.triggered.connect(lambda _, comp=i: self.create_component(comp + "Component"))
+                    current_menu.addAction(action)
+            else:
+                action = QAction(v, self)
+                action.triggered.connect(lambda _, comp=v: self.create_component(comp + "Component"))
+                current_menu.addAction(action)
+
         menu.exec_(QCursor.pos())
 
     def remove_component(self, _=None, comp=None):
