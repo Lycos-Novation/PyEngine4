@@ -60,7 +60,7 @@ class ComponentsWidget(QWidget):
             menu = QMenu(self)
             menus = {
                 "Graphics": ("Sprite", "Text", "Spritesheet", "Anim", "Particle"),
-                "UI": "Button",
+                "UI": ("Button", "Label"),
                 "Physics": "BasicPhysic",
                 "Audio": ("Music", "Sound"),
                 "default": ("Transform", "Collision", "Control", "Auto", "Script")
@@ -94,7 +94,7 @@ class ComponentsWidget(QWidget):
         menu = QMenu(self)
         menus = {
             "Graphics": ("Sprite", "Text", "Spritesheet", "Anim", "Particle"),
-            "UI": "Button",
+            "UI": ("Button", "Label"),
             "Physics": "BasicPhysic",
             "Audio": ("Music", "Sound"),
             "default": ("Transform", "Collision", "Control", "Auto", "Script")
@@ -122,7 +122,8 @@ class ComponentsWidget(QWidget):
             if len(self.list_components.selectedItems()) >= 1:
                 widget = self.list_components.itemWidget(self.list_components.selectedItems()[0])
                 if widget.component.name not in (
-                        "ColorComponent", "PathComponent", "TimeScaleComponent", "TagComponent", "CameraComponent"
+                        "ColorComponent", "PathComponent", "TimeScaleComponent", "TagComponent", "CameraComponent",
+                        "GameObjectPropertiesComponent"
                 ):
                     self.remove_component(comp=widget.component.name)
             return
@@ -163,6 +164,8 @@ class ComponentsWidget(QWidget):
             self.obj.components.append(components.AnimComponent(self.obj))
         elif comp == "ParticleComponent":
             self.obj.components.append(components.ParticleComponent(self.obj))
+        elif comp == "LabelComponent":
+            self.obj.components.append(components.LabelComponent(self.obj))
         self.set_obj(self.obj)
         self.parent.project.save()
         self.parent.viewport.update_screen()
@@ -217,6 +220,8 @@ class ComponentsWidget(QWidget):
                 w = CameraComponent(self, i)
             elif i.name == "ParticleComponent":
                 w = ParticleComponent(self, i)
+            elif i.name == "LabelComponent":
+                w = LabelComponent(self, i)
             elif i.name.startswith("ScriptComponent"):
                 w = ScriptComponent(self, i)
             else:

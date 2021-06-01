@@ -59,9 +59,10 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [+] Camera System
 - [+] Particle System
 - [+] Translation System
+- [+] Z-Index
 - [+] Utils functions : distance_between_rect
 - [+] Engine functions : get_game_size, take_screenshot
-- [+] Z-Index
+- [+] Components : LabelComponent
 - [~] Little work on Project Building
 - [~] Little work on Vec2 (and some Bug Fixes)
 - [~] Move graphic anchor to the center of game object

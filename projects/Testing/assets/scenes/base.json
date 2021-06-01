@@ -10,7 +10,7 @@
                 {
                     "name": "TransformComponent",
                     "position": [
-                        100,
+                        200,
                         100
                     ],
                     "rotation": 0,
@@ -167,6 +167,42 @@
                 },
                 {
                     "name": "ScriptComponent printLang"
+                }
+            ]
+        },
+        {
+            "name": "bonjour",
+            "tag": "Object",
+            "zindex": 0,
+            "childs": [],
+            "components": [
+                {
+                    "name": "LabelComponent",
+                    "text": "Bonjour",
+                    "font_name": "arial",
+                    "font_size": 30,
+                    "font_bold": false,
+                    "font_italic": false,
+                    "font_underline": false,
+                    "font_color": [
+                        255,
+                        85,
+                        0,
+                        255
+                    ],
+                    "font_antialias": true
+                },
+                {
+                    "name": "TransformComponent",
+                    "position": [
+                        100,
+                        100
+                    ],
+                    "rotation": 0,
+                    "scale": [
+                        1.0,
+                        1.0
+                    ]
                 }
             ]
         }

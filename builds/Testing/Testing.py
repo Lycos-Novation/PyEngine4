@@ -8,7 +8,7 @@ def launch():
     engine = Engine("en")
 
     e1 = GameObject("e1", "Object", 1)
-    transformcomponent = TransformComponent(engine, Vec2(100, 100), 0, Vec2(1.0, 1.0))
+    transformcomponent = TransformComponent(engine, Vec2(200, 100), 0, Vec2(1.0, 1.0))
     e1.add_component(transformcomponent)
     spritecomponent = SpriteComponent(engine, "e1.png")
     e1.add_component(spritecomponent)
@@ -34,8 +34,14 @@ def launch():
     button.add_component(buttoncomponent)
     printlang = Printlang(engine)
     button.add_component(printlang)
+
+    bonjour = GameObject("bonjour", "Object", 0)
+    labelcomponent = LabelComponent(engine, "Bonjour", "arial", 30, False, False, False, Color.from_rgba(255, 85, 0, 255), True)
+    bonjour.add_component(labelcomponent)
+    transformcomponent = TransformComponent(engine, Vec2(100, 100), 0, Vec2(1.0, 1.0))
+    bonjour.add_component(transformcomponent)
     
-    entities = [e1, e2, button]
+    entities = [e1, e2, button, bonjour]
     base = Scene(engine, "base", Color.from_rgba(0, 0, 0, 255), 1, Vec2(0, 0), e1, entities)
     
     scenes = [base]

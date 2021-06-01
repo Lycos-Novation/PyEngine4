@@ -30,7 +30,7 @@ class TextComponent(Component):
 
     @classmethod
     def from_dict(cls, game_object, values):
-        comp = TextComponent(game_object)
+        comp = cls(game_object)
         comp.text = values.get("text", "")
         comp.font_name = values.get("font_name", "arial")
         comp.font_size = values.get("font_size", 16)

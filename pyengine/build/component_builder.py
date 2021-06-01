@@ -127,6 +127,29 @@ class ComponentBuilder:
         return text.replace("{COMPONENTS}", template)
 
     @staticmethod
+    def generate_label_component(text, comp):
+        replaces = {
+            "{NAME}": str(comp.name.lower()),
+            "{TEXT}": str(comp.text),
+            "{FONT_NAME}": str(comp.font_name),
+            "{FONT_SIZE}": str(comp.font_size),
+            "{FONT_BOLD}": str(comp.font_bold),
+            "{FONT_ITALIC}": str(comp.font_italic),
+            "{FONT_UNDERLINE}": str(comp.font_underline),
+            "{FONT_COLOR}": str(comp.font_color),
+            "{FONT_ANTIALIAS}": str(comp.font_antialias)
+        }
+
+        with open(os.path.join(ComponentBuilder.templates, "label_component.txt"), "r") as f:
+            template = f.read()
+
+        # GENERATE MAIN INFO
+        for k, v in replaces.items():
+            template = template.replace(k, v)
+
+        return text.replace("{COMPONENTS}", template)
+
+    @staticmethod
     def generate_text_component(text, comp):
         replaces = {
             "{NAME}": str(comp.name.lower()),

@@ -45,9 +45,12 @@ class Viewport(QWidget):
                         text = child.get_component("TextComponent")
                         button = child.get_component("ButtonComponent")
                         anim = child.get_component("AnimComponent")
+                        label = child.get_component("LabelComponent")
                         position = transform.global_position()
                         rotation = transform.global_rotation()
                         scale = transform.global_scale()
+
+                        # RENDER BUTTON COMPONENT
                         if button is not None:
                             render = pygame.Surface(button.size.coords(), pygame.SRCALPHA, 32).convert_alpha()
                             render.fill(button.bg.rgba())
@@ -72,6 +75,8 @@ class Viewport(QWidget):
                             screen.blit(render,
                                         (position - Vec2(render.get_rect().width,
                                                          render.get_rect().height) / 2).coords())
+
+                        # RENDER SPRITE COMPONENT
                         if sprite is not None and sprite.sprite is not None:
                             path = self.parent.project.get_texture(sprite.sprite).components[0].path
                             if path is not None:
@@ -83,7 +88,9 @@ class Viewport(QWidget):
                                 )
                                 screen.blit(render,
                                             (position - Vec2(render.get_rect().width,
-                                                             render.get_rect().height) / 2 - camera_pos / 2).coords())
+                                                             render.get_rect().height) / 2 - camera_pos).coords())
+
+                        # RENDER SPRITESHEET COMPONENT
                         if spritesheet is not None and spritesheet.sprite is not None:
                             path = self.parent.project.get_texture(spritesheet.sprite).components[0].path
                             if path is not None:
@@ -102,7 +109,28 @@ class Viewport(QWidget):
                                 )
                                 screen.blit(render,
                                             (position - Vec2(render.get_rect().width,
-                                                             render.get_rect().height) / 2 - camera_pos / 2).coords())
+                                                             render.get_rect().height) / 2 - camera_pos).coords())
+
+                        # RENDER LABEL COMPONENT
+                        if label is not None:
+                            try:
+                                font = pygame.font.Font(label.font_name, label.font_size)
+                            except FileNotFoundError:
+                                font = pygame.font.SysFont(label.font_name, label.font_size)
+                            font.set_underline(label.font_underline)
+                            font.set_italic(label.font_italic)
+                            font.set_bold(label.font_bold)
+                            render = font.render(label.text, label.font_antialias, label.font_color.rgba())
+                            render = pygame.transform.rotate(render, rotation)
+                            render = pygame.transform.scale(
+                                render,
+                                [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
+                            )
+                            screen.blit(render,
+                                        (position - Vec2(render.get_rect().width,
+                                                         render.get_rect().height) / 2).coords())
+
+                        # RENDER TEXT COMPONENT
                         if text is not None:
                             try:
                                 font = pygame.font.Font(text.font_name, text.font_size)
@@ -119,7 +147,9 @@ class Viewport(QWidget):
                             )
                             screen.blit(render,
                                         (position - Vec2(render.get_rect().width,
-                                                         render.get_rect().height) / 2 - camera_pos / 2).coords())
+                                                         render.get_rect().height) / 2 - camera_pos).coords())
+
+                        # RENDER ANIM COMPONENT
                         if anim is not None:
                             if anim.playing != "":
                                 for i in anim.anims:
@@ -137,7 +167,7 @@ class Viewport(QWidget):
                                                 screen.blit(render,
                                                             (position -
                                                              Vec2(render.get_rect().width, render.get_rect().height) / 2
-                                                             - camera_pos / 2).coords())
+                                                             - camera_pos).coords())
                                         elif i.type_ == "Sheet":
                                             path = self.parent.project.get_texture(i.sprite_sheet).components[
                                                 0].path
@@ -157,7 +187,7 @@ class Viewport(QWidget):
                                                 screen.blit(render,
                                                             (position -
                                                              Vec2(render.get_rect().width, render.get_rect().height) / 2
-                                                             - camera_pos / 2).coords())
+                                                             - camera_pos).coords())
                                         break
                     objs.append(child)
 

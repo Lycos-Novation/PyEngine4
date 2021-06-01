@@ -48,6 +48,8 @@ class ProjectBuilder:
             return ComponentBuilder.generate_anim_component(text, comp)
         elif comp.name == "ParticleComponent":
             return ComponentBuilder.generate_particle_component(text, comp)
+        elif comp.name == "LabelComponent":
+            return ComponentBuilder.generate_label_component(text, comp)
         elif comp.name.startswith("ScriptComponent"):
             return ComponentBuilder.generate_script_component(text, comp)
         else:
