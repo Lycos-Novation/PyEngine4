@@ -66,6 +66,7 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [~] Little work on Vec2 (and some Bug Fixes)
 - [~] Move graphic anchor to the center of game object
 - [#] Project with other name than Pong can't be launched
+- [#] Crash when rightclick on GameObjectPropertiesComponent
 
 ### V 1.1.0 : Kisure Update - 09/05/21 (LATEST)
 

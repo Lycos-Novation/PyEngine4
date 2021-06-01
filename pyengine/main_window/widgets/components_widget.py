@@ -67,7 +67,8 @@ class ComponentsWidget(QWidget):
                 menu.addAction(action)
             if len(self.list_components.selectedItems()) >= 1:
                 widget = self.list_components.itemWidget(self.list_components.selectedItems()[0])
-                if widget.component.name not in ("ColorComponent", "PathComponent"):
+                if widget.__class__ != GameObjectPropertiesComponent and widget.component.name not in ("ColorComponent",
+                                                                                                       "PathComponent"):
                     menu.addSeparator()
                     remove = QAction("Delete Component", self)
                     remove.triggered.connect(lambda: self.remove_component(comp=widget.component.name))
