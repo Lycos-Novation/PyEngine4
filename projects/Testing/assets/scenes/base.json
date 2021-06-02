@@ -177,29 +177,6 @@
             "childs": [],
             "components": [
                 {
-                    "name": "LabelComponent",
-                    "text": "Bonjour",
-                    "background_transparent": true,
-                    "background_color": [
-                        85,
-                        0,
-                        0,
-                        255
-                    ],
-                    "font_name": "arial",
-                    "font_size": 30,
-                    "font_bold": false,
-                    "font_italic": false,
-                    "font_underline": false,
-                    "font_color": [
-                        255,
-                        85,
-                        0,
-                        255
-                    ],
-                    "font_antialias": true
-                },
-                {
                     "name": "TransformComponent",
                     "position": [
                         100,
@@ -210,6 +187,10 @@
                         1.0,
                         1.0
                     ]
+                },
+                {
+                    "name": "ImageComponent",
+                    "sprite": "e1"
                 }
             ]
         }

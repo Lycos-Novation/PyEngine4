@@ -63,7 +63,7 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [+] Adding background in TextComponent
 - [+] Utils functions : distance_between_rect
 - [+] Engine functions : get_game_size, take_screenshot
-- [+] Components : LabelComponent
+- [+] Components : LabelComponent, ImageComponent
 - [~] Little work on Project Building
 - [~] Little work on Vec2 (and some Bug Fixes)
 - [~] Move graphic anchor to the center of game object

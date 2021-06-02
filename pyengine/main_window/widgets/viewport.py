@@ -46,6 +46,7 @@ class Viewport(QWidget):
                         button = child.get_component("ButtonComponent")
                         anim = child.get_component("AnimComponent")
                         label = child.get_component("LabelComponent")
+                        image = child.get_component("ImageComponent")
                         position = transform.global_position()
                         rotation = transform.global_rotation()
                         scale = transform.global_scale()
@@ -89,6 +90,20 @@ class Viewport(QWidget):
                                 screen.blit(render,
                                             (position - Vec2(render.get_rect().width,
                                                              render.get_rect().height) / 2 - camera_pos).coords())
+
+                        # RENDER IMAGE COMPONENT
+                        if image is not None and image.sprite is not None:
+                            path = self.parent.project.get_texture(image.sprite).components[0].path
+                            if path is not None:
+                                render = pygame.image.load(path).convert_alpha()
+                                render = pygame.transform.rotate(render, rotation)
+                                render = pygame.transform.scale(
+                                    render,
+                                    [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
+                                )
+                                screen.blit(render,
+                                            (position - Vec2(render.get_rect().width,
+                                                             render.get_rect().height) / 2).coords())
 
                         # RENDER SPRITESHEET COMPONENT
                         if spritesheet is not None and spritesheet.sprite is not None:

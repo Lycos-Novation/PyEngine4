@@ -18,3 +18,4 @@ from pyengine.main_window.components.anim_component import AnimComponent
 from pyengine.main_window.components.camera_component import CameraComponent
 from pyengine.main_window.components.particle_component import ParticleComponent
 from pyengine.main_window.components.label_component import LabelComponent
+from pyengine.main_window.components.image_component import ImageComponent

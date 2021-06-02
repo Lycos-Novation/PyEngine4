@@ -6,4 +6,4 @@ from files.components.control_component import ControlComponent
 from files.components.particle_component import ParticleComponent
 from files.components.collision_component import CollisionComponent
 from files.components.button_component import ButtonComponent
-from files.components.label_component import LabelComponent
+from files.components.image_component import ImageComponent

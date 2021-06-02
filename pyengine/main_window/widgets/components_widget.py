@@ -60,12 +60,12 @@ class ComponentsWidget(QWidget):
             menu = QMenu(self)
             menus = {
                 "Graphics": ("Sprite", "Text", "Spritesheet", "Anim", "Particle"),
-                "UI": ("Button", "Label"),
+                "UI": ("Button", "Label", "Image"),
                 "Physics": "BasicPhysic",
                 "Audio": ("Music", "Sound"),
                 "default": ("Transform", "Collision", "Control", "Auto", "Script")
             }
-            for k, v in menus:
+            for k, v in menus.items():
                 if k != "default":
                     current_menu = menu.addMenu(k)
                 else:
@@ -94,7 +94,7 @@ class ComponentsWidget(QWidget):
         menu = QMenu(self)
         menus = {
             "Graphics": ("Sprite", "Text", "Spritesheet", "Anim", "Particle"),
-            "UI": ("Button", "Label"),
+            "UI": ("Button", "Label", "Image"),
             "Physics": "BasicPhysic",
             "Audio": ("Music", "Sound"),
             "default": ("Transform", "Collision", "Control", "Auto", "Script")
@@ -166,6 +166,8 @@ class ComponentsWidget(QWidget):
             self.obj.components.append(components.ParticleComponent(self.obj))
         elif comp == "LabelComponent":
             self.obj.components.append(components.LabelComponent(self.obj))
+        elif comp == "ImageComponent":
+            self.obj.components.append(components.ImageComponent(self.obj))
         self.set_obj(self.obj)
         self.parent.project.save()
         self.parent.viewport.update_screen()
@@ -222,6 +224,8 @@ class ComponentsWidget(QWidget):
                 w = ParticleComponent(self, i)
             elif i.name == "LabelComponent":
                 w = LabelComponent(self, i)
+            elif i.name == "ImageComponent":
+                w = ImageComponent(self, i)
             elif i.name.startswith("ScriptComponent"):
                 w = ScriptComponent(self, i)
             else:

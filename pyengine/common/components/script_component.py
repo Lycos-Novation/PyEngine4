@@ -13,6 +13,6 @@ class ScriptComponent(Component):
 
     @classmethod
     def from_dict(cls, game_object, values):
-        comp = ScriptComponent(game_object)
+        comp = cls(game_object)
         comp.name = values.get("name", "")
         return comp

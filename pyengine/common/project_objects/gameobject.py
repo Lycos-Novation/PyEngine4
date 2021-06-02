@@ -76,6 +76,8 @@ class GameObject:
                 obj.components.append(ParticleComponent.from_dict(obj, i))
             elif i.get("name", "") == "LabelComponent":
                 obj.components.append(LabelComponent.from_dict(obj, i))
+            elif i.get("name", "") == "ImageComponent":
+                obj.components.append(ImageComponent.from_dict(obj, i))
             elif i.get("name", "").startswith("ScriptComponent"):
                 obj.components.append(ScriptComponent.from_dict(obj, i))
         return obj

@@ -175,6 +175,26 @@ class ComponentBuilder:
         return text.replace("{COMPONENTS}", template)
 
     @staticmethod
+    def generate_image_component(text, comp):
+        if ComponentBuilder.sprites[comp.sprite] is not None:
+            sprite = str(comp.sprite)+"."+ComponentBuilder.sprites[comp.sprite]
+        else:
+            sprite = None
+        replaces = {
+            "{NAME}": str(comp.name.lower()),
+            "{SPRITE}": str(sprite)
+        }
+
+        with open(os.path.join(ComponentBuilder.templates, "image_component.txt"), "r") as f:
+            template = f.read()
+
+        # GENERATE MAIN INFO
+        for k, v in replaces.items():
+            template = template.replace(k, v)
+
+        return text.replace("{COMPONENTS}", template)
+
+    @staticmethod
     def generate_sprite_component(text, comp):
         if ComponentBuilder.sprites[comp.sprite] is not None:
             sprite = str(comp.sprite)+"."+ComponentBuilder.sprites[comp.sprite]
