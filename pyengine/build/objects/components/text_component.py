@@ -5,11 +5,12 @@ import pygame
 
 
 class TextComponent(Component):
-    def __init__(self, engine, text, font_name, font_size, font_bold, font_italic, font_underline, font_color,
-                 font_antialias):
+    def __init__(self, engine, text, background_color, font_name, font_size, font_bold, font_italic, font_underline,
+                 font_color, font_antialias):
         super().__init__(engine)
         self.name = "TextComponent"
         self.text = text
+        self.background_color = background_color
         self.font_name = font_name
         self.font_size = font_size
         self.font_bold = font_bold
@@ -54,4 +55,6 @@ class TextComponent(Component):
         if transform is not None:
             position = transform.global_position() - camera_pos - Vec2(self.render.get_rect().width,
                                                                        self.render.get_rect().height) / 2
+            if self.background_color is not None:
+                screen.fill(self.background_color.rgba(), self.render.get_rect(x=position.x, y=position.y))
             screen.blit(self.render, position.coords())

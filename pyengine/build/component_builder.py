@@ -131,6 +131,7 @@ class ComponentBuilder:
         replaces = {
             "{NAME}": str(comp.name.lower()),
             "{TEXT}": str(comp.text),
+            "{BACKGROUND_COLOR}": "None" if comp.background_transparent else str(comp.background_color),
             "{FONT_NAME}": str(comp.font_name),
             "{FONT_SIZE}": str(comp.font_size),
             "{FONT_BOLD}": str(comp.font_bold),
@@ -154,6 +155,7 @@ class ComponentBuilder:
         replaces = {
             "{NAME}": str(comp.name.lower()),
             "{TEXT}": str(comp.text),
+            "{BACKGROUND_COLOR}": "None" if comp.background_transparent else str(comp.background_color),
             "{FONT_NAME}": str(comp.font_name),
             "{FONT_SIZE}": str(comp.font_size),
             "{FONT_BOLD}": str(comp.font_bold),

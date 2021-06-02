@@ -179,6 +179,13 @@
                 {
                     "name": "LabelComponent",
                     "text": "Bonjour",
+                    "background_transparent": true,
+                    "background_color": [
+                        85,
+                        0,
+                        0,
+                        255
+                    ],
                     "font_name": "arial",
                     "font_size": 30,
                     "font_bold": false,

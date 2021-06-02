@@ -126,9 +126,10 @@ class Viewport(QWidget):
                                 render,
                                 [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
                             )
-                            screen.blit(render,
-                                        (position - Vec2(render.get_rect().width,
-                                                         render.get_rect().height) / 2).coords())
+                            temp = (position - Vec2(render.get_rect().width, render.get_rect().height) / 2)
+                            if not label.background_transparent:
+                                screen.fill(label.background_color.rgba(), render.get_rect(x=temp.x, y=temp.y))
+                            screen.blit(render, temp.coords())
 
                         # RENDER TEXT COMPONENT
                         if text is not None:
@@ -145,9 +146,10 @@ class Viewport(QWidget):
                                 render,
                                 [int(render.get_rect().width * scale.x), int(render.get_rect().height * scale.y)]
                             )
-                            screen.blit(render,
-                                        (position - Vec2(render.get_rect().width,
-                                                         render.get_rect().height) / 2 - camera_pos).coords())
+                            temp = (position - Vec2(render.get_rect().width, render.get_rect().height) / 2 - camera_pos)
+                            if not text.background_transparent:
+                                screen.fill(text.background_color.rgba(), render.get_rect(x=temp.x, y=temp.y))
+                            screen.blit(render, temp.coords())
 
                         # RENDER ANIM COMPONENT
                         if anim is not None:

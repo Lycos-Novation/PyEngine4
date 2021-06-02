@@ -60,6 +60,7 @@ Caption : [+] Addition, [~] Modification, [-] Deletion, [#] Bug fix
 - [+] Particle System
 - [+] Translation System
 - [+] Z-Index
+- [+] Adding background in TextComponent
 - [+] Utils functions : distance_between_rect
 - [+] Engine functions : get_game_size, take_screenshot
 - [+] Components : LabelComponent

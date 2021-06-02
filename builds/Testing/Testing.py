@@ -36,7 +36,7 @@ def launch():
     button.add_component(printlang)
 
     bonjour = GameObject("bonjour", "Object", 0)
-    labelcomponent = LabelComponent(engine, "Bonjour", "arial", 30, False, False, False, Color.from_rgba(255, 85, 0, 255), True)
+    labelcomponent = LabelComponent(engine, "Bonjour", None, "arial", 30, False, False, False, Color.from_rgba(255, 85, 0, 255), True)
     bonjour.add_component(labelcomponent)
     transformcomponent = TransformComponent(engine, Vec2(100, 100), 0, Vec2(1.0, 1.0))
     bonjour.add_component(transformcomponent)
